@@ -1,7 +1,11 @@
 package com.lessons.first
 
+/*
+Время = 171ms
+Память = 14.70Mb
+ */
 fun main() {
-    val (troom, tcond) = readln().split(" ").map { it.toInt() }
+    val (troom, tcond) = readLine()!!.split(" ").map { it.toInt() }
     val mode = readln().trim()
 
     var result = troom
