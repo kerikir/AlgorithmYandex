@@ -5,8 +5,8 @@ fun main() {
         readLine()!!.trim().split(" ").map { it.toInt() }
 
 
-
-
+    val (entrance1, floor1) = calculateApartment(apartment1, floors, apartment2, entrance2, floor2)
+    println("$entrance1 $floor1")
 }
 
 
@@ -62,12 +62,31 @@ fun calculateApartment(
         val apartmentsPerEntrance = floors * apartmentsPerFloor
 
         // Определение номера подъезда
-        entrance1 = (apartment1 - 1) / apartmentsPerEntrance + 1 // Для краевых условий
+        val entranceCurrent = (apartment1 - 1) / apartmentsPerEntrance + 1 // Для краевых условий
 
         // Определение номера квартиры в подъезде
         val apartmentInEntrance = (apartment1 - 1) % apartmentsPerEntrance + 1 // Для краевых условий
 
         // Определение номера этажа
-        floor1 = (apartment1 - 1) / apartmentsPerFloor + 1 // Для краевых условий
+        val floorCurrent = (apartmentInEntrance - 1) / apartmentsPerFloor + 1 // Для краевых условий
+
+        if (floorCurrent <= floors) {
+            // Первое найденное значение
+            if (entranceCurrent == -1) {
+                entrance1 = entranceCurrent
+                floor1 = floorCurrent
+            } else if (entranceCurrent != entrance1 || floorCurrent != floor1) {
+                // Несколько возможных ответов
+                if (entrance1 != 0 && entranceCurrent != entrance1) entrance1 = 0
+                if (floor1 != 0 && floorCurrent != floor1) floor1 = 0
+            }
+        }
     }
+
+    // Решение не найдено
+    if (floor1 == -1 || entrance1 == -1) {
+        return Pair(-1, -1)
+    }
+
+    return Pair(entrance1, floor1)
 }
