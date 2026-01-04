@@ -1,5 +1,9 @@
 package com.lessons.first
 
+
+/*
+Нет решение - не понял задачу
+ */
 fun main() {
     val a1 = readLine()!!.trim().toInt()
     val b1 = readLine()!!.trim().toInt()
@@ -14,6 +18,8 @@ fun main() {
 
 
 fun calculateCramerRule(a1: Int, b1: Int, c1: Int, a2: Int, b2: Int, c2: Int) : Pair<Double,Double> {
+
+    // TODO добавить проверку определителя
 
     val determinant = a1 * b2 - a2 * b1
 
