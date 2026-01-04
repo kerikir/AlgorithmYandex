@@ -3,6 +3,10 @@ package com.lessons.first
 import kotlin.math.max
 
 
+/*
+Время = 189ms
+Память = 17.68Mb
+ */
 fun main() {
     val (length1, width1, length2, width2) = readLine()!!.trim().split(" ").map { it.toInt() }
 

@@ -1,5 +1,8 @@
 package com.lessons.first
 
+/*
+Не решено
+ */
 fun main() {
     val (apartment1, floors, apartment2, entrance2, floor2) =
         readLine()!!.trim().split(" ").map { it.toInt() }
