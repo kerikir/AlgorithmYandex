@@ -11,6 +11,14 @@ fun main() {
 
 fun calculateAmountMachineParts(n: Int, consumptionBlank: Int, consumptionParts: Int) : Int {
 
+    // Проверка на нехватку материала для изготовления
+    if (
+        n / consumptionBlank == 0 ||
+        ((n / consumptionBlank) * consumptionBlank) / consumptionParts == 0
+    ) {
+        return 0
+    }
+
     // Определение количества деталей без повторного использования материала
     var numberOfDetails = (n / consumptionBlank) * (consumptionBlank / consumptionParts)
     // Определение остатка материала после изготовления деталей
