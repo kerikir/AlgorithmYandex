@@ -1,6 +1,10 @@
 package com.lessons.first
 
 
+/*
+Время = 172ms
+Память = 14.70Mb
+ */
 fun main() {
     val (n, k, m) = readLine()!!.trim().split(" ").map { it.toInt() }
 
@@ -14,7 +18,7 @@ fun calculateAmountMachineParts(n: Int, consumptionBlank: Int, consumptionParts:
     // Проверка на нехватку материала для изготовления
     if (
         n / consumptionBlank == 0 ||
-        ((n / consumptionBlank) * consumptionBlank) / consumptionParts == 0
+        consumptionBlank / consumptionParts == 0
     ) {
         return 0
     }
