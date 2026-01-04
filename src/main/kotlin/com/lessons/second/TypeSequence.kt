@@ -12,6 +12,7 @@ fun main() {
 
     val result = when {
         isConstant(list = numbers) -> "CONSTANT"
+        isAscending(numbers) -> "ASCENDING"
         else -> "RANDOM"
     }
 
@@ -23,6 +24,18 @@ fun isConstant(list: List<Int>) : Boolean {
     var flag = true
     for (i in 0..(list.lastIndex - 1)) {
         if (list[i] != list[i + 1]) {
+            flag = false
+        }
+    }
+
+    return flag
+}
+
+
+fun isAscending(list: List<Int>) : Boolean {
+    var flag = true
+    for (i in 1..list.lastIndex) {
+        if (list[i - 1] >= list[i]) {
             flag = false
         }
     }
