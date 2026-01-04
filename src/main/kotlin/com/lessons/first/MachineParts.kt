@@ -19,19 +19,24 @@ fun calculateAmountMachineParts(n: Int, consumptionBlank: Int, consumptionParts:
         return 0
     }
 
+    // Определение количества произведенных деталей за 1 загатовку
+    val numberOfPartsFromBlank = consumptionBlank / consumptionParts
+    // Остаток материала при изготовке деталей из 1 загатовки
+    val remainOfPartsFromBlank = consumptionBlank - numberOfPartsFromBlank * consumptionParts
+
     // Определение количества деталей без повторного использования материала
-    var numberOfDetails = (n / consumptionBlank) * (consumptionBlank / consumptionParts)
+    var numberOfDetails = (n / consumptionBlank) * numberOfPartsFromBlank
     // Определение остатка материала после изготовления деталей
     var remains = n % ((n / consumptionBlank) * consumptionBlank) +
-            (n / consumptionBlank) * (consumptionBlank - (consumptionBlank / consumptionParts) * consumptionParts)
+            (n / consumptionBlank) * remainOfPartsFromBlank
 
     var amount: Int
     while (remains >= consumptionBlank) {
-        amount = (remains / consumptionBlank) * (consumptionBlank / consumptionParts)
+        amount = (remains / consumptionBlank) * numberOfPartsFromBlank
         numberOfDetails += amount
 
-        remains = remains % ((remains / consumptionBlank) * consumptionBlank) + (remains / consumptionBlank) *
-                (consumptionBlank - (consumptionBlank / consumptionParts) * consumptionParts)
+        remains = remains % ((remains / consumptionBlank) * consumptionBlank) +
+                (remains / consumptionBlank) * remainOfPartsFromBlank
     }
 
     return numberOfDetails
