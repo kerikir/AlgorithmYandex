@@ -1,6 +1,10 @@
 package com.lessons.second
 
 
+/*
+Время = 177ms
+Память = 14.65Mb
+ */
 fun main() {
     val numbers = mutableListOf<Int>()
     while (true) {
