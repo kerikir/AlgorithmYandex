@@ -14,6 +14,7 @@ fun main() {
         isConstant(list = numbers) -> "CONSTANT"
         isAscending(numbers) -> "ASCENDING"
         isWeaklyAscending(numbers) -> "WEAKLY ASCENDING"
+        isDescending(numbers) -> "DESCENDING"
         else -> "RANDOM"
     }
 
@@ -49,6 +50,19 @@ fun isWeaklyAscending(list: List<Int>) : Boolean {
     var flag = true
     for (i in 1..list.lastIndex) {
         if (list[i - 1] > list[i]) {
+            flag = false
+            break
+        }
+    }
+
+    return flag
+}
+
+
+fun isDescending(list: List<Int>) : Boolean {
+    var flag = true
+    for (i in 1..list.lastIndex) {
+        if (list[i - 1] <= list[i]) {
             flag = false
             break
         }
