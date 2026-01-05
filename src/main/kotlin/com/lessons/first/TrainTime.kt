@@ -4,6 +4,10 @@ import kotlin.math.max
 import kotlin.math.min
 
 
+/*
+Время = 165ms
+Память = 13.66Mb
+ */
 fun main() {
     val a = readLine()!!.trim().toInt()
     val b = readLine()!!.trim().toInt()
