@@ -2,8 +2,8 @@ package com.lessons.second
 
 
 /*
-Время = 173ms
-Память = 14.70Mb
+Время = 0.557s
+Память = 30.59Mb
  */
 fun main() {
     val n = readLine()!!.trim().toInt()
@@ -15,21 +15,28 @@ fun main() {
 
 
 fun definitionPlaceInChampionship(list: List<Int>) : Int {
-    var placement = 0
     var max = list[0]
     var index = -1
 
     // Поиск участника в списке бросков
-    for (i in 1..list.lastIndex - 1) {
+    for (i in 1..list.lastIndex) {
         if (list[i] > max) {
             max = list[i]
             index = -1
-        } else if ((list[i] % 5 == 0) && (list[i + 1] < list[i]) && list[i].toString().endsWith('5')) {
-            index = i
+        } else if (
+            (list[i] % 5 == 0) && (i != list.lastIndex) &&
+            (list[i] > list[i + 1]) && list[i].toString().endsWith('5')
+        ) {
+            if (index == -1) {
+                index = i
+            } else if (list[i] > list[index]) {
+                index = i
+            }
         }
     }
 
     // Подсчет места участника
+    var placement: Int
     if (index > 0) {
         placement = 1
 
