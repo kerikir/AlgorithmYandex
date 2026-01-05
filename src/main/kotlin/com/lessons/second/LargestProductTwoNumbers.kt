@@ -4,6 +4,10 @@ import kotlin.math.max
 import kotlin.math.min
 
 
+/*
+Время = 478ms
+Память = 29.73Mb
+ */
 fun main() {
     val numbers = readLine()!!.trim().split(" ").map { it.toInt() }
 
@@ -19,6 +23,7 @@ fun largestMultiplicationTwoNumbers(list: List<Int>) : Pair<Int, Int> {
     var max2 = min1
 
     for (i in 2..list.lastIndex) {
+        // Находим максимальные числа в последовательности
         if (list[i] > max1) {
             max2 = max1
             max1 = list[i]
@@ -26,6 +31,7 @@ fun largestMultiplicationTwoNumbers(list: List<Int>) : Pair<Int, Int> {
             max2 = list[i]
         }
 
+        // Находим минимальные числа в последовательности
         if (list[i] < min1) {
             min2 = min1
             min1 = list[i]
@@ -34,12 +40,13 @@ fun largestMultiplicationTwoNumbers(list: List<Int>) : Pair<Int, Int> {
         }
     }
 
-    val multiplicationMinNumbers = min1 * min2
-    val multiplicationMaxNumbers = max2 * max1
+    // Решение проблемы с переполнениме
+    val multiplicationMinNumbers: Long = min1 * min2.toLong()
+    val multiplicationMaxNumbers: Long = max2 * max1.toLong()
 
-    if (multiplicationMinNumbers > multiplicationMaxNumbers) {
-        return Pair(min1, min2)
+    return if (multiplicationMinNumbers >= multiplicationMaxNumbers) {
+        Pair(min1, min2)
     } else {
-        return Pair(max2, max1)
+        Pair(max2, max1)
     }
 }
