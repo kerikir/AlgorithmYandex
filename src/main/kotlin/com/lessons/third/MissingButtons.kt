@@ -1,6 +1,10 @@
 package com.lessons.third
 
 
+/*
+Время = 180ms
+Память = 15.21Mb
+ */
 fun main() {
     val buttons = readLine()!!.trim().split(" ").map { it.toInt() }
     val n = readLine()!!.trim().toInt()
