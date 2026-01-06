@@ -1,5 +1,12 @@
 package com.lessons.third
 
+
+/*
+Время = 412ms
+Память = 31.77Mb
+
+Результат = 100 баллов
+ */
 fun main() {
     val genome1 = readLine()!!.trim()
     val genome2 = readLine()!!.trim()
