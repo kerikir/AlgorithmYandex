@@ -2,6 +2,10 @@ package com.lessons.third
 
 import java.io.File
 
+
+/*
+Не решено
+ */
 fun main() {
     val text = File("input.txt").readText()
 
@@ -13,8 +17,8 @@ fun main() {
 fun determinateNumbersOfWords(text: String) : Int {
     // Удаление знаков пунктуации
     //val cleanText = text.replace("[,.;:!?]".toRegex(), "")
-    val textOneLine = text.replace("[\\s+]".toRegex(), " ").replace("\\s+".toRegex(), " ")
+    val textOneLine = text.trim().replace("[\\s+]".toRegex(), " ").replace("\\s+".toRegex(), " ")
 
-    val words = textOneLine/*.toLowerCase()*/.split(" ").toSet()
+    val words = textOneLine.trim()./*toLowerCase().*/split(" ").toSet()
     return words.size
 }
