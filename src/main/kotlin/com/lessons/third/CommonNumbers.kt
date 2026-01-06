@@ -17,6 +17,6 @@ fun main() {
 fun definingCommonNumbers(list1: List<Int>, list2: List<Int>) : List<Int> {
     val set1 = list1.toSet()
     val set2 = list2.toSet()
-    val setIntersection = list1.intersect(set2)
+    val setIntersection = set1.intersect(set2)
     return setIntersection.sorted()
 }
