@@ -12,9 +12,9 @@ fun main() {
 
 fun determinateNumbersOfWords(text: String) : Int {
     // Удаление знаков пунктуации
-    val cleanText = text.replace("[,.;:!?]".toRegex(), "")
-    val textOneLine = cleanText.replace("[\\s+]".toRegex(), " ").replace("\\s+".toRegex(), " ")
+    //val cleanText = text.replace("[,.;:!?]".toRegex(), "")
+    val textOneLine = text.replace("[\\s+]".toRegex(), " ").replace("\\s+".toRegex(), " ")
 
-    val words = textOneLine.toLowerCase().split(" ").toSet()
+    val words = textOneLine/*.toLowerCase()*/.split(" ").toSet()
     return words.size
 }
