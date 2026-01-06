@@ -1,5 +1,10 @@
 package com.lessons.third
 
+
+/*
+Время = 457ms
+Память = 31.66Mb
+ */
 fun main() {
     val numbers = readLine()!!.trim().split(" ").map { it.toInt() }
     val result = numberOfDifferentNumbers(numbers)
