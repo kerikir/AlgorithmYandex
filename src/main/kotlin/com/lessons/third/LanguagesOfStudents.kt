@@ -4,12 +4,12 @@ package com.lessons.third
 
 fun main() {
     val n = readLine()!!.trim().toInt()
-    val languages = mutableListOf<MutableList<String>>()
+    val languages = mutableSetOf<MutableSet<String>>()
 
     for (i in 1..n) {
         val m = readLine()!!.trim().toInt()
 
-        val lang = mutableListOf<String>()
+        val lang = mutableSetOf<String>()
         for (j in 1..m) {
             lang.add(readLine()!!.trim())
         }
@@ -32,28 +32,26 @@ fun main() {
 
 
 
-fun determinateLanguagesEveryStudentKnows(languages: List<List<String>>) : List<String> {
+fun determinateLanguagesEveryStudentKnows(languages: Set<Set<String>>) : Set<String> {
 
-    var languageEveryKnows = languages[0].toSet()
+    var languageEveryKnows = languages.first()
 
-    for (i in 1..languages.lastIndex) {
-        val set = languages[i].toSet()
-        languageEveryKnows = languageEveryKnows.intersect(set)
+    for (item in languages) {
+        languageEveryKnows = languageEveryKnows.intersect(item)
     }
 
-    return languageEveryKnows.toList()
+    return languageEveryKnows
 }
 
 
 
-fun determinateLanguagesLeastOneStudentKnows(languages: List<List<String>>) : List<String> {
+fun determinateLanguagesLeastOneStudentKnows(languages: Set<Set<String>>) : Set<String> {
 
-    var languageLeastOneKnows = languages[0].toSet()
+    var languageLeastOneKnows = languages.first()
 
-    for (i in 1..languages.lastIndex) {
-        val set = languages[i].toSet()
-        languageLeastOneKnows = languageLeastOneKnows.union(set)
+    for (item in languages) {
+        languageLeastOneKnows = languageLeastOneKnows.union(item)
     }
 
-    return languageLeastOneKnows.toList()
+    return languageLeastOneKnows
 }
