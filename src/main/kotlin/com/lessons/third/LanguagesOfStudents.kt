@@ -1,7 +1,9 @@
 package com.lessons.third
 
 
-
+/*
+Не решено
+ */
 fun main() {
     val n = readLine()!!.trim().toInt()
     val languages = mutableSetOf<MutableSet<String>>()
