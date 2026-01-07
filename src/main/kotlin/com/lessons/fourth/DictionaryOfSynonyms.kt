@@ -2,8 +2,8 @@ package com.lessons.fourth
 
 
 /*
-Время = 0.642s
-Память = 48.47Mb
+Время = 0.727s
+Память = 48.93Mb
 */
 fun main() {
 
@@ -24,15 +24,11 @@ fun main() {
 fun determinateSynonym(words: List<Pair<String, String>>, word: String) : String {
     val synonyms = mutableMapOf<String, String>()
     words.forEach {
-        // Можно все слова положить в ключи и искать по ним
         synonyms.put(it.first, it.second)
+        synonyms[it.second] = it.first
     }
 
     var synonym = synonyms[word]
-
-    if (synonym.isNullOrEmpty()) {
-        synonym = synonyms.entries.find { it.value.equals(word) }?.key
-    }
 
     return synonym ?: ""
 }
