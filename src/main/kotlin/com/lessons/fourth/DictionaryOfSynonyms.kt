@@ -24,6 +24,7 @@ fun main() {
 fun determinateSynonym(words: List<Pair<String, String>>, word: String) : String {
     val synonyms = mutableMapOf<String, String>()
     words.forEach {
+        // Можно все слова положить в ключи и искать по ним
         synonyms.put(it.first, it.second)
     }
 
