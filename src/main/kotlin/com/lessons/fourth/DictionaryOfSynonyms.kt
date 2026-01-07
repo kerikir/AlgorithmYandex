@@ -1,6 +1,10 @@
 package com.lessons.fourth
 
 
+/*
+Время = 0.642s
+Память = 48.47Mb
+*/
 fun main() {
 
     val n = readLine()!!.trim().toInt()
