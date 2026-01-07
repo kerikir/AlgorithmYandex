@@ -1,8 +1,13 @@
 package com.lessons.fourth
 
+import java.io.File
 
+
+/*
+Не решено
+ */
 fun main() {
-    val text = readLine()!!.trim()
+    val text = File("input.txt").readText()
 
     val result = determinateOccurrenceNumbersOfWords(text)
     println(result)
@@ -12,7 +17,7 @@ fun main() {
 
 fun determinateOccurrenceNumbersOfWords(text: String) : String {
 
-    val words = text.trim().replace("[\\s+]".toRegex(), " ").split(" ")
+    val words = text.trim().replace(Regex("\\s+"), " ").split(" ")
 
     val occurrenceWords = mutableMapOf<String, Int>()
     val occurrenceNumbers = mutableListOf<Int>()
