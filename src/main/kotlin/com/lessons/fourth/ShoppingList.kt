@@ -21,7 +21,7 @@ fun main() {
 
 fun determinateShoppingList(shoppingList: List<Triple<String, String, Int>>) : String {
 
-    var buyers = mutableMapOf<String, MutableMap<String, Int>>()
+    val buyers = mutableMapOf<String, MutableMap<String, Int>>()
 
     for (item in shoppingList) {
 
@@ -30,13 +30,11 @@ fun determinateShoppingList(shoppingList: List<Triple<String, String, Int>>) : S
         bayer[item.second] = bayer.getOrDefault(item.second, 0) + item.third
     }
 
-    buyers = buyers.toSortedMap()
-
     val list = mutableListOf<String>()
-    for (item in buyers) {
+    for (item in buyers.toSortedMap()) {
         list.add("${item.key}:")
 
-        for (i in item.value) {
+        for (i in item.value.toSortedMap()) {
             list.add("${i.key} ${i.value}")
         }
     }
