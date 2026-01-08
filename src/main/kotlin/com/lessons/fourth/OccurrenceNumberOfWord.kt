@@ -4,7 +4,7 @@ import java.io.File
 
 
 /*
-Не решено
+Не решено - не сошелся ответ
  */
 fun main() {
     val text = File("input.txt").readText()
