@@ -2,7 +2,7 @@ package com.lessons.fourth
 
 
 /*
-Не решено
+Не решено - не сошелся ответ
  */
 fun main() {
     val n = readLine()!!.trim().toInt()
