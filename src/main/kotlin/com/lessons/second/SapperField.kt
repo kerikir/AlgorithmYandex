@@ -1,6 +1,10 @@
 package com.lessons.second
 
 
+/*
+Время = 194ms
+Память = 14.95Mb
+ */
 fun main() {
 
     val (n, m, k)  = readLine()!!.trim().split(" ").map { it.toInt() }
@@ -38,8 +42,16 @@ fun fillFieldWithMines(rows: Int, columns: Int, coords: List<Pair<Int, Int>>) : 
     }
 
     var result = ""
-    for (row in field) {
-        result += row.joinToString(" ", postfix = "\n")
+    for (i in field.indices) {
+        for (j in field[i].indices) {
+            if (field[i][j] == -1) {
+                result += "* "
+            } else {
+                result += "${field[i][j]} "
+            }
+        }
+
+        result += "\n"
     }
     return result
 }
