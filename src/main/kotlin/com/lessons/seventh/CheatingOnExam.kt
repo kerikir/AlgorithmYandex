@@ -1,6 +1,10 @@
 package com.lessons.seventh
 
-
+/*
+Не решено - превышен лимит времени
+Сложность = O(M*N)
+Память = O(N)
+ */
 fun main() {
     val (n, m) = readLine()!!.trim().split(" ").map { it.toInt() }
     val checkingDesks = mutableListOf<Pair<Int, Int>>()
