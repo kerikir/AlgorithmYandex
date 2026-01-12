@@ -9,14 +9,20 @@ fun main() {
         checkingDesks.add(b to e)
     }
 
-    val result = determinateNumberOfStudentsWithoutSupervision(checkingDesks)
+    val result = determinateNumberOfStudentsWithoutSupervision(n, checkingDesks)
     println(result)
 }
 
 
-fun determinateNumberOfStudentsWithoutSupervision(checkingDesks: List<Pair<Int, Int>>) : Int {
+fun determinateNumberOfStudentsWithoutSupervision(numberOfDesks: Int, checkingDesks: List<Pair<Int, Int>>) : Int {
 
-    val sortCheckingDesks = checkingDesks.sortedBy { it.first }
+    val checkingDesksSet = mutableSetOf<Int>()
 
-    return checkingDesks.size
+    for (item in checkingDesks) {
+        for (i in item.first..item.second) {
+            checkingDesksSet.add(i)
+        }
+    }
+
+    return numberOfDesks - checkingDesksSet.size
 }
