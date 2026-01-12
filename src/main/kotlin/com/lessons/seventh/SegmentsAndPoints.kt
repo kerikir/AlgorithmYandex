@@ -1,5 +1,11 @@
 package com.lessons.seventh
 
+
+/*
+Не решено - превышен лимит времени
+Сложность = O(N*M) = O(N^2)
+Память = O(M)
+*/
 fun main() {
     val (n, m) = readLine()!!.trim().split(" ").map { it.toInt() }
     val segments = mutableListOf<Pair<Int, Int>>()
