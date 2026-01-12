@@ -1,9 +1,11 @@
 package com.lessons.seventh
 
 /*
-Не решено - превышен лимит времени
-Сложность = O(M*N)
-Память = O(N)
+Время = 379ms
+Память = 25.45Mb
+
+Сложность = O(M*logM)
+Память = O(M)
  */
 fun main() {
     val (n, m) = readLine()!!.trim().split(" ").map { it.toInt() }
@@ -20,13 +22,23 @@ fun main() {
 
 fun determinateNumberOfStudentsWithoutSupervision(numberOfDesks: Int, checkingDesks: List<Pair<Int, Int>>) : Int {
 
-    val checkingDesksSet = mutableSetOf<Int>()
+    // Сортировка интервалов по началу
+    val checkingDesksSorted = checkingDesks.sortedBy { it.first }
 
-    for (item in checkingDesks) {
-        for (i in item.first..item.second) {
-            checkingDesksSet.add(i)
+    var counterDesksObserved = 0
+    var maxEnd = -1
+
+    for ((start, end) in checkingDesksSorted) {
+        if (maxEnd < start) {
+            // Интервалы не пересекаются - наблюдают за разными партами
+            counterDesksObserved += end - start + 1
+            maxEnd = end
+        } else if (maxEnd < end) {
+            // Интервалы пересекаются
+            counterDesksObserved += end - maxEnd
+            maxEnd = end
         }
     }
 
-    return numberOfDesks - checkingDesksSet.size
+    return numberOfDesks - counterDesksObserved
 }
