@@ -6,6 +6,8 @@ import kotlin.math.abs
 /*
 Время = 173ms
 Память = 14.82Mb
+
+Сложность = O(N)
  */
 fun main() {
     val size = readLine()!!.trim().toShort()
