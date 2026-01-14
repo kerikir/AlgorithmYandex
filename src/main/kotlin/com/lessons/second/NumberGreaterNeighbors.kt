@@ -4,6 +4,8 @@ package com.lessons.second
 /*
 Время = 173ms
 Память = 14.70Mb
+
+Сложность = O(N)
  */
 fun main() {
     val array = readLine()!!.trim().split(" ").map { it.toInt() }
