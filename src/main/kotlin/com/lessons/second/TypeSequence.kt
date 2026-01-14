@@ -4,6 +4,8 @@ package com.lessons.second
 /*
 Время = 177ms
 Память = 14.65Mb
+
+Сложность = O(5*N) = O(N)
  */
 fun main() {
     val numbers = mutableListOf<Int>()
