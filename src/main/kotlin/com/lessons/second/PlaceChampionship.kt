@@ -4,6 +4,8 @@ package com.lessons.second
 /*
 Время = 0.557s
 Память = 30.59Mb
+
+Сложность = O(2*N) = O(N)
  */
 fun main() {
     val n = readLine()!!.trim().toInt()
@@ -21,6 +23,7 @@ fun definitionPlaceInChampionship(list: List<Int>) : Int {
     // Поиск участника в списке бросков
     for (i in 1..list.lastIndex) {
         if (list[i] > max) {
+            // Определение максимума
             max = list[i]
             index = -1
         } else if (
@@ -28,8 +31,10 @@ fun definitionPlaceInChampionship(list: List<Int>) : Int {
             (list[i] > list[i + 1]) && list[i].toString().endsWith('5')
         ) {
             if (index == -1) {
+                // Первое подходящее
                 index = i
             } else if (list[i] > list[index]) {
+                // Наибольшее из подходящих
                 index = i
             }
         }
