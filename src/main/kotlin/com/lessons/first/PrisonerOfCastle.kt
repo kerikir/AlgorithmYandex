@@ -4,6 +4,8 @@ package com.lessons.first
 /*
 Время = 186ms
 Память = 18.05Mb
+
+Сложность = O(1)
  */
 fun main() {
     val x = readLine()!!.trim().toInt()
@@ -19,11 +21,9 @@ fun main() {
 
 fun isThroughTheHole(x: Int, y: Int, z: Int, a: Int, b: Int) : Boolean {
 
-    val brick = listOf(x, y, z)
-    val hole = listOf(a, b)
-
     var flag = false
 
+    // Перебор возможного переворота предмета для перемещения через отверстие
     if (x <= a && y <= b) flag = true
     else if (x <= b && y <= a) flag = true
     else if (x <= a && z <= b) flag = true

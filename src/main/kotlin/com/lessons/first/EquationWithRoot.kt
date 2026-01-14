@@ -4,6 +4,8 @@ package com.lessons.first
 /*
 Время = 146ms
 Память = 12.38Mb
+
+Сложность = O(1)
  */
 fun main() {
     val a = readLine()!!.toInt()
@@ -15,6 +17,7 @@ fun main() {
 }
 
 
+// O(1)
 fun calculateEquation(a: Int, b: Int, c: Int) : String {
     // Область допустимых значений
     if (c < 0) return "NO SOLUTION"
