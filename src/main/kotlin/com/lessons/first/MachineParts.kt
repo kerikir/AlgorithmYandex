@@ -4,6 +4,8 @@ package com.lessons.first
 /*
 Время = 172ms
 Память = 14.70Mb
+
+Сложность = O(1), если входные данные не ограничены O(N)
  */
 fun main() {
     val (n, k, m) = readLine()!!.trim().split(" ").map { it.toInt() }
@@ -34,6 +36,7 @@ fun calculateAmountMachineParts(n: Int, consumptionBlank: Int, consumptionParts:
     var remains = n % ((n / consumptionBlank) * consumptionBlank) +
             (n / consumptionBlank) * remainOfPartsFromBlank
 
+    // Распределение остатка материала
     var amount: Int
     while (remains >= consumptionBlank) {
         amount = (remains / consumptionBlank) * numberOfPartsFromBlank
