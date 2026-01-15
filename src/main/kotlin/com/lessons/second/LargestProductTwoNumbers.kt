@@ -7,8 +7,11 @@ import kotlin.math.min
 /*
 Время = 478ms
 Память = 29.73Mb
+
+Сложность = O(N)
  */
 fun main() {
+    // O(N)
     val numbers = readLine()!!.trim().split(" ").map { it.toInt() }
 
     val result = largestMultiplicationTwoNumbers(numbers)
@@ -22,6 +25,7 @@ fun largestMultiplicationTwoNumbers(list: List<Int>) : Pair<Int, Int> {
     var max1 = min2
     var max2 = min1
 
+    // O(N)
     for (i in 2..list.lastIndex) {
         // Находим максимальные числа в последовательности
         if (list[i] > max1) {
@@ -40,6 +44,7 @@ fun largestMultiplicationTwoNumbers(list: List<Int>) : Pair<Int, Int> {
         }
     }
 
+    // O(1)
     // Решение проблемы с переполнениме
     val multiplicationMinNumbers: Long = min1 * min2.toLong()
     val multiplicationMaxNumbers: Long = max2 * max1.toLong()
