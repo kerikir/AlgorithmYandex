@@ -1,7 +1,11 @@
 package com.lessons.first
 
+
 /*
-Не решено
+Время = 184ms
+Память = 14.70Mb
+
+Сложность = O(1)
  */
 fun main() {
     val newNumber = readLine()!!.trim()
@@ -11,10 +15,13 @@ fun main() {
         telephoneNumbers.add(readLine()!!.trim())
     }
 
+    // Нормализация введенного номера
     val newNumberNormalized = normalizeNumber(newNumber)
     for (number in telephoneNumbers) {
+        // Нормализация номера
         val telephoneNumberNormalized = normalizeNumber(number)
 
+        // Проверка на совпадение
         if (newNumberNormalized == telephoneNumberNormalized) {
             println("yes".toUpperCase())
         } else {
