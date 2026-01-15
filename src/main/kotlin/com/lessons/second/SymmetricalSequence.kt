@@ -4,6 +4,8 @@ package com.lessons.second
 /*
 Время = 176ms
 Память = 14.57Mb
+
+Сложность = O(4*N) = O(N)
  */
 fun main() {
     val size = readLine()!!.trim().toInt()
@@ -27,12 +29,15 @@ fun additionSymmetricSequence(list: List<Int>) : List<Int> {
     var missingNumbers = -1
     var indexEnd = list.lastIndex
 
+    // Определение симметричная ли последовательность
     while (indexStart < indexEnd) {
 
         if (list[indexStart] == list[indexEnd]) {
+            // Текущие значения симметричны
             indexStart++
             indexEnd--
         } else {
+            // Опраделение каких значений не хватает для симметричности
             indexEnd = list.lastIndex
 
             missingNumbers = indexStart
@@ -40,6 +45,7 @@ fun additionSymmetricSequence(list: List<Int>) : List<Int> {
         }
     }
 
+    // Добавления значений в последовательность для симметричности
     if (missingNumbers >= 0) {
         for (i in missingNumbers downTo 0) {
             mutableList.add(list[i])
