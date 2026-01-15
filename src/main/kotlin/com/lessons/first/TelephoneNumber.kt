@@ -4,11 +4,11 @@ package com.lessons.first
 Не решено
  */
 fun main() {
-    val newNumber = readLine()!!
+    val newNumber = readLine()!!.trim()
 
     val telephoneNumbers = mutableListOf<String>()
     for (i in 1..3) {
-        telephoneNumbers.add(readLine()!!)
+        telephoneNumbers.add(readLine()!!.trim())
     }
 
     val newNumberNormalized = normalizeNumber(newNumber)
@@ -29,7 +29,7 @@ fun normalizeNumber(phone: String) : String {
     var digitsOnly = phone.replace(Regex("[^0-9]"), "")
 
     // Удаление кода страны
-    if (digitsOnly.startsWith('7') || digitsOnly.startsWith('8')) {
+    if (digitsOnly.length == 11 && (digitsOnly.startsWith('7') || digitsOnly.startsWith('8'))) {
         digitsOnly = digitsOnly.substring(1)
     }
 
