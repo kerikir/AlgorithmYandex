@@ -30,8 +30,6 @@ fun main() {
 fun calculateLinearEquation(a: Float, b: Float, c: Float, d: Float, e: Float, f: Float)
 : String {
 
-    var result = "0"
-
     // Поиск определителя
     val determinant = a * d - c * b
 
@@ -43,29 +41,29 @@ fun calculateLinearEquation(a: Float, b: Float, c: Float, d: Float, e: Float, f:
 
             if (equalsZero(e) && equalsZero(f)) {
                 // Любая пара - решение
-                result = "5"
+                return "5"
             } else {
                 // Нет решения - противоречие
-                result = "0"
+                return "0"
             }
 
         } else if (equalsZero(a) && equalsZero(b) && equalsZero(e)) {
             // Одна строка пустая - 0x + 0y = 0
-            result = calculateOneLineEmpty(c, d, f)
+            return calculateOneLineEmpty(c, d, f)
 
         } else if (equalsZero(c) && equalsZero(d) && equalsZero(f)) {
             // Одна строка пустая - 0x + 0y = 0
-            result = calculateOneLineEmpty(a, b, e)
+            return calculateOneLineEmpty(a, b, e)
 
         } else {
 
             if (equalsZero(c)) {
                 // Пропорциональные строки
-                result = calculateProportionallyLine(c, d, f)
+                return calculateProportionallyLine(c, d, f)
 
             } else if (equalsZero(d)) {
                 // Пропорциональные строки
-                result = calculateProportionallyLine(c, d, f)
+                return calculateProportionallyLine(c, d, f)
 
             } else if (
                 equalsZero(a * d - b * c) &&
@@ -74,21 +72,21 @@ fun calculateLinearEquation(a: Float, b: Float, c: Float, d: Float, e: Float, f:
                 ) {
                 // Убрано деление на 0 с помощью умножения
                 // Пропорциональные строки
-                result = calculateProportionallyLine(c, d, f)
+                return calculateProportionallyLine(c, d, f)
 
             } else {
                 // Нет решения
-                result = "0"
+                return "0"
             }
         }
 
     } else {
 
         val pairResult = calculateCramerRule(a, b, c, d, e, f, determinant)
-        result = "2 ${pairResult.first} ${pairResult.second}"
+        return "2 ${pairResult.first} ${pairResult.second}"
     }
 
-    return result
+    return "0"
 }
 
 
@@ -149,5 +147,5 @@ fun calculateProportionallyLine(c: Float, d: Float, f: Float) : String {
 
 fun equalsZero(value: Float) : Boolean {
     val eps = 10.0f.pow(-6)
-    return abs(value - 0.0f) < eps
+    return abs(value) < eps
 }
