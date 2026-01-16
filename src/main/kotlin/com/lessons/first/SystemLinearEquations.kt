@@ -5,7 +5,7 @@ import kotlin.math.pow
 
 
 /*
-Нет решение - не понял задачу
+Нет решение - неверный ответ (25 проверка)
  */
 fun main() {
     val a = readLine()!!.trim().toFloat()
@@ -67,7 +67,11 @@ fun calculateLinearEquation(a: Float, b: Float, c: Float, d: Float, e: Float, f:
                 // Пропорциональные строки
                 result = calculateProportionallyLine(c, d, f)
 
-            } else if ((a * d == b * c) && (a * f == e * c)) {
+            } else if (
+                equalsZero(a * d - b * c) &&
+                equalsZero(a * f - e * c) &&
+                equalsZero(b * f - e * d)
+                ) {
                 // Убрано деление на 0 с помощью умножения
                 // Пропорциональные строки
                 result = calculateProportionallyLine(c, d, f)
