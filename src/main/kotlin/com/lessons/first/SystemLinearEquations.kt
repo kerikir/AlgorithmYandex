@@ -1,27 +1,35 @@
 package com.lessons.first
 
 
+
 /*
 Нет решение - не понял задачу
  */
 fun main() {
-    val a1 = readLine()!!.trim().toInt()
-    val b1 = readLine()!!.trim().toInt()
-    val c1 = readLine()!!.trim().toInt()
-    val a2 = readLine()!!.trim().toInt()
-    val b2 = readLine()!!.trim().toInt()
-    val c2 = readLine()!!.trim().toInt()
+    val a = readLine()!!.trim().toFloat()
+    val b = readLine()!!.trim().toFloat()
+    val c = readLine()!!.trim().toFloat()
+    val d = readLine()!!.trim().toFloat()
+    val e = readLine()!!.trim().toFloat()
+    val f = readLine()!!.trim().toFloat()
 
-    val result = calculateCramerRule(a1, b1, c1, a2, b2, c2)
-    println("${result.first} ${result.second}")
+
+    val result = calculateLinearEquation(a, b, c, d, e, f)
+    println("${result.first} ${result.second} ${result.third}")
 }
 
 
-fun calculateCramerRule(a1: Int, b1: Int, c1: Int, a2: Int, b2: Int, c2: Int) : Pair<Double,Double> {
 
-    // TODO добавить проверку определителя
+/**
+ * ax + by = e
+ * 
+ * cx + dy = f
+ */
+fun calculateLinearEquation(a: Float, b: Float, c: Float, d: Float, e: Float, f: Float)
+: Triple<Float, Float, Float> {
 
-    val determinant = a1 * b2 - a2 * b1
+    // Поиск определителя
+    val determinant = a * d - c * b
 
     val determinant1 = c1 * b2 - c2 * b1
     val determinant2 = a1 * c2 - a2 * c1
