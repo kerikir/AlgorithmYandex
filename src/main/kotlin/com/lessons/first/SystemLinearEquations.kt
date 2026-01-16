@@ -7,6 +7,8 @@ import kotlin.math.pow
 /*
 Время = 168ms
 Память = 14.05Mb
+
+Сложность = O(1)
  */
 fun main() {
     val a = readLine()!!.trim().toFloat()
