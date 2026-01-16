@@ -107,6 +107,10 @@ fun calculateCramerRule(a: Float, b: Float, c: Float, d: Float, e: Float, f: Flo
 
 fun calculateSingleEquation(c: Float, d: Float, f: Float) : String {
 
+    if (equalsZero(c) && equalsZero(d)) {
+        return if (equalsZero(f)) "5" else "0"
+    }
+
     if (equalsZero(d)) {
         // Много решений (y - любое) - x = x0
         val x = f / c
