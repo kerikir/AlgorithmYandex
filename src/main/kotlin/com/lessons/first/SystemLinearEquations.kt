@@ -49,30 +49,30 @@ fun calculateLinearEquation(a: Float, b: Float, c: Float, d: Float, e: Float, f:
 
         } else if (equalsZero(a) && equalsZero(b) && equalsZero(e)) {
             // Одна строка пустая - 0x + 0y = 0
-            return calculateOneLineEmpty(c, d, f)
+            return calculateSingleEquation(c, d, f)
 
         } else if (equalsZero(c) && equalsZero(d) && equalsZero(f)) {
             // Одна строка пустая - 0x + 0y = 0
-            return calculateOneLineEmpty(a, b, e)
+            return calculateSingleEquation(a, b, e)
 
         } else {
 
             if (equalsZero(c)) {
                 // Пропорциональные строки
-                return calculateProportionallyLine(c, d, f)
+                return calculateSingleEquation(c, d, f)
 
             } else if (equalsZero(d)) {
                 // Пропорциональные строки
-                return calculateProportionallyLine(c, d, f)
+                return calculateSingleEquation(c, d, f)
 
             } else if (
-                equalsZero(a * d - b * c) &&
-                equalsZero(a * f - e * c) &&
-                equalsZero(b * f - e * d)
+                equalsZero(b) && equalsZero(d) && equalsZero(a * f - e * c) ||
+                equalsZero(a) && equalsZero(c) && equalsZero(b * f - e * d) ||
+                equalsZero(a * f - e * c) && equalsZero(b * f - e * d)
                 ) {
                 // Убрано деление на 0 с помощью умножения
                 // Пропорциональные строки
-                return calculateProportionallyLine(c, d, f)
+                return calculateSingleEquation(c, d, f)
 
             } else {
                 // Нет решения
@@ -105,28 +105,8 @@ fun calculateCramerRule(a: Float, b: Float, c: Float, d: Float, e: Float, f: Flo
 
 
 
-fun calculateOneLineEmpty(c: Float, d: Float, f: Float) : String {
-    // Одна строка пустая - 0x + 0y = 0
-    if (equalsZero(d)) {
-        // Много решений (y - любое) - x = x0
-        val x = f / c
-        return "3 $x"
-    } else if (equalsZero(c)) {
-        // Много решений (x - любое) - y = y0
-        val y = f / d
-        return "4 $y"
-    } else {
-        // Много решений - y = kx + z
-        val k = -c / d
-        val z = f / d
-        return "1 $k $z"
-    }
-}
+fun calculateSingleEquation(c: Float, d: Float, f: Float) : String {
 
-
-
-fun calculateProportionallyLine(c: Float, d: Float, f: Float) : String {
-    // Пропорциональные строки
     if (equalsZero(d)) {
         // Много решений (y - любое) - x = x0
         val x = f / c
