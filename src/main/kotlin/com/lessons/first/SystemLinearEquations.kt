@@ -22,20 +22,37 @@ fun main() {
 
 /**
  * ax + by = e
- * 
+ *
  * cx + dy = f
  */
 fun calculateLinearEquation(a: Float, b: Float, c: Float, d: Float, e: Float, f: Float)
-: Triple<Float, Float, Float> {
+: String {
+
+    var result = ""
 
     // Поиск определителя
     val determinant = a * d - c * b
 
-    val determinant1 = c1 * b2 - c2 * b1
-    val determinant2 = a1 * c2 - a2 * c1
+    if (!determinant.equals(0.0)) {
+        val pairResult = calculateCramerRule(a, b, c, d, e, f, determinant)
+        result = "2 ${pairResult.first} ${pairResult.second}"
+    } else {
+        
+    }
 
-    val x = determinant1 / determinant.toDouble()
-    val y = determinant2 / determinant.toDouble()
+    return ""
+}
+
+
+
+fun calculateCramerRule(a: Float, b: Float, c: Float, d: Float, e: Float, f: Float, determinant: Float)
+: Pair<Float, Float> {
+
+    val determinant1 = e * d - f * b
+    val determinant2 = a * f - c * e
+
+    val x = determinant1 / determinant
+    val y = determinant2 / determinant
 
     return x to y
 }
