@@ -43,13 +43,14 @@ fun calculateApartment(
     }
 
     // Максимально возможное количество квартир на этаже
-    val maxApartmentsPerFloor = min(apartment2, 1_000_000)
+    // Дойдем если этаж или подъезд известной не равен 1
+    val maxApartmentsPerFloor = min(apartment2 - 1, 1_000_000)
 
     var floor1: Int = -1
     var entrance1: Int = -1
 
     // Перебор всех вариантов количества квартир на этаже
-    for (apartmentsPerFloor in 1..< maxApartmentsPerFloor) {
+    for (apartmentsPerFloor in 1.. maxApartmentsPerFloor) {
 
         val (entranceCurrent, floorCurrent) =
             checkApartmentsPerFloor(apartment1, floors, apartment2, entrance2, floor2, apartmentsPerFloor)
