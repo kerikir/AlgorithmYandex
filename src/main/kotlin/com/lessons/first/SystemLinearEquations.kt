@@ -57,20 +57,7 @@ fun calculateLinearEquation(a: Float, b: Float, c: Float, d: Float, e: Float, f:
 
         } else {
 
-            if (equalsZero(c)) {
-                // Пропорциональные строки
-                return calculateSingleEquation(c, d, f)
-
-            } else if (equalsZero(d)) {
-                // Пропорциональные строки
-                return calculateSingleEquation(c, d, f)
-
-            } else if (
-                equalsZero(b) && equalsZero(d) && equalsZero(a * f - e * c) ||
-                equalsZero(a) && equalsZero(c) && equalsZero(b * f - e * d) ||
-                equalsZero(a * f - e * c) && equalsZero(b * f - e * d)
-                ) {
-                // Убрано деление на 0 с помощью умножения
+            if (isProportionalLines(a, b, c, d, e, f)) {
                 // Пропорциональные строки
                 return calculateSingleEquation(c, d, f)
 
@@ -103,6 +90,24 @@ fun calculateCramerRule(a: Float, b: Float, c: Float, d: Float, e: Float, f: Flo
     return x to y
 }
 
+
+fun isProportionalLines(a: Float, b: Float, c: Float, d: Float, e: Float, f: Float) : Boolean {
+    var ratio: Float
+
+    // Убрано деление на 0 с помощью умножения
+    if (!equalsZero(c)) {
+        ratio = a / c
+        return equalsZero(b - d * ratio) && equalsZero(e - f * ratio)
+    } else if (!equalsZero(d)) {
+        ratio = b / d
+        return equalsZero(a - c * ratio) && equalsZero(e - f * ratio)
+    } else if (!equalsZero(f)) {
+        ratio = e / f
+        return equalsZero(b - d * ratio) && equalsZero(a - c * ratio)
+    }
+
+    return false
+}
 
 
 fun calculateSingleEquation(c: Float, d: Float, f: Float) : String {
