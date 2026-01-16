@@ -56,17 +56,13 @@ fun calculateApartment(
     // Проверка каждого подходящего значения (число квартир на этаже)
     for (apartmentsPerFloor in apartmentsPerFloorSet) {
 
-        // Количество квартир в подъезде
-        val apartmentsPerEntrance = floors * apartmentsPerFloor
 
-        // Определение номера подъезда
-        val entranceCurrent = (apartment1 - 1) / apartmentsPerEntrance + 1 // Для краевых условий
 
-        // Определение номера квартиры в подъезде
-        val apartmentInEntrance = (apartment1 - 1) % apartmentsPerEntrance + 1 // Для краевых условий
 
-        // Определение номера этажа
-        val floorCurrent = (apartmentInEntrance - 1) / apartmentsPerFloor + 1 // Для краевых условий
+
+
+
+
 
         if (floorCurrent <= floors) {
             // Первое найденное значение
@@ -90,4 +86,29 @@ fun calculateApartment(
 }
 
 
-fun checkApartmentsPerFloor()
+
+fun checkApartmentsPerFloor(
+    apartment1: Int, floors: Int, apartment2: Int, entrance2: Int, floor2: Int
+): Pair<Int, Int> {
+
+
+}
+
+
+
+fun getEntranceAndFloor(apartment: Int, floors: Int, apartmentsPerFloor: Int) : Pair<Int, Int> {
+
+    // Количество квартир в подъезде
+    val apartmentsPerEntrance = floors * apartmentsPerFloor
+
+    // Определение номера подъезда
+    val entranceCurrent = (apartment - 1) / apartmentsPerEntrance + 1
+
+    // Определение номера квартиры в подъезде
+    val apartmentInEntrance = (apartment - 1) % apartmentsPerEntrance + 1
+
+    // Определение номера этажа
+    val floorCurrent = (apartmentInEntrance - 1) / apartmentsPerFloor + 1
+
+    return entranceCurrent to floorCurrent
+}
