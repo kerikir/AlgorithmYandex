@@ -50,7 +50,23 @@ fun calculateLinearEquation(a: Float, b: Float, c: Float, d: Float, e: Float, f:
                 result = "0"
             }
         }
-        else if ()
+        else if (a.equals(0.0f) && b.equals(0.0f) && e.equals(0.0f)) {
+            // Одна строка пустая - 0x + 0y = 0
+            if (d.equals(0.0f)) {
+                // Много решений (y - любое) - x = x0
+                val x = f / c
+                result = "3 $x"
+            } else if (c.equals(0.0f)) {
+                // Много решений (x - любое) - y = y0
+                val y = f / d
+                result = "4 $y"
+            } else {
+                // Много решений - y = kx + z
+                val k = -c / d
+                val z = f / d
+                result = "1 $k $z"
+            }
+        }
     }
 
     return result
