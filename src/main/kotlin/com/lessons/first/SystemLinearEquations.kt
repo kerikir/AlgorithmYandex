@@ -5,7 +5,10 @@ import kotlin.math.pow
 
 
 /*
-Нет решение - неверный ответ (25 проверка)
+Время = 168ms
+Память = 14.05Mb
+
+Сложность = O(1)
  */
 fun main() {
     val a = readLine()!!.trim().toFloat()
@@ -30,8 +33,6 @@ fun main() {
 fun calculateLinearEquation(a: Float, b: Float, c: Float, d: Float, e: Float, f: Float)
 : String {
 
-    var result = "0"
-
     // Поиск определителя
     val determinant = a * d - c * b
 
@@ -43,52 +44,39 @@ fun calculateLinearEquation(a: Float, b: Float, c: Float, d: Float, e: Float, f:
 
             if (equalsZero(e) && equalsZero(f)) {
                 // Любая пара - решение
-                result = "5"
+                return "5"
             } else {
                 // Нет решения - противоречие
-                result = "0"
+                return "0"
             }
 
         } else if (equalsZero(a) && equalsZero(b) && equalsZero(e)) {
             // Одна строка пустая - 0x + 0y = 0
-            result = calculateOneLineEmpty(c, d, f)
+            return calculateSingleEquation(c, d, f)
 
         } else if (equalsZero(c) && equalsZero(d) && equalsZero(f)) {
             // Одна строка пустая - 0x + 0y = 0
-            result = calculateOneLineEmpty(a, b, e)
+            return calculateSingleEquation(a, b, e)
 
         } else {
 
-            if (equalsZero(c)) {
+            if (isProportionalLines(a, b, c, d, e, f)) {
                 // Пропорциональные строки
-                result = calculateProportionallyLine(c, d, f)
-
-            } else if (equalsZero(d)) {
-                // Пропорциональные строки
-                result = calculateProportionallyLine(c, d, f)
-
-            } else if (
-                equalsZero(a * d - b * c) &&
-                equalsZero(a * f - e * c) &&
-                equalsZero(b * f - e * d)
-                ) {
-                // Убрано деление на 0 с помощью умножения
-                // Пропорциональные строки
-                result = calculateProportionallyLine(c, d, f)
+                return calculateSingleEquation(c, d, f)
 
             } else {
                 // Нет решения
-                result = "0"
+                return "0"
             }
         }
 
     } else {
 
         val pairResult = calculateCramerRule(a, b, c, d, e, f, determinant)
-        result = "2 ${pairResult.first} ${pairResult.second}"
+        return "2 ${pairResult.first} ${pairResult.second}"
     }
 
-    return result
+    return "0"
 }
 
 
@@ -107,28 +95,32 @@ fun calculateCramerRule(a: Float, b: Float, c: Float, d: Float, e: Float, f: Flo
 
 
 
-fun calculateOneLineEmpty(c: Float, d: Float, f: Float) : String {
-    // Одна строка пустая - 0x + 0y = 0
-    if (equalsZero(d)) {
-        // Много решений (y - любое) - x = x0
-        val x = f / c
-        return "3 $x"
-    } else if (equalsZero(c)) {
-        // Много решений (x - любое) - y = y0
-        val y = f / d
-        return "4 $y"
-    } else {
-        // Много решений - y = kx + z
-        val k = -c / d
-        val z = f / d
-        return "1 $k $z"
+fun isProportionalLines(a: Float, b: Float, c: Float, d: Float, e: Float, f: Float) : Boolean {
+    var ratio: Float
+
+    // Убрано деление на 0 с помощью умножения
+    if (!equalsZero(c)) {
+        ratio = a / c
+        return equalsZero(b - d * ratio) && equalsZero(e - f * ratio)
+    } else if (!equalsZero(d)) {
+        ratio = b / d
+        return equalsZero(a - c * ratio) && equalsZero(e - f * ratio)
+    } else if (!equalsZero(f)) {
+        ratio = e / f
+        return equalsZero(b - d * ratio) && equalsZero(a - c * ratio)
     }
+
+    return false
 }
 
 
 
-fun calculateProportionallyLine(c: Float, d: Float, f: Float) : String {
-    // Пропорциональные строки
+fun calculateSingleEquation(c: Float, d: Float, f: Float) : String {
+
+    if (equalsZero(c) && equalsZero(d)) {
+        return if (equalsZero(f)) "5" else "0"
+    }
+
     if (equalsZero(d)) {
         // Много решений (y - любое) - x = x0
         val x = f / c
@@ -149,5 +141,5 @@ fun calculateProportionallyLine(c: Float, d: Float, f: Float) : String {
 
 fun equalsZero(value: Float) : Boolean {
     val eps = 10.0f.pow(-6)
-    return abs(value - 0.0f) < eps
+    return abs(value) < eps
 }
