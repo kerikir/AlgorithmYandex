@@ -67,7 +67,8 @@ fun calculateLinearEquation(a: Float, b: Float, c: Float, d: Float, e: Float, f:
                 // Пропорциональные строки
                 result = calculateProportionallyLine(c, d, f)
 
-            } else if (((a / c) == (b / d)) && ((a / c) == (e / f))) {
+            } else if ((a * d == b * c) && (a * f == e * c)) {
+                // Убрано деление на 0 с помощью умножения
                 // Пропорциональные строки
                 result = calculateProportionallyLine(c, d, f)
 
