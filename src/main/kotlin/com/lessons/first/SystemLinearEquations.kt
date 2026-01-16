@@ -1,5 +1,7 @@
 package com.lessons.first
 
+import kotlin.math.abs
+import kotlin.math.pow
 
 
 /*
@@ -34,12 +36,12 @@ fun calculateLinearEquation(a: Float, b: Float, c: Float, d: Float, e: Float, f:
     val determinant = a * d - c * b
 
     // Вырожденные случаи
-    if (determinant.equals(0.0f)) {
+    if (equalsZero(determinant)) {
 
         // Все коэффициенты нулевые
-        if (a.equals(0.0f) && b.equals(0.0f) && c.equals(0.0f) && d.equals(0.0f)) {
+        if (equalsZero(a) && equalsZero(b) && equalsZero(c) && equalsZero(d)) {
 
-            if (e.equals(0.0f) && f.equals(0.0f)) {
+            if (equalsZero(e) && equalsZero(f)) {
                 // Любая пара - решение
                 result = "5"
             } else {
@@ -47,19 +49,19 @@ fun calculateLinearEquation(a: Float, b: Float, c: Float, d: Float, e: Float, f:
                 result = "0"
             }
 
-        } else if (a.equals(0.0f) && b.equals(0.0f) && e.equals(0.0f)) {
+        } else if (equalsZero(a) && equalsZero(b) && equalsZero(e)) {
             // Одна строка пустая - 0x + 0y = 0
             result = calculateOneLineEmpty(c, d, f)
 
-        } else if (c.equals(0.0f) && d.equals(0.0f) && f.equals(0.0f)) {
+        } else if (equalsZero(c) && equalsZero(d) && equalsZero(f)) {
             // Одна строка пустая - 0x + 0y = 0
             result = calculateOneLineEmpty(a, b, e)
 
         } else {
             // Пропорциональные строки
-            if (c.equals(0.0f)) {
+            if (equalsZero(c)) {
                 result = calculateProportionallyLine(c, d, f)
-            } else if (d.equals(0.0f)) {
+            } else if (equalsZero(d)) {
                 result = calculateProportionallyLine(c, d, f)
             } else if (((a / c) == (b / d)) && ((a / c) == (e / f))) {
                 result = calculateProportionallyLine(c, d, f)
@@ -93,11 +95,11 @@ fun calculateCramerRule(a: Float, b: Float, c: Float, d: Float, e: Float, f: Flo
 
 fun calculateOneLineEmpty(c: Float, d: Float, f: Float) : String {
     // Одна строка пустая - 0x + 0y = 0
-    if (d.equals(0.0f)) {
+    if (equalsZero(d)) {
         // Много решений (y - любое) - x = x0
         val x = f / c
         return "3 $x"
-    } else if (c.equals(0.0f)) {
+    } else if (equalsZero(c)) {
         // Много решений (x - любое) - y = y0
         val y = f / d
         return "4 $y"
@@ -113,11 +115,11 @@ fun calculateOneLineEmpty(c: Float, d: Float, f: Float) : String {
 
 fun calculateProportionallyLine(c: Float, d: Float, f: Float) : String {
     // Пропорциональные строки
-    if (d.equals(0.0f)) {
+    if (equalsZero(d)) {
         // Много решений (y - любое) - x = x0
         val x = f / c
         return "3 $x"
-    } else if (c.equals(0.0f)) {
+    } else if (equalsZero(c)) {
         // Много решений (x - любое) - y = y0
         val y = f / d
         return "4 $y"
@@ -127,4 +129,11 @@ fun calculateProportionallyLine(c: Float, d: Float, f: Float) : String {
         val z = f / d
         return "1 $k $z"
     }
+}
+
+
+
+fun equalsZero(value: Float) : Boolean {
+    val eps = 10.0f.pow(-6)
+    return abs(value - 0.0f) < eps
 }
