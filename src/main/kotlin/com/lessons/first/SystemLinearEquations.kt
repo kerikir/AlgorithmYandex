@@ -30,7 +30,7 @@ fun main() {
 fun calculateLinearEquation(a: Float, b: Float, c: Float, d: Float, e: Float, f: Float)
 : String {
 
-    var result = ""
+    var result = "0"
 
     // Поиск определителя
     val determinant = a * d - c * b
@@ -58,13 +58,22 @@ fun calculateLinearEquation(a: Float, b: Float, c: Float, d: Float, e: Float, f:
             result = calculateOneLineEmpty(a, b, e)
 
         } else {
-            // Пропорциональные строки
+
             if (equalsZero(c)) {
+                // Пропорциональные строки
                 result = calculateProportionallyLine(c, d, f)
+
             } else if (equalsZero(d)) {
+                // Пропорциональные строки
                 result = calculateProportionallyLine(c, d, f)
+
             } else if (((a / c) == (b / d)) && ((a / c) == (e / f))) {
+                // Пропорциональные строки
                 result = calculateProportionallyLine(c, d, f)
+
+            } else {
+                // Нет решения
+                result = "0"
             }
         }
 
