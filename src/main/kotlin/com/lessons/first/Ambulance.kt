@@ -1,5 +1,7 @@
 package com.lessons.first
 
+import kotlin.math.min
+
 
 /*
 Не решено
@@ -22,6 +24,7 @@ fun calculateApartment(
 
     // Нельзя определить число квартир на этаже (знаменатель == 0)
     if (entrance2 == 1 && floor2 == 1) {
+
         if (apartment2 == 1) {
             // Квартиры совпадают
             if (apartment1 == 1) return Pair(1, 1)
@@ -29,7 +32,10 @@ fun calculateApartment(
             // Номер квартиры меньше числа этажей
             val entrance1 = if (apartment1 <= floors) 1 else 0
 
-            return Pair(entrance1, 0)
+            // Всего 1 этаж в доме
+            val floor1 = if (floors == 1) 1 else 0
+
+            return Pair(entrance1, floor1)
         }
 
         // Невозможно определить
@@ -37,8 +43,7 @@ fun calculateApartment(
     }
 
     // Максимально возможное количество квартир на этаже
-    val maxApartmentsPerFloor = apartment2
-    val apartmentsPerFloorSet = mutableSetOf<Int>()
+    val maxApartmentsPerFloor = min(apartment2, 1_000_000)
 
     var floor1: Int = -1
     var entrance1: Int = -1
@@ -58,15 +63,18 @@ fun calculateApartment(
                 entrance1 = entranceCurrent
                 floor1 = floorCurrent
 
-            } else if ((entranceCurrent != entrance1) && (entrance1 != 0)) {
+            } else {
+                // Несколько решений
 
-                // Несколько правильных решений
-                entrance1 = 0
+                if ((entranceCurrent != entrance1) && (entrance1 != 0)) {
+                    // Несколько правильных решений
+                    entrance1 = 0
+                }
 
-            } else if ((floorCurrent != floor1) && (floor1 != 0)) {
-
-                // Несколько правильных решений
-                floor1 = 0
+                if ((floorCurrent != floor1) && (floor1 != 0)) {
+                    // Несколько правильных решений
+                    floor1 = 0
+                }
             }
         }
     }
@@ -81,10 +89,10 @@ fun checkApartmentsPerFloor(
 ): Pair<Int, Int> {
 
     // Проверка на корректность значения количества квартир на этаже
-    val (calculatedEntrance, calculatedFloor) = getEntranceAndFloor(apartment2, apartmentsPerFloor, floors)
+    val (calculatedEntrance, calculatedFloor) = getEntranceAndFloor(apartment2, floors, apartmentsPerFloor)
 
     if (calculatedEntrance == entrance2 && calculatedFloor == floor2) {
-        return getEntranceAndFloor(apartment1, apartmentsPerFloor, floors)
+        return getEntranceAndFloor(apartment1, floors, apartmentsPerFloor)
     } else {
         return -1 to -1
     }
