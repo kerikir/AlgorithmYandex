@@ -1,5 +1,7 @@
 package com.lessons.first
 
+import kotlin.math.max
+
 /*
 Не решено
  */
@@ -25,31 +27,24 @@ fun calculateApartment(
             // Квартиры совпадают
             if (apartment1 == 1) return Pair(1, 1)
 
-            // Минимум квартир в подъезде как этажей
+            // Номер квартиры меньше числа этажей
             val entrance1 = if (apartment1 <= floors) 1 else 0
-            // Минимум одна квартира на этаже
-            val floor1 = if (apartment1 <= floors) apartment1 else 0
-            return Pair(entrance1, floor1)
+
+            return Pair(entrance1, 0)
         }
 
         // Невозможно определить
         return Pair(0, 0)
     }
 
-    // Количество этажей до 2 известной квартиры
-    val denominator = (entrance2 - 1) * floors + (floor2 - 1)
-
-    // Перебор всех возможных вариантов квартир на этаже
+    // Максимально возможное количество квартир на этаже
+    val maxApartmentsPerFloor = apartment2
     val apartmentsPerFloorSet = mutableSetOf<Int>()
-    for (x in 1..< apartment2) {
-        // Подходит по условию
-        if ((apartment2 - x) % denominator == 0) {
-            val apartmentsPerFloor = (apartment2 - x) / denominator
 
-            if (apartmentsPerFloor >= 1 && apartmentsPerFloor >= x) {
-                apartmentsPerFloorSet.add(apartmentsPerFloor)
-            }
-        }
+    // Перебор всех вариантов количества квартир на этаже
+    for (apartmentsPerFloor in 1..< maxApartmentsPerFloor) {
+
+
     }
 
     // Не нашли подходящих значений
@@ -93,3 +88,6 @@ fun calculateApartment(
 
     return Pair(entrance1, floor1)
 }
+
+
+fun checkApartmentsPerFloor()
