@@ -5,7 +5,8 @@ import kotlin.math.pow
 
 
 /*
-Нет решение - неверный ответ (25 проверка)
+Время = 168ms
+Память = 14.05Mb
  */
 fun main() {
     val a = readLine()!!.trim().toFloat()
@@ -91,6 +92,7 @@ fun calculateCramerRule(a: Float, b: Float, c: Float, d: Float, e: Float, f: Flo
 }
 
 
+
 fun isProportionalLines(a: Float, b: Float, c: Float, d: Float, e: Float, f: Float) : Boolean {
     var ratio: Float
 
@@ -108,6 +110,7 @@ fun isProportionalLines(a: Float, b: Float, c: Float, d: Float, e: Float, f: Flo
 
     return false
 }
+
 
 
 fun calculateSingleEquation(c: Float, d: Float, f: Float) : String {
