@@ -33,14 +33,27 @@ fun calculateLinearEquation(a: Float, b: Float, c: Float, d: Float, e: Float, f:
     // Поиск определителя
     val determinant = a * d - c * b
 
-    if (!determinant.equals(0.0)) {
+    if (!determinant.equals(0.0f)) {
+
         val pairResult = calculateCramerRule(a, b, c, d, e, f, determinant)
         result = "2 ${pairResult.first} ${pairResult.second}"
+
     } else {
-        
+        // Все коэффициенты нулевые
+        if (a.equals(0.0f) && b.equals(0.0f) && c.equals(0.0f) && d.equals(0.0f)) {
+
+            if (e.equals(0.0f) && f.equals(0.0f)) {
+                // Любая пара - решение
+                result = "5"
+            } else {
+                // Нет решения - противоречие
+                result = "0"
+            }
+        }
+        else if ()
     }
 
-    return ""
+    return result
 }
 
 
