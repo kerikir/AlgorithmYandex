@@ -1,33 +1,153 @@
 package com.lessons.first
 
+import kotlin.math.abs
+import kotlin.math.pow
+
 
 /*
-Нет решение - не понял задачу
+Нет решение - неверный ответ (25 проверка)
  */
 fun main() {
-    val a1 = readLine()!!.trim().toInt()
-    val b1 = readLine()!!.trim().toInt()
-    val c1 = readLine()!!.trim().toInt()
-    val a2 = readLine()!!.trim().toInt()
-    val b2 = readLine()!!.trim().toInt()
-    val c2 = readLine()!!.trim().toInt()
+    val a = readLine()!!.trim().toFloat()
+    val b = readLine()!!.trim().toFloat()
+    val c = readLine()!!.trim().toFloat()
+    val d = readLine()!!.trim().toFloat()
+    val e = readLine()!!.trim().toFloat()
+    val f = readLine()!!.trim().toFloat()
 
-    val result = calculateCramerRule(a1, b1, c1, a2, b2, c2)
-    println("${result.first} ${result.second}")
+
+    val result = calculateLinearEquation(a, b, c, d, e, f)
+    println(result)
 }
 
 
-fun calculateCramerRule(a1: Int, b1: Int, c1: Int, a2: Int, b2: Int, c2: Int) : Pair<Double,Double> {
 
-    // TODO добавить проверку определителя
+/**
+ * ax + by = e
+ *
+ * cx + dy = f
+ */
+fun calculateLinearEquation(a: Float, b: Float, c: Float, d: Float, e: Float, f: Float)
+: String {
 
-    val determinant = a1 * b2 - a2 * b1
+    var result = "0"
 
-    val determinant1 = c1 * b2 - c2 * b1
-    val determinant2 = a1 * c2 - a2 * c1
+    // Поиск определителя
+    val determinant = a * d - c * b
 
-    val x = determinant1 / determinant.toDouble()
-    val y = determinant2 / determinant.toDouble()
+    // Вырожденные случаи
+    if (equalsZero(determinant)) {
+
+        // Все коэффициенты нулевые
+        if (equalsZero(a) && equalsZero(b) && equalsZero(c) && equalsZero(d)) {
+
+            if (equalsZero(e) && equalsZero(f)) {
+                // Любая пара - решение
+                result = "5"
+            } else {
+                // Нет решения - противоречие
+                result = "0"
+            }
+
+        } else if (equalsZero(a) && equalsZero(b) && equalsZero(e)) {
+            // Одна строка пустая - 0x + 0y = 0
+            result = calculateOneLineEmpty(c, d, f)
+
+        } else if (equalsZero(c) && equalsZero(d) && equalsZero(f)) {
+            // Одна строка пустая - 0x + 0y = 0
+            result = calculateOneLineEmpty(a, b, e)
+
+        } else {
+
+            if (equalsZero(c)) {
+                // Пропорциональные строки
+                result = calculateProportionallyLine(c, d, f)
+
+            } else if (equalsZero(d)) {
+                // Пропорциональные строки
+                result = calculateProportionallyLine(c, d, f)
+
+            } else if (
+                equalsZero(a * d - b * c) &&
+                equalsZero(a * f - e * c) &&
+                equalsZero(b * f - e * d)
+                ) {
+                // Убрано деление на 0 с помощью умножения
+                // Пропорциональные строки
+                result = calculateProportionallyLine(c, d, f)
+
+            } else {
+                // Нет решения
+                result = "0"
+            }
+        }
+
+    } else {
+
+        val pairResult = calculateCramerRule(a, b, c, d, e, f, determinant)
+        result = "2 ${pairResult.first} ${pairResult.second}"
+    }
+
+    return result
+}
+
+
+
+fun calculateCramerRule(a: Float, b: Float, c: Float, d: Float, e: Float, f: Float, determinant: Float)
+: Pair<Float, Float> {
+
+    val determinant1 = e * d - f * b
+    val determinant2 = a * f - c * e
+
+    val x = determinant1 / determinant
+    val y = determinant2 / determinant
 
     return x to y
+}
+
+
+
+fun calculateOneLineEmpty(c: Float, d: Float, f: Float) : String {
+    // Одна строка пустая - 0x + 0y = 0
+    if (equalsZero(d)) {
+        // Много решений (y - любое) - x = x0
+        val x = f / c
+        return "3 $x"
+    } else if (equalsZero(c)) {
+        // Много решений (x - любое) - y = y0
+        val y = f / d
+        return "4 $y"
+    } else {
+        // Много решений - y = kx + z
+        val k = -c / d
+        val z = f / d
+        return "1 $k $z"
+    }
+}
+
+
+
+fun calculateProportionallyLine(c: Float, d: Float, f: Float) : String {
+    // Пропорциональные строки
+    if (equalsZero(d)) {
+        // Много решений (y - любое) - x = x0
+        val x = f / c
+        return "3 $x"
+    } else if (equalsZero(c)) {
+        // Много решений (x - любое) - y = y0
+        val y = f / d
+        return "4 $y"
+    } else {
+        // Много решений - y = kx + z
+        val k = -c / d
+        val z = f / d
+        return "1 $k $z"
+    }
+}
+
+
+
+fun equalsZero(value: Float) : Boolean {
+    val eps = 10.0f.pow(-6)
+    return abs(value - 0.0f) < eps
 }
