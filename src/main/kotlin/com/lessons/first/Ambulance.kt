@@ -1,6 +1,5 @@
 package com.lessons.first
 
-import kotlin.math.max
 
 /*
 Не решено
@@ -41,45 +40,35 @@ fun calculateApartment(
     val maxApartmentsPerFloor = apartment2
     val apartmentsPerFloorSet = mutableSetOf<Int>()
 
-    // Перебор всех вариантов количества квартир на этаже
-    for (apartmentsPerFloor in 1..< maxApartmentsPerFloor) {
-
-
-    }
-
-    // Не нашли подходящих значений
-    if (apartmentsPerFloorSet.isEmpty()) return Pair(-1, -1)
-
     var floor1: Int = -1
     var entrance1: Int = -1
 
-    // Проверка каждого подходящего значения (число квартир на этаже)
-    for (apartmentsPerFloor in apartmentsPerFloorSet) {
+    // Перебор всех вариантов количества квартир на этаже
+    for (apartmentsPerFloor in 1..< maxApartmentsPerFloor) {
 
+        val (entranceCurrent, floorCurrent) =
+            checkApartmentsPerFloor(apartment1, floors, apartment2, entrance2, floor2, apartmentsPerFloor)
 
+        // Количество квартир на этаже подошло
+        if (entranceCurrent != -1) {
 
+            if (entrance1 == -1) {
 
-
-
-
-
-
-        if (floorCurrent <= floors) {
-            // Первое найденное значение
-            if (entranceCurrent == -1) {
+                // Первое подходящее значение
                 entrance1 = entranceCurrent
                 floor1 = floorCurrent
-            } else if (entranceCurrent != entrance1 || floorCurrent != floor1) {
-                // Несколько возможных ответов
-                if (entrance1 != 0 && entranceCurrent != entrance1) entrance1 = 0
-                if (floor1 != 0 && floorCurrent != floor1) floor1 = 0
+
+            } else if ((entranceCurrent != entrance1) && (entrance1 != 0)) {
+
+                // Несколько правильных решений
+                entrance1 = 0
+
+            } else if ((floorCurrent != floor1) && (floor1 != 0)) {
+
+                // Несколько правильных решений
+                floor1 = 0
             }
         }
-    }
-
-    // Решение не найдено
-    if (floor1 == -1 || entrance1 == -1) {
-        return Pair(-1, -1)
     }
 
     return Pair(entrance1, floor1)
