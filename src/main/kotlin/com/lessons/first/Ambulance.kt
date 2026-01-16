@@ -88,10 +88,17 @@ fun calculateApartment(
 
 
 fun checkApartmentsPerFloor(
-    apartment1: Int, floors: Int, apartment2: Int, entrance2: Int, floor2: Int
+    apartment1: Int, floors: Int, apartment2: Int, entrance2: Int, floor2: Int, apartmentsPerFloor: Int
 ): Pair<Int, Int> {
 
+    // Проверка на корректность значения количества квартир на этаже
+    val (calculatedEntrance, calculatedFloor) = getEntranceAndFloor(apartment2, apartmentsPerFloor, floors)
 
+    if (calculatedEntrance == entrance2 && calculatedFloor == floor2) {
+        return getEntranceAndFloor(apartment1, apartmentsPerFloor, floors)
+    } else {
+        return -1 to -1
+    }
 }
 
 
