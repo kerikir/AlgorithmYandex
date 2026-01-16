@@ -33,12 +33,9 @@ fun calculateLinearEquation(a: Float, b: Float, c: Float, d: Float, e: Float, f:
     // Поиск определителя
     val determinant = a * d - c * b
 
-    if (!determinant.equals(0.0f)) {
+    // Вырожденные случаи
+    if (determinant.equals(0.0f)) {
 
-        val pairResult = calculateCramerRule(a, b, c, d, e, f, determinant)
-        result = "2 ${pairResult.first} ${pairResult.second}"
-
-    } else {
         // Все коэффициенты нулевые
         if (a.equals(0.0f) && b.equals(0.0f) && c.equals(0.0f) && d.equals(0.0f)) {
 
@@ -49,13 +46,17 @@ fun calculateLinearEquation(a: Float, b: Float, c: Float, d: Float, e: Float, f:
                 // Нет решения - противоречие
                 result = "0"
             }
+
         } else if (a.equals(0.0f) && b.equals(0.0f) && e.equals(0.0f)) {
             // Одна строка пустая - 0x + 0y = 0
             result = calculateOneLineEmpty(c, d, f)
+
         } else if (c.equals(0.0f) && d.equals(0.0f) && f.equals(0.0f)) {
             // Одна строка пустая - 0x + 0y = 0
             result = calculateOneLineEmpty(a, b, e)
+
         } else {
+            // Пропорциональные строки
             if (c.equals(0.0f)) {
                 result = calculateProportionallyLine(c, d, f)
             } else if (d.equals(0.0f)) {
@@ -64,6 +65,11 @@ fun calculateLinearEquation(a: Float, b: Float, c: Float, d: Float, e: Float, f:
                 result = calculateProportionallyLine(c, d, f)
             }
         }
+
+    } else {
+
+        val pairResult = calculateCramerRule(a, b, c, d, e, f, determinant)
+        result = "2 ${pairResult.first} ${pairResult.second}"
     }
 
     return result
@@ -106,7 +112,7 @@ fun calculateOneLineEmpty(c: Float, d: Float, f: Float) : String {
 
 
 fun calculateProportionallyLine(c: Float, d: Float, f: Float) : String {
-    // Одна строка пустая - 0x + 0y = 0
+    // Пропорциональные строки
     if (d.equals(0.0f)) {
         // Много решений (y - любое) - x = x0
         val x = f / c
