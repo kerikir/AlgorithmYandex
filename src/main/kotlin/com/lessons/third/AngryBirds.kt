@@ -4,6 +4,8 @@ package com.lessons.third
 /*
 Время = 238ms
 Память = 17.27Mb
+
+Сложность = O(N)
 */
 fun main() {
     val n = readLine()!!.trim().toInt()
@@ -21,6 +23,8 @@ fun main() {
 
 fun determinateMinimumNumberOfShots(coordsBirds: List<Pair<Int, Int>>) : Int {
 
+    // O(2 * N)
     val shots = coordsBirds.map { it.first }.toSet()
+    // O(1)
     return shots.size
 }
