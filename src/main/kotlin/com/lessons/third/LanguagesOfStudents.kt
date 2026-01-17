@@ -2,12 +2,15 @@ package com.lessons.third
 
 
 /*
-Не решено
+Время = 0.912s
+Память = 43.36Mb
+
+Сложность = O(N * M)
  */
 fun main() {
     val n = readLine()!!.trim().toInt()
-    val languages = mutableSetOf<MutableSet<String>>()
 
+    val languages = mutableListOf<MutableSet<String>>()
     for (i in 1..n) {
         val m = readLine()!!.trim().toInt()
 
@@ -34,12 +37,14 @@ fun main() {
 
 
 
-fun determinateLanguagesEveryStudentKnows(languages: Set<Set<String>>) : Set<String> {
+/** Определение языков, который знает каждый студент */
+fun determinateLanguagesEveryStudentKnows(languages: List<Set<String>>) : Set<String> {
 
     var languageEveryKnows = languages.first()
 
-    for (item in languages) {
-        languageEveryKnows = languageEveryKnows.intersect(item)
+    // Пересечение всех множеств
+    for (i in 1..languages.lastIndex) {
+        languageEveryKnows = languageEveryKnows.intersect(languages[i])  // O(N * M)
     }
 
     return languageEveryKnows
@@ -47,12 +52,16 @@ fun determinateLanguagesEveryStudentKnows(languages: Set<Set<String>>) : Set<Str
 
 
 
-fun determinateLanguagesLeastOneStudentKnows(languages: Set<Set<String>>) : Set<String> {
+/** Определение языков, который знает хотя бы один студент */
+fun determinateLanguagesLeastOneStudentKnows(languages: List<Set<String>>) : Set<String> {
 
-    var languageLeastOneKnows = languages.first()
+    var languageLeastOneKnows = mutableSetOf<String>()
 
-    for (item in languages) {
-        languageLeastOneKnows = languageLeastOneKnows.union(item)
+    // Объединение всех множеств
+    for (student in languages) {
+        for (language in student) {
+            languageLeastOneKnows.add(language) // O(N * M)
+        }
     }
 
     return languageLeastOneKnows

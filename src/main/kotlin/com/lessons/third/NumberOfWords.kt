@@ -4,21 +4,23 @@ import java.io.File
 
 
 /*
-Не решено
+Время = 461ms
+Память = 41.36Mb
+
+Сложность = O(L)
  */
 fun main() {
-    val text = File("input.txt").readText()
+    val text = File("input.txt").readText().trim()
 
     val result = determinateNumbersOfWords(text)
-    File("output.txt").writeText(result.toString())
+    println(result)
 }
 
 
 fun determinateNumbersOfWords(text: String) : Int {
-    // Удаление знаков пунктуации
-    //val cleanText = text.replace("[,.;:!?]".toRegex(), "")
-    val textOneLine = text.trim().replace("[\\s+]".toRegex(), " ").replace("\\s+".toRegex(), " ")
+    // Разделение слов по пробелам
+    // Проверка что слово не пустое
+    val words = text.split(Regex("\\s+")).filter { it.isNotBlank() }.toSet() // O(L + N + M)
 
-    val words = textOneLine.trim()./*toLowerCase().*/split(" ").toSet()
     return words.size
 }
