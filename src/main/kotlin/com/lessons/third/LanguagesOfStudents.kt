@@ -4,6 +4,8 @@ package com.lessons.third
 /*
 Время = 0.912s
 Память = 43.36Mb
+
+Сложность = O(N * M)
  */
 fun main() {
     val n = readLine()!!.trim().toInt()
@@ -42,7 +44,7 @@ fun determinateLanguagesEveryStudentKnows(languages: List<Set<String>>) : Set<St
 
     // Пересечение всех множеств
     for (i in 1..languages.lastIndex) {
-        languageEveryKnows = languageEveryKnows.intersect(languages[i])
+        languageEveryKnows = languageEveryKnows.intersect(languages[i])  // O(N * M)
     }
 
     return languageEveryKnows
@@ -58,7 +60,7 @@ fun determinateLanguagesLeastOneStudentKnows(languages: List<Set<String>>) : Set
     // Объединение всех множеств
     for (student in languages) {
         for (language in student) {
-            languageLeastOneKnows.add(language)
+            languageLeastOneKnows.add(language) // O(N * M)
         }
     }
 
