@@ -1,7 +1,14 @@
 package com.lessons.first
 
+import kotlin.math.max
+
+
+
 /*
-Не решено
+Время = 228ms
+Память = 30.12Mb
+
+Сложность = O(max(K1, K2))
  */
 fun main() {
     val (apartment1, floors, apartment2, entrance2, floor2) =
@@ -17,79 +24,87 @@ fun calculateApartment(
     apartment1: Int, floors: Int, apartment2: Int, entrance2: Int, floor2: Int
 ): Pair<Int, Int> {
 
-    if (floor2 > floors) return Pair(-1, -1)
-
-    // Нельзя определить число квартир на этаже (знаменатель == 0)
-    if (entrance2 == 1 && floor2 == 1) {
-        if (apartment2 == 1) {
-            // Квартиры совпадают
-            if (apartment1 == 1) return Pair(1, 1)
-
-            // Минимум квартир в подъезде как этажей
-            val entrance1 = if (apartment1 <= floors) 1 else 0
-            // Минимум одна квартира на этаже
-            val floor1 = if (apartment1 <= floors) apartment1 else 0
-            return Pair(entrance1, floor1)
-        }
-
-        // Невозможно определить
-        return Pair(0, 0)
+    if ((floor2 > floors) || (floors <= 0) || (apartment2 <= 0) ||
+        (entrance2 <= 0) || (floor2 <= 0) || (apartment1 <= 0)
+    ) {
+        return Pair(-1, -1)
     }
 
-    // Количество этажей до 2 известной квартиры
-    val denominator = (entrance2 - 1) * floors + (floor2 - 1)
-
-    // Перебор всех возможных вариантов квартир на этаже
-    val apartmentsPerFloorSet = mutableSetOf<Int>()
-    for (x in 1..< apartment2) {
-        // Подходит по условию
-        if ((apartment2 - x) % denominator == 0) {
-            val apartmentsPerFloor = (apartment2 - x) / denominator
-
-            if (apartmentsPerFloor >= 1 && apartmentsPerFloor >= x) {
-                apartmentsPerFloorSet.add(apartmentsPerFloor)
-            }
-        }
-    }
-
-    // Не нашли подходящих значений
-    if (apartmentsPerFloorSet.isEmpty()) return Pair(-1, -1)
+    // Максимально возможное количество квартир на этаже
+    // Дойдем если этаж или подъезд известной не равен 1
+    val maxApartmentsPerFloor = max(apartment2, apartment1)
 
     var floor1: Int = -1
     var entrance1: Int = -1
 
-    // Проверка каждого подходящего значения (число квартир на этаже)
-    for (apartmentsPerFloor in apartmentsPerFloorSet) {
+    // Перебор всех вариантов количества квартир на этаже
+    for (apartmentsPerFloor in 1.. maxApartmentsPerFloor) {
 
-        // Количество квартир в подъезде
-        val apartmentsPerEntrance = floors * apartmentsPerFloor
+        val (entranceCurrent, floorCurrent) =
+            checkApartmentsPerFloor(apartment1, floors, apartment2, entrance2, floor2, apartmentsPerFloor)
 
-        // Определение номера подъезда
-        val entranceCurrent = (apartment1 - 1) / apartmentsPerEntrance + 1 // Для краевых условий
+        // Количество квартир на этаже подошло
+        if (entranceCurrent != -1) {
 
-        // Определение номера квартиры в подъезде
-        val apartmentInEntrance = (apartment1 - 1) % apartmentsPerEntrance + 1 // Для краевых условий
+            if (entrance1 == -1) {
 
-        // Определение номера этажа
-        val floorCurrent = (apartmentInEntrance - 1) / apartmentsPerFloor + 1 // Для краевых условий
-
-        if (floorCurrent <= floors) {
-            // Первое найденное значение
-            if (entranceCurrent == -1) {
+                // Первое подходящее значение
                 entrance1 = entranceCurrent
                 floor1 = floorCurrent
-            } else if (entranceCurrent != entrance1 || floorCurrent != floor1) {
-                // Несколько возможных ответов
-                if (entrance1 != 0 && entranceCurrent != entrance1) entrance1 = 0
-                if (floor1 != 0 && floorCurrent != floor1) floor1 = 0
+
+            } else {
+                // Несколько решений
+
+                if ((entranceCurrent != entrance1) && (entrance1 != 0)) {
+                    // Несколько правильных решений
+                    entrance1 = 0
+                }
+
+                if ((floorCurrent != floor1) && (floor1 != 0)) {
+                    // Несколько правильных решений
+                    floor1 = 0
+                }
             }
         }
     }
 
-    // Решение не найдено
-    if (floor1 == -1 || entrance1 == -1) {
-        return Pair(-1, -1)
-    }
+    return if (floors == 1)
+        Pair(entrance1, 1)
+    else
+        Pair(entrance1, floor1)
+}
 
-    return Pair(entrance1, floor1)
+
+
+fun checkApartmentsPerFloor(
+    apartment1: Int, floors: Int, apartment2: Int, entrance2: Int, floor2: Int, apartmentsPerFloor: Int
+): Pair<Int, Int> {
+
+    // Проверка на корректность значения количества квартир на этаже
+    val (calculatedEntrance, calculatedFloor) = getEntranceAndFloor(apartment2, floors, apartmentsPerFloor)
+
+    if (calculatedEntrance == entrance2 && calculatedFloor == floor2) {
+        return getEntranceAndFloor(apartment1, floors, apartmentsPerFloor)
+    } else {
+        return -1 to -1
+    }
+}
+
+
+
+fun getEntranceAndFloor(apartment: Int, floors: Int, apartmentsPerFloor: Int) : Pair<Int, Int> {
+
+    // Количество квартир в подъезде
+    val apartmentsPerEntrance = floors * apartmentsPerFloor
+
+    // Определение номера подъезда
+    val entranceCurrent = (apartment - 1) / apartmentsPerEntrance + 1
+
+    // Определение номера квартиры в подъезде
+    val apartmentInEntrance = (apartment - 1) % apartmentsPerEntrance + 1
+
+    // Определение номера этажа
+    val floorCurrent = (apartmentInEntrance - 1) / apartmentsPerFloor + 1
+
+    return entranceCurrent to floorCurrent
 }
