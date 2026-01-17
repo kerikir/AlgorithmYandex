@@ -2,7 +2,8 @@ package com.lessons.third
 
 
 /*
-Не решено
+Время = 0.912s
+Память = 43.36Mb
  */
 fun main() {
     val n = readLine()!!.trim().toInt()
@@ -34,10 +35,12 @@ fun main() {
 
 
 
+/** Определение языков, который знает каждый студент */
 fun determinateLanguagesEveryStudentKnows(languages: List<Set<String>>) : Set<String> {
 
     var languageEveryKnows = languages.first()
 
+    // Пересечение всех множеств
     for (i in 1..languages.lastIndex) {
         languageEveryKnows = languageEveryKnows.intersect(languages[i])
     }
@@ -47,10 +50,12 @@ fun determinateLanguagesEveryStudentKnows(languages: List<Set<String>>) : Set<St
 
 
 
+/** Определение языков, который знает хотя бы один студент */
 fun determinateLanguagesLeastOneStudentKnows(languages: List<Set<String>>) : Set<String> {
 
     var languageLeastOneKnows = mutableSetOf<String>()
 
+    // Объединение всех множеств
     for (student in languages) {
         for (language in student) {
             languageLeastOneKnows.add(language)
