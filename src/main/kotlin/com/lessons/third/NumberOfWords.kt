@@ -15,9 +15,9 @@ fun main() {
 
 
 fun determinateNumbersOfWords(text: String) : Int {
-    // Удаление знаков пунктуации
-    val textOneLine = text.replace(Regex("\\s+"), " ").trim()
+    // Разделение слов по пробелам
+    // Проверка что слово не пустое
+    val words = text.split(Regex("\\s+")).filter { it.isNotBlank() }.toSet()
 
-    val words = textOneLine.split(" ").toSet()
     return words.size
 }
