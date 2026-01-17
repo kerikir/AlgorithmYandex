@@ -5,7 +5,10 @@ import kotlin.math.max
 
 
 /*
-Не решено
+Время = 228ms
+Память = 30.12Mb
+
+Сложность = O(max(K1, K2))
  */
 fun main() {
     val (apartment1, floors, apartment2, entrance2, floor2) =
