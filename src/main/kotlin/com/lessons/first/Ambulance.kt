@@ -40,10 +40,19 @@ fun calculateApartment(
             val floor1 = if (floors == 1) 1 else 0
 
             return Pair(entrance1, floor1)
+
+        } else if (apartment1 <= apartment2) {
+
+            // У квартиры меньше номер, чем у известной в 1 подъезде на 1 этаже
+            return entrance2 to floor2
         }
 
         // Невозможно определить
-        return Pair(0, 0)
+        return if (floors == 1) {
+            Pair(0, 1)
+        } else {
+            Pair(0, 0)
+        }
     }
 
     // Максимально возможное количество квартир на этаже
