@@ -20,7 +20,11 @@ fun calculateApartment(
     apartment1: Int, floors: Int, apartment2: Int, entrance2: Int, floor2: Int
 ): Pair<Int, Int> {
 
-    if (floor2 > floors) return Pair(-1, -1)
+    if ((floor2 > floors) || (floors <= 0) || (apartment2 <= 0) ||
+        (entrance2 <= 0) || (floor2 <= 0) || (apartment1 <= 0)
+    ) {
+        return Pair(-1, -1)
+    }
 
     // Нельзя определить число квартир на этаже (знаменатель == 0)
     if (entrance2 == 1 && floor2 == 1) {
