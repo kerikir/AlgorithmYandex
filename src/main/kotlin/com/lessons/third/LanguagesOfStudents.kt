@@ -6,8 +6,8 @@ package com.lessons.third
  */
 fun main() {
     val n = readLine()!!.trim().toInt()
-    val languages = mutableSetOf<MutableSet<String>>()
 
+    val languages = mutableListOf<MutableSet<String>>()
     for (i in 1..n) {
         val m = readLine()!!.trim().toInt()
 
@@ -34,12 +34,12 @@ fun main() {
 
 
 
-fun determinateLanguagesEveryStudentKnows(languages: Set<Set<String>>) : Set<String> {
+fun determinateLanguagesEveryStudentKnows(languages: List<Set<String>>) : Set<String> {
 
     var languageEveryKnows = languages.first()
 
-    for (item in languages) {
-        languageEveryKnows = languageEveryKnows.intersect(item)
+    for (i in 1..languages.lastIndex) {
+        languageEveryKnows = languageEveryKnows.intersect(languages[i])
     }
 
     return languageEveryKnows
@@ -47,12 +47,14 @@ fun determinateLanguagesEveryStudentKnows(languages: Set<Set<String>>) : Set<Str
 
 
 
-fun determinateLanguagesLeastOneStudentKnows(languages: Set<Set<String>>) : Set<String> {
+fun determinateLanguagesLeastOneStudentKnows(languages: List<Set<String>>) : Set<String> {
 
-    var languageLeastOneKnows = languages.first()
+    var languageLeastOneKnows = mutableSetOf<String>()
 
-    for (item in languages) {
-        languageLeastOneKnows = languageLeastOneKnows.union(item)
+    for (student in languages) {
+        for (language in student) {
+            languageLeastOneKnows.add(language)
+        }
     }
 
     return languageLeastOneKnows
