@@ -7,18 +7,17 @@ import java.io.File
 Не решено
  */
 fun main() {
-    val text = File("input.txt").readText()
+    val text = File("input.txt").readText().trim()
 
     val result = determinateNumbersOfWords(text)
-    File("output.txt").writeText(result.toString())
+    println(result)
 }
 
 
 fun determinateNumbersOfWords(text: String) : Int {
     // Удаление знаков пунктуации
-    //val cleanText = text.replace("[,.;:!?]".toRegex(), "")
-    val textOneLine = text.trim().replace("[\\s+]".toRegex(), " ").replace("\\s+".toRegex(), " ")
+    val textOneLine = text.replace(Regex("[\\s+]"), " ").trim()
 
-    val words = textOneLine.trim()./*toLowerCase().*/split(" ").toSet()
+    val words = textOneLine.split(" ").toSet()
     return words.size
 }
