@@ -7,10 +7,13 @@ import kotlin.math.min
 /*
 Время = 461ms
 Память = 22.56Mb
+
+Сложность = O(N + A * B)
  */
 fun main() {
     val (t, d, n) = readLine()!!.trim().split(" ").map { it.toInt() }
 
+    // O(N)
     val coords = mutableListOf<Pair<Int, Int>>()
     for (i in 1..n) {
         val (x, y) = readLine()!!.trim().split(" ").map { it.toInt() }
@@ -31,6 +34,7 @@ fun calculateDistance(time: Int, numberOfMeasurements: Int, accuracy: Int, coord
 
     var position = IntArray(4) { 0 }
 
+    // O(N)
     // Симуляция перемещения
     for (i in 1..numberOfMeasurements) {
 
@@ -43,6 +47,7 @@ fun calculateDistance(time: Int, numberOfMeasurements: Int, accuracy: Int, coord
 
     val possiblePosition = mutableSetOf<Pair<Int, Int>>()
 
+    // O(A * B)
     // Определение координат
     for (firstDiagonal in position[0]..position[1]) {
         for (secondDiagonal in position[2]..position[3]) {
