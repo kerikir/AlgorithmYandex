@@ -49,17 +49,17 @@ fun calculateDistance(time: Int, numberOfMeasurements: Int, accuracy: Int, coord
  *
  * @param coords Показание навигатора
  * @param accuracy Точность навигатора
- * @return Возможный район местоположения по навигатору `[pMin, pMax, qMin, qMax]`
+ * @return Возможный район местоположения по навигатору `[qMin, qMax, pMin, pMax]`
  */
 fun definitionPositionOnNavigator(coords: Pair<Int, Int>, accuracy: Int) : IntArray {
 
-    // x - y = p (Y)
-    val diagonalFirstMin = (coords.first - coords.second) - accuracy
-    val diagonalFirstMax = (coords.first - coords.second) + accuracy
-
     // x + y = q (X)
-    val diagonalSecondMin = (coords.first + coords.second) - accuracy
-    val diagonalSecondMax = (coords.first + coords.second) + accuracy
+    val diagonalFirstMin = (coords.first + coords.second) - accuracy
+    val diagonalFirstMax = (coords.first + coords.second) + accuracy
+
+    // x - y = p (Y)
+    val diagonalSecondMin = (coords.first - coords.second) - accuracy
+    val diagonalSecondMax = (coords.first - coords.second) + accuracy
 
     return intArrayOf(diagonalFirstMin, diagonalFirstMax, diagonalSecondMin, diagonalSecondMax)
 }
@@ -69,17 +69,17 @@ fun definitionPositionOnNavigator(coords: Pair<Int, Int>, accuracy: Int) : IntAr
 /**
  * Определение возможной позиции
  *
- *  @param possiblePosition Позиция старта `[pMin, pMax, qMin, qMax]`
+ *  @param possiblePosition Позиция старта `[qMin, qMax, pMin, pMax]`
  *  @param time Время в пути
- *  @return Возможная позиция при ходьбе `[pMin, pMax, qMin, qMax]`
+ *  @return Возможная позиция при ходьбе `[qMin, qMax, pMin, pMax]`
  */
 fun definitionPossiblePosition(possiblePosition: IntArray, time: Int) : IntArray {
 
-    // x - y = p
+    // x + y = q (X)
     val diagonalFirstMin = possiblePosition[0] - time
     val diagonalFirstMax = possiblePosition[1] + time
 
-    // x + y = q
+    // x - y = p (Y)
     val diagonalSecondMin = possiblePosition[2] - time
     val diagonalSecondMax = possiblePosition[3] + time
 
@@ -91,17 +91,17 @@ fun definitionPossiblePosition(possiblePosition: IntArray, time: Int) : IntArray
 /**
  * Корректирование позиции по навигатору
  *
- * @param possiblePosition Возможная позиция `[pMin, pMax, qMin, qMax]`
- * @param navigatorPosition Показание навигатора `[pMin, pMax, qMin, qMax]`
- * @return Скорректированная позиция `[pMin, pMax, qMin, qMax]`
+ * @param possiblePosition Возможная позиция `[qMin, qMax, pMin, pMax]`
+ * @param navigatorPosition Показание навигатора `[qMin, qMax, pMin, pMax]`
+ * @return Скорректированная позиция `[qMin, qMax, pMin, pMax]`
  */
 fun definitionPosition(possiblePosition: IntArray, navigatorPosition: IntArray) : IntArray {
 
-    // x - y = p
+    // x + y = q (X)
     val diagonalFirstMin = max(possiblePosition[0], navigatorPosition[0])
     val diagonalFirstMax = min(possiblePosition[1], navigatorPosition[1])
 
-    // x + y = q
+    // x - y = p (Y)
     val diagonalSecondMin = max(possiblePosition[2], navigatorPosition[2])
     val diagonalSecondMax = min(possiblePosition[3], navigatorPosition[3])
 
