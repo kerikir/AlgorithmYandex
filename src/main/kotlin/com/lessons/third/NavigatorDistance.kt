@@ -25,6 +25,21 @@ fun main() {
 fun calculateDistance(time: Int, numberOfMeasurements: Int, accuracy: Int, coords: List<Pair<Int, Int>>)
 : Set<Pair<Int, Int>> {
 
+    var position = IntArray(4) { 0 }
+
+    // Симуляция перемещения
+    for (i in 1..numberOfMeasurements) {
+
+        position = definitionPossiblePosition(position, time)
+
+        val positionNavigator = definitionPositionOnNavigator(coords[i - 1], accuracy)
+
+        position = definitionPosition(position, positionNavigator)
+    }
+
+    val possiblePosition = mutableSetOf<Pair<Int, Int>>()
+
+    return possiblePosition
 }
 
 
@@ -38,11 +53,11 @@ fun calculateDistance(time: Int, numberOfMeasurements: Int, accuracy: Int, coord
  */
 fun definitionPositionOnNavigator(coords: Pair<Int, Int>, accuracy: Int) : IntArray {
 
-    // x - y = p
+    // x - y = p (Y)
     val diagonalFirstMin = (coords.first - coords.second) - accuracy
     val diagonalFirstMax = (coords.first - coords.second) + accuracy
 
-    // x + y = q
+    // x + y = q (X)
     val diagonalSecondMin = (coords.first + coords.second) - accuracy
     val diagonalSecondMax = (coords.first + coords.second) + accuracy
 
