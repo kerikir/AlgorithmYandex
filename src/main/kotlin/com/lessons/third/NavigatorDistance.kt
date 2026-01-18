@@ -4,6 +4,7 @@ import kotlin.math.max
 import kotlin.math.min
 
 
+
 fun main() {
     val (t, d, n) = readLine()!!.trim().split(" ").map { it.toInt() }
 
@@ -38,6 +39,17 @@ fun calculateDistance(time: Int, numberOfMeasurements: Int, accuracy: Int, coord
     }
 
     val possiblePosition = mutableSetOf<Pair<Int, Int>>()
+
+    // Определение координат
+    for (firstDiagonal in position[0]..position[1]) {
+        for (secondDiagonal in position[2]..position[3]) {
+            if ((firstDiagonal + secondDiagonal) % 2 == 0) {
+                val x = (firstDiagonal + secondDiagonal) / 2
+                val y = firstDiagonal - x
+                possiblePosition.add(x to y)
+            }
+        }
+    }
 
     return possiblePosition
 }
