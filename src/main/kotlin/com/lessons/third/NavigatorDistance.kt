@@ -1,5 +1,7 @@
 package com.lessons.third
 
+import kotlin.math.max
+import kotlin.math.min
 
 
 fun main() {
@@ -80,4 +82,13 @@ fun definitionPossiblePosition(possiblePosition: IntArray, time: Int) : IntArray
  */
 fun definitionPosition(possiblePosition: IntArray, navigatorPosition: IntArray) : IntArray {
 
+    // x - y = p
+    val diagonalFirstMin = max(possiblePosition[0], navigatorPosition[0])
+    val diagonalFirstMax = min(possiblePosition[1], navigatorPosition[1])
+
+    // x + y = q
+    val diagonalSecondMin = max(possiblePosition[2], navigatorPosition[2])
+    val diagonalSecondMax = min(possiblePosition[3], navigatorPosition[3])
+
+    return intArrayOf(diagonalFirstMin, diagonalFirstMax, diagonalSecondMin, diagonalSecondMax)
 }
