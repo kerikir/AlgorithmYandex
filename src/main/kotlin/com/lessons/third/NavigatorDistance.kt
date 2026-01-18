@@ -1,6 +1,7 @@
 package com.lessons.third
 
 
+
 fun main() {
     val (t, d, n) = readLine()!!.trim().split(" ").map { it.toInt() }
 
@@ -18,18 +19,22 @@ fun main() {
 }
 
 
+
 fun calculateDistance(time: Int, numberOfMeasurements: Int, accuracy: Int, coords: List<Pair<Int, Int>>)
-: List<Pair<Int, Int>> {
+: Set<Pair<Int, Int>> {
 
 }
 
 
+
 /**
- * Определение возможной позиции по показаниям навигатора
+ * Определение позиции по показаниям навигатора
  *
- * @return `[pMin, pMax, qMin, qMax]`
+ * @param coords Показание навигатора
+ * @param accuracy Точность навигатора
+ * @return Возможный район местоположения по навигатору `[pMin, pMax, qMin, qMax]`
  */
-fun definitionPosition(coords: Pair<Int, Int>, accuracy: Int) : IntArray {
+fun definitionPositionOnNavigator(coords: Pair<Int, Int>, accuracy: Int) : IntArray {
 
     // x - y = p
     val diagonalFirstMin = (coords.first - coords.second) - accuracy
@@ -40,4 +45,31 @@ fun definitionPosition(coords: Pair<Int, Int>, accuracy: Int) : IntArray {
     val diagonalSecondMax = (coords.first + coords.second) + accuracy
 
     return intArrayOf(diagonalFirstMin, diagonalFirstMax, diagonalSecondMin, diagonalSecondMax)
+}
+
+
+
+/**
+ * Определение возможной позиции
+ *
+ *  @param possiblePosition Позиция старта `[pMin, pMax, qMin, qMax]`
+ *  @param time Время в пути
+ *  @return Возможная позиция при ходьбе `[pMin, pMax, qMin, qMax]`
+ */
+fun definitionPossiblePosition(possiblePosition: IntArray, time: Int) : IntArray {
+
+
+}
+
+
+
+/**
+ * Корректирование позиции по навигатору
+ *
+ * @param possiblePosition Возможная позиция `[pMin, pMax, qMin, qMax]`
+ * @param navigatorPosition Показание навигатора `[pMin, pMax, qMin, qMax]`
+ * @return Скорректированная позиция `[pMin, pMax, qMin, qMax]`
+ */
+fun definitionPosition(possiblePosition: IntArray, navigatorPosition: IntArray) : IntArray {
+
 }
