@@ -58,7 +58,15 @@ fun definitionPositionOnNavigator(coords: Pair<Int, Int>, accuracy: Int) : IntAr
  */
 fun definitionPossiblePosition(possiblePosition: IntArray, time: Int) : IntArray {
 
+    // x - y = p
+    val diagonalFirstMin = possiblePosition[0] - time
+    val diagonalFirstMax = possiblePosition[1] + time
 
+    // x + y = q
+    val diagonalSecondMin = possiblePosition[2] - time
+    val diagonalSecondMax = possiblePosition[3] + time
+
+    return intArrayOf(diagonalFirstMin, diagonalFirstMax, diagonalSecondMin, diagonalSecondMax)
 }
 
 
