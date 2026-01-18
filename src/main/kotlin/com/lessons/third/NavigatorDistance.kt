@@ -4,7 +4,10 @@ import kotlin.math.max
 import kotlin.math.min
 
 
-
+/*
+Время = 461ms
+Память = 22.56Mb
+ */
 fun main() {
     val (t, d, n) = readLine()!!.trim().split(" ").map { it.toInt() }
 
