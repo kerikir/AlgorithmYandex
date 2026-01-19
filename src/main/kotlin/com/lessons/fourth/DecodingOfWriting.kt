@@ -23,11 +23,23 @@ fun decodeOfWriting(symbols: List<Char>, text: String) : Int {
 
     // Получание символов и их количества в первом отрезке текста
     for (i in 0..symbols.lastIndex) {
-        symbolsInText[symbols[i]] = symbolsInText.getOrDefault(symbols[i], 0) + 1
+        symbolsInText[text[i]] = symbolsInText.getOrDefault(text[i], 0) + 1
     }
 
-    println(symbolsInWord)
-    println(symbolsInText)
+    var counter = 0
+    var degreeOfSimilarity = 0
 
-    return 0
+    // Определение степени сходства с словом первого отрезка
+    for (symbol in symbolsInWord) {
+        if (symbol.value == symbolsInText[symbol.key]) {
+            degreeOfSimilarity++
+        }
+    }
+
+    // Проверка на сходство
+    if (degreeOfSimilarity == symbolsInWord.size) {
+        counter++
+    }
+
+    return counter
 }
