@@ -4,6 +4,8 @@ package com.lessons.fourth
 /*
 Время = 0.727s
 Память = 48.93Mb
+
+Сложность = O(L * N) = O(N)
 */
 fun main() {
 
@@ -23,11 +25,14 @@ fun main() {
 
 fun determinateSynonym(words: List<Pair<String, String>>, word: String) : String {
     val synonyms = mutableMapOf<String, String>()
+
+    // O(N)
     words.forEach {
-        synonyms.put(it.first, it.second)
-        synonyms[it.second] = it.first
+        synonyms.put(it.first, it.second)   // O(1)
+        synonyms[it.second] = it.first      // O(1)
     }
 
+    // O(1)
     var synonym = synonyms[word]
 
     return synonym ?: ""
