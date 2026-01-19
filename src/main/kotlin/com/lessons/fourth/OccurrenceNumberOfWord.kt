@@ -4,7 +4,10 @@ import java.io.File
 
 
 /*
-Не решено - не сошелся ответ
+Время = 0.603s
+Память = 41.29Mb
+
+Сложность = O(L + N) = O(L)
  */
 fun main() {
     val text = File("input.txt").readText().trim()
@@ -18,13 +21,15 @@ fun main() {
 fun determinateOccurrenceNumbersOfWords(text: String) : String {
 
     // Разделение слов по пробелам и переносам и фильтрация пустых слов
-    val words = text.split(Regex("\\s+")).filter { it.isNotBlank() }
+    val words = text.split(Regex("\\s+")).filter { it.isNotBlank() }  // O(L + N)
 
     val occurrenceWords = mutableMapOf<String, Int>()
     val occurrenceNumbers = mutableListOf<Int>()
 
+    // O(N)
     // Пробег по всем словам
     words.forEach {
+        // O(1)
         if (it in occurrenceWords) {
             // Слово уже встречалось
             occurrenceNumbers.add(occurrenceWords[it]!!)
@@ -36,5 +41,5 @@ fun determinateOccurrenceNumbersOfWords(text: String) : String {
         }
     }
 
-    return occurrenceNumbers.joinToString(" ")
+    return occurrenceNumbers.joinToString(" ")   // O(N)
 }
