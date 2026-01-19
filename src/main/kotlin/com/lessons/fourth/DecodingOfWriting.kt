@@ -41,5 +41,32 @@ fun decodeOfWriting(symbols: List<Char>, text: String) : Int {
         counter++
     }
 
+    // Проверка степени сходства каждой последовательности
+    for (i in symbols.size until text.length) {
+
+        val leftSymbol = text[i - symbols.size]
+        val nextSymbol = text[i]
+
+        // Совпадающая буква ушла
+        if (symbolsInWord[leftSymbol] == symbolsInText[leftSymbol]) {
+            degreeOfSimilarity--
+        }
+
+        // Сдвиг левого указателя
+        symbolsInText[leftSymbol] = (symbolsInText[leftSymbol] ?: 0) - 1
+        // Сдвиг правого указателя
+        symbolsInText[nextSymbol] = symbolsInText.getOrDefault(nextSymbol, 0) + 1
+
+        // Нужная буква пришла
+        if (symbolsInText[nextSymbol] == symbolsInWord[nextSymbol]) {
+            degreeOfSimilarity++
+        }
+
+        // Проверка на сходство
+        if (degreeOfSimilarity == symbolsInWord.size) {
+            counter++
+        }
+    }
+
     return counter
 }
