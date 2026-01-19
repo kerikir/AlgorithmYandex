@@ -2,7 +2,10 @@ package com.lessons.fourth
 
 
 /*
-Не решено - не сошелся ответ
+Время = 0.759s
+Память = 44.44Mb
+
+Сложность = O(N + M) = O(N)
  */
 fun main() {
     val n = readLine()!!.trim().toInt()
@@ -18,10 +21,12 @@ fun main() {
 }
 
 
+
 fun determinateHeightOfPyramid(sizesOfBlocks: List<Pair<Int, Int>>) : Long {
 
     val blocks = mutableMapOf<Int, Int>()
 
+    // O(N)
     // Пробег по всем блокам
     sizesOfBlocks.forEach {
 
@@ -32,7 +37,11 @@ fun determinateHeightOfPyramid(sizesOfBlocks: List<Pair<Int, Int>>) : Long {
         }
     }
 
+    // Исключение переполнения суммы Integer
     var sumHeights = 0L
+
+    // O(M)
+    // Перебор всех блоков с уникальной шириной в пирамиде
     blocks.forEach { (_, height) ->
         sumHeights += height
     }
