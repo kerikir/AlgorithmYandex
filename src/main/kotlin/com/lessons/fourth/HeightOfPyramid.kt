@@ -18,15 +18,24 @@ fun main() {
 }
 
 
-fun determinateHeightOfPyramid(sizesOfBlocks: List<Pair<Int, Int>>) : Int {
+fun determinateHeightOfPyramid(sizesOfBlocks: List<Pair<Int, Int>>) : Long {
 
     val blocks = mutableMapOf<Int, Int>()
+
+    // Пробег по всем блокам
     sizesOfBlocks.forEach {
+
+        // Первый блок с текущей широтой или самый высокий
         if ((it.first !in blocks) || (blocks[it.first]!! < it.second))
         {
             blocks[it.first] = it.second
         }
     }
 
-    return blocks.values.sum()
+    var sumHeights = 0L
+    blocks.forEach { (_, height) ->
+        sumHeights += height
+    }
+
+    return sumHeights
 }
