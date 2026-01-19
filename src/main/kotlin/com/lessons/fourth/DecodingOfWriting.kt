@@ -50,6 +50,8 @@ fun decodeOfWriting(symbols: List<Char>, text: String) : Int {
         // Совпадающая буква ушла
         if (symbolsInWord[leftSymbol] == symbolsInText[leftSymbol]) {
             degreeOfSimilarity--
+        } else if (symbolsInWord[leftSymbol] == (symbolsInText[leftSymbol]!! - 1)) {
+            degreeOfSimilarity++
         }
 
         // Сдвиг левого указателя
@@ -58,8 +60,10 @@ fun decodeOfWriting(symbols: List<Char>, text: String) : Int {
         symbolsInText[nextSymbol] = symbolsInText.getOrDefault(nextSymbol, 0) + 1
 
         // Нужная буква пришла
-        if (symbolsInText[nextSymbol] == symbolsInWord[nextSymbol]) {
+        if (symbolsInWord[nextSymbol] == symbolsInText[nextSymbol]) {
             degreeOfSimilarity++
+        } else if (symbolsInWord[nextSymbol] == (symbolsInText[nextSymbol]!! - 1)) {
+            degreeOfSimilarity--
         }
 
         // Проверка на сходство
