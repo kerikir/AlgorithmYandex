@@ -6,6 +6,8 @@ import java.io.File
 /*
 Время = 0.535s
 Память = 42.45Mb
+
+Сложность = O(N * M)
 */
 fun main() {
     val text = File("input.txt").readText().trim().split("\r\n")
@@ -26,6 +28,7 @@ fun simulateBankingOperations(operations: List<List<String>>) : String {
     val accounts = mutableMapOf<String, Int>()
     val output = mutableListOf<String>()
 
+    // O(N)
     for (operation in operations) {
 
         when (operation[0]) {
@@ -44,6 +47,7 @@ fun simulateBankingOperations(operations: List<List<String>>) : String {
 
 fun depositOperation(accounts: MutableMap<String, Int>, operation: List<String>) {
 
+    // O(1)
     accounts[operation[1]] = accounts.getOrDefault(operation[1], 0) + operation[2].toInt()
 }
 
@@ -51,6 +55,7 @@ fun depositOperation(accounts: MutableMap<String, Int>, operation: List<String>)
 
 fun withdrawOperation(accounts: MutableMap<String, Int>, operation: List<String>) {
 
+    // O(1)
     accounts[operation[1]] = accounts.getOrDefault(operation[1], 0) - operation[2].toInt()
 }
 
@@ -58,6 +63,7 @@ fun withdrawOperation(accounts: MutableMap<String, Int>, operation: List<String>
 
 fun transferOperation(accounts: MutableMap<String, Int>, operation: List<String>) {
 
+    // O(1)
     accounts[operation[1]] = accounts.getOrDefault(operation[1], 0) - operation[3].toInt()
     accounts[operation[2]] = accounts.getOrDefault(operation[2], 0) + operation[3].toInt()
 }
@@ -66,6 +72,7 @@ fun transferOperation(accounts: MutableMap<String, Int>, operation: List<String>
 
 fun incomeOperation(accounts: MutableMap<String, Int>, operation: List<String>) {
 
+    // O(M)
     accounts.forEach { (name, sum) ->
         if (sum > 0) {
             accounts[name] = (sum * (100.0 + operation[1].toInt()) / 100.0).toInt()
@@ -77,6 +84,7 @@ fun incomeOperation(accounts: MutableMap<String, Int>, operation: List<String>) 
 
 fun balanceOperation(accounts: MutableMap<String, Int>, operation: List<String>) : String {
 
+    // O(1)
     return if (accounts.contains(operation[1])) {
         accounts[operation[1]].toString()
     } else {

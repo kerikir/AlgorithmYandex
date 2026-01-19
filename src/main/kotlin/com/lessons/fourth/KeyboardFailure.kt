@@ -4,6 +4,8 @@ package com.lessons.fourth
 /*
 Время = 0.501s
 Память = 32.12Mb
+
+Сложность = O(K + N)
 */
 fun main() {
 
@@ -21,7 +23,10 @@ fun main() {
 fun determinateKeyboardFailure(c: List<Int>, p: List<Int>) : String {
     val clicks = mutableMapOf<Int, Int>()
 
+    // O(K)
+    // Определение числа нажатий
     p.forEach {
+        // O(1)
         if (it in clicks) {
             clicks[it] = clicks[it]!! + 1
         } else {
@@ -30,12 +35,17 @@ fun determinateKeyboardFailure(c: List<Int>, p: List<Int>) : String {
     }
 
     val answers = mutableListOf<String>()
+
+    // O(N)
+    // Определение состояния клавиш
     c.forEachIndexed { index, value ->
+        // O(1)
         if (clicks[index + 1]!! > value)
             answers.add("YES")
         else
             answers.add("NO")
     }
 
+    // O(N)
     return answers.joinToString("\n")
 }
