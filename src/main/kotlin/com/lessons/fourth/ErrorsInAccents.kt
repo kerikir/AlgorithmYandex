@@ -1,6 +1,10 @@
 package com.lessons.fourth
 
 
+/*
+Время = 0.619s
+Память = 44.18Mb
+ */
 fun main() {
 
     val n = readLine()!!.trim().toInt()
@@ -17,6 +21,7 @@ fun main() {
         if (word !in dictionary) {
             // Слова нет в словаре ударений
             dictionary[word] = mutableSetOf(accent)
+
         } else {
             // У слова несколько ударений
             dictionary[word]!!.add(accent)
@@ -28,6 +33,7 @@ fun main() {
     val result = identificationOfErrorsInAccents(dictionary, text)
     println(result)
 }
+
 
 
 fun identificationOfErrorsInAccents(dictionary: Map<String, Set<String>>, text: String) : Int {
@@ -53,6 +59,7 @@ fun identificationOfErrorsInAccents(dictionary: Map<String, Set<String>>, text: 
             }
 
         } else {
+
             // Определение числа поставленных ударений
             val count = word.count { it.isUpperCase() }
 
