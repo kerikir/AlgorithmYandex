@@ -1,6 +1,7 @@
 package com.lessons.fourth
 
-import java.io.File
+import java.io.BufferedReader
+import java.io.FileReader
 import java.util.TreeMap
 
 
@@ -8,17 +9,23 @@ import java.util.TreeMap
 Не решено - превышен лимит 1 сек
  */
 fun main() {
-    // В контесте только "\n"
-    val text = File("input.txt").readText().trim().split("\r\n")  // O(L)
-
     // В контесте неверный ответ из-за переполения, поэтому Long
     val buyers = TreeMap<String, TreeMap<String, Long>>()
 
-    for (i in text) {
-        val (name, item, count) = i.split(" ")
+    // В контесте только "\n"
+    val text = BufferedReader(FileReader("input.txt"))
 
-        val bayer = buyers.getOrPut(name) { TreeMap() }
-        bayer[item] = bayer.getOrDefault(item, 0L) + count.toLong()
+    text.useLines { lines ->
+
+        lines.forEach { line ->
+            if (line.isNotBlank()) {
+
+                val (name, item, count) = line.split(" ")
+
+                val bayer = buyers.getOrPut(name) { TreeMap() }
+                bayer[item] = bayer.getOrDefault(item, 0L) + count.toLong()
+            }
+        }
     }
 
     val result = determinateShoppingList(buyers)
