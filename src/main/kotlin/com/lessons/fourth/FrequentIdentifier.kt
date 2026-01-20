@@ -4,7 +4,9 @@ import java.io.File
 
 
 fun main() {
-    val (n, c, d) = readLine()!!.trim().split(" ")
+    val text = File("input.txt").readText().trim().split(Regex("\r\n"))
+
+    val (n, c, d) = text[0].split(' ')
 
     // Чувствителен ли язык к регстру
     val caseSensitivity = if (c == "yes") true else false
@@ -13,12 +15,11 @@ fun main() {
     // Количество ключевых слов
     val numberOfKeywords = n.toInt()
 
-    val keywords = mutableSetOf<String>()
-
     // Определение всех ключевых слов
+    val keywords = mutableSetOf<String>()
     for (i in 1..numberOfKeywords) {
 
-        val keyword = readLine()!!.trim()
+        val keyword = text[i]
 
         if (caseSensitivity) {
             keywords.add(keyword)
@@ -28,11 +29,10 @@ fun main() {
         }
     }
 
+    // Получение кода программы
     val program = mutableListOf<String>()
-    while (true) {
-
-        val line = readLine() ?: break
-        program.add(line)
+    for (i in (numberOfKeywords + 1) until text.size) {
+        program.add(text[i])
     }
 
     val result = determinateMostFrequentIdentifier()
