@@ -8,9 +8,10 @@ import java.io.File
  */
 fun main() {
     // В контесте только "\n"
-    val text = File("input.txt").readText().trim().split("\r\n")
+    val text = File("input.txt").readText().trim().split("\r\n")  // O(L)
 
     val shoppingList = mutableListOf<Triple<String, String, Long>>()
+    // O(N * S)
     for (i in text) {
         val (name, item, count) = i.split(" ")
         shoppingList.add(Triple(name, item, count.toLong()))
@@ -27,7 +28,8 @@ fun determinateShoppingList(shoppingList: List<Triple<String, String, Long>>) : 
     // В контесте неверный ответ из-за переполения, поэтому Long
     val buyers = mutableMapOf<String, MutableMap<String, Long>>()
 
-    for (item in shoppingList) {
+    // Проход по всем покупкам
+    for (item in shoppingList) {    // O(N)
 
         val bayer = buyers.getOrPut(item.first) { mutableMapOf() }
 
@@ -35,7 +37,9 @@ fun determinateShoppingList(shoppingList: List<Triple<String, String, Long>>) : 
     }
 
     val list = mutableListOf<String>()
-    for (item in buyers.toSortedMap()) {
+
+    // Формирование ответа
+    for (item in buyers.toSortedMap()) {    // O(M * logM + M * K * logK)
         list.add("${item.key}:")
 
         for (i in item.value.toSortedMap()) {
