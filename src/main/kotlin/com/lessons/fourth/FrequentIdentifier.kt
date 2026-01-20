@@ -35,12 +35,23 @@ fun main() {
         program.add(text[i])
     }
 
-    val result = determinateMostFrequentIdentifier()
+    val result = determinateMostFrequentIdentifier(program, keywords, caseSensitivity, identifierWithDigit)
     println(result)
 }
 
 
 
-fun determinateMostFrequentIdentifier() : String {
+fun determinateMostFrequentIdentifier(
+    program: List<String>, keywords: Set<String>, caseSensitivity: Boolean, identifierWithDigit: Boolean
+) : String {
+
+    // Получение всех идентификаторов и ключевых слов в программе
+    val words = program.joinToString("\n")
+        .replace(Regex("[^A-Za-z0-9]"), " ")
+        .split(Regex("\\s+"))
+        .filter { it.isNotBlank() }
+
+    val identifications = mutableMapOf<String, Int>()
+
     return ""
 }
