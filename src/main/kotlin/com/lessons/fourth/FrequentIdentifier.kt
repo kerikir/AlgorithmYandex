@@ -53,5 +53,29 @@ fun determinateMostFrequentIdentifier(
 
     val identifications = mutableMapOf<String, Int>()
 
+    // Пробег по всем словам
+    for (word in words) {
+
+        // Получение идентификатора в зависимости от специфики языка
+        val identification = if (caseSensitivity) {
+            word
+        } else {
+            word.toLowerCase()
+        }
+
+        // Не является ключевым словом
+        if (identification !in keywords) {
+
+            // Идентификатор не подходит
+            if (identification.first().isDigit() && !identifierWithDigit) {
+                continue
+            }
+
+            // Подсчет частоты идентификаторов
+            val count = identifications.getOrDefault(identification, 0)
+            identifications[identification] = count + 1
+        }
+    }
+
     return ""
 }
