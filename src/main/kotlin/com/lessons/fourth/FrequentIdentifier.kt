@@ -1,6 +1,7 @@
 package com.lessons.fourth
 
 import java.io.File
+import java.util.LinkedHashMap
 
 
 fun main() {
@@ -51,7 +52,7 @@ fun determinateMostFrequentIdentifier(
         .split(Regex("\\s+"))
         .filter { it.isNotBlank() }
 
-    val identifications = mutableMapOf<String, Int>()
+    val identifications = LinkedHashMap<String, Int>()
 
     // Пробег по всем словам
     for (word in words) {
@@ -77,5 +78,8 @@ fun determinateMostFrequentIdentifier(
         }
     }
 
-    return ""
+    // Максимальная частота повторения идентификатора
+    val maxFrequency = identifications.maxOf { it.value }
+
+    return identifications.entries.firstOrNull { it.value == maxFrequency }!!.key
 }
