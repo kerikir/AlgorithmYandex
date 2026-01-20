@@ -1,47 +1,58 @@
 package com.lessons.fourth
 
-import java.io.File
+import java.io.BufferedReader
+import java.io.FileReader
+import java.util.TreeMap
 
 
 /*
-Не решено - превышен лимит 1 сек
+Время = 0.99s
+Память = 58.72Mb
+
+Сложность = O(L + N * logM + N * logK)
  */
 fun main() {
-    // В контесте только "\n"
-    val text = File("input.txt").readText().trim().split("\r\n")
 
-    val shoppingList = mutableListOf<Triple<String, String, Long>>()
-    for (i in text) {
-        val (name, item, count) = i.split(" ")
-        shoppingList.add(Triple(name, item, count.toLong()))
+    // Автоматическая сортировка при добавлении
+    val buyers = TreeMap<String, TreeMap<String, Long>>()
+
+    // Быстрое чтение в буфер
+    val text = BufferedReader(FileReader("input.txt"))
+    // O(L)
+    text.useLines { lines ->
+
+        // O(N)
+        lines.forEach { line ->
+            if (line.isNotBlank()) {
+
+                val (name, item, count) = line.split(' ')   // O(S)
+
+                val bayer = buyers.getOrPut(name) { TreeMap() }   // O(logM)
+                // В контесте неверный ответ из-за переполения, поэтому Long
+                bayer[item] = bayer.getOrDefault(item, 0L) + count.toLong()   // O(logK)
+            }
+        }
     }
 
-    val result = determinateShoppingList(shoppingList)
+    val result = determinateShoppingList(buyers)
     println(result)
 }
 
 
 
-fun determinateShoppingList(shoppingList: List<Triple<String, String, Long>>) : String {
+fun determinateShoppingList(buyers: TreeMap<String, TreeMap<String, Long>>) : String {
 
-    // В контесте неверный ответ из-за переполения, поэтому Long
-    val buyers = mutableMapOf<String, MutableMap<String, Long>>()
+    val result = StringBuilder()
 
-    for (item in shoppingList) {
+    // Формирование ответа
+    for ((name, items) in buyers) {     // O(N)
 
-        val bayer = buyers.getOrPut(item.first) { mutableMapOf() }
+        result.append("$name:\n")
 
-        bayer[item.second] = bayer.getOrDefault(item.second, 0L) + item.third
-    }
-
-    val list = mutableListOf<String>()
-    for (item in buyers.toSortedMap()) {
-        list.add("${item.key}:")
-
-        for (i in item.value.toSortedMap()) {
-            list.add("${i.key} ${i.value}")
+        for ((item, count) in items) {
+            result.append("$item $count\n")
         }
     }
 
-    return list.joinToString("\n")
+    return result.toString()
 }
