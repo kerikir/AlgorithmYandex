@@ -42,12 +42,22 @@ fun identificationOfErrorsInAccents(dictionary: Map<String, Set<String>>, text: 
 
         val wordWithoutAccent = word.toLowerCase()
 
+        // Проверка есть ли ударение в словаре
         if (wordWithoutAccent in dictionary) {
-            // Есть ударение в словаре
+
             val right = dictionary[wordWithoutAccent]!!.contains(word)
 
             if (!right) {
                 // Ошибка в ударении
+                misstaces++
+            }
+
+        } else {
+            // Определение числа поставленных ударений
+            val count = word.count { it.isUpperCase() }
+
+            // Несколько поставленных ударений
+            if (count != 1) {
                 misstaces++
             }
         }
