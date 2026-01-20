@@ -4,6 +4,8 @@ package com.lessons.fourth
 /*
 Время = 0.619s
 Память = 44.18Mb
+
+Сложность = O(N + L)
  */
 fun main() {
 
@@ -11,7 +13,7 @@ fun main() {
 
     val dictionary = mutableMapOf<String, MutableSet<String>>()
     // Инициализация словаря
-    for (i in 1..n) {
+    for (i in 1..n) {      // O(N * K)
 
         // Ударение в слове
         val accent = readLine()!!.trim()
@@ -41,10 +43,10 @@ fun identificationOfErrorsInAccents(dictionary: Map<String, Set<String>>, text: 
     var misstaces = 0
 
     // Получение слов из текста
-    val words = text.split(Regex("\\s+")).filter { it.isNotBlank() }
+    val words = text.split(Regex("\\s+")).filter { it.isNotBlank() }    // O(L)
 
     // Просмотр всех слов
-    for (word in words) {
+    for (word in words) {    // O(M + K)
 
         val wordWithoutAccent = word.toLowerCase()
 
