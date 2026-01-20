@@ -8,6 +8,8 @@ import java.util.TreeMap
 /*
 Время = 0.99s
 Память = 58.72Mb
+
+Сложность = O(L + N * logM + N * logK)
  */
 fun main() {
 
@@ -16,17 +18,18 @@ fun main() {
 
     // Быстрое чтение в буфер
     val text = BufferedReader(FileReader("input.txt"))
-
+    // O(L)
     text.useLines { lines ->
 
+        // O(N)
         lines.forEach { line ->
             if (line.isNotBlank()) {
 
-                val (name, item, count) = line.split(' ')
+                val (name, item, count) = line.split(' ')   // O(S)
 
-                val bayer = buyers.getOrPut(name) { TreeMap() }
+                val bayer = buyers.getOrPut(name) { TreeMap() }   // O(logM)
                 // В контесте неверный ответ из-за переполения, поэтому Long
-                bayer[item] = bayer.getOrDefault(item, 0L) + count.toLong()
+                bayer[item] = bayer.getOrDefault(item, 0L) + count.toLong()   // O(logK)
             }
         }
     }
@@ -42,7 +45,7 @@ fun determinateShoppingList(buyers: TreeMap<String, TreeMap<String, Long>>) : St
     val result = StringBuilder()
 
     // Формирование ответа
-    for ((name, items) in buyers) {
+    for ((name, items) in buyers) {     // O(N)
 
         result.append("$name:\n")
 
