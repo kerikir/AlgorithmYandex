@@ -34,5 +34,24 @@ fun identificationOfErrorsInAccents(dictionary: Map<String, Set<String>>, text: 
 
     var misstaces = 0
 
+    // Получение слов из текста
+    val words = text.split(Regex("\\s+")).filter { it.isNotBlank() }
+
+    // Просмотр всех слов
+    for (word in words) {
+
+        val wordWithoutAccent = word.toLowerCase()
+
+        if (wordWithoutAccent in dictionary) {
+            // Есть ударение в словаре
+            val right = dictionary[wordWithoutAccent]!!.contains(word)
+
+            if (!right) {
+                // Ошибка в ударении
+                misstaces++
+            }
+        }
+    }
+
     return misstaces
 }
