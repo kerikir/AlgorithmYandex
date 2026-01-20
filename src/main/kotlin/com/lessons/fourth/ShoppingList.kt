@@ -11,31 +11,23 @@ fun main() {
     // В контесте только "\n"
     val text = File("input.txt").readText().trim().split("\r\n")  // O(L)
 
-    val shoppingList = mutableListOf<Triple<String, String, Long>>()
-    // O(N * S)
+    // В контесте неверный ответ из-за переполения, поэтому Long
+    val buyers = TreeMap<String, TreeMap<String, Long>>()
+
     for (i in text) {
         val (name, item, count) = i.split(" ")
-        shoppingList.add(Triple(name, item, count.toLong()))
+
+        val bayer = buyers.getOrPut(name) { TreeMap() }
+        bayer[item] = bayer.getOrDefault(item, 0L) + count.toLong()
     }
 
-    val result = determinateShoppingList(shoppingList)
+    val result = determinateShoppingList(buyers)
     println(result)
 }
 
 
 
-fun determinateShoppingList(shoppingList: List<Triple<String, String, Long>>) : String {
-
-    // В контесте неверный ответ из-за переполения, поэтому Long
-    val buyers = TreeMap<String, TreeMap<String, Long>>()
-
-    // Проход по всем покупкам
-    for ((name, item, count) in shoppingList) {
-
-        val bayer = buyers.getOrPut(name) { TreeMap() }
-
-        bayer[item] = bayer.getOrDefault(item, 0L) + count
-    }
+fun determinateShoppingList(buyers: TreeMap<String, TreeMap<String, Long>>) : String {
 
     val result = StringBuilder()
 
