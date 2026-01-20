@@ -37,16 +37,17 @@ fun determinateShoppingList(shoppingList: List<Triple<String, String, Long>>) : 
         bayer[item] = bayer.getOrDefault(item, 0L) + count
     }
 
-    val list = mutableListOf<String>()
+    val result = StringBuilder()
 
     // Формирование ответа
     for ((name, items) in buyers) {
-        list.add("$name:")
+
+        result.append("$name:\n")
 
         for ((item, count) in items) {
-            list.add("$item $count")
+            result.append("$item $count\n")
         }
     }
 
-    return list.joinToString("\n")
+    return result.toString()
 }
