@@ -1,6 +1,7 @@
 package com.lessons.fourth
 
 import java.io.File
+import java.util.TreeMap
 
 
 /*
@@ -26,24 +27,24 @@ fun main() {
 fun determinateShoppingList(shoppingList: List<Triple<String, String, Long>>) : String {
 
     // В контесте неверный ответ из-за переполения, поэтому Long
-    val buyers = mutableMapOf<String, MutableMap<String, Long>>()
+    val buyers = TreeMap<String, TreeMap<String, Long>>()
 
     // Проход по всем покупкам
-    for (item in shoppingList) {    // O(N)
+    for ((name, item, count) in shoppingList) {
 
-        val bayer = buyers.getOrPut(item.first) { mutableMapOf() }
+        val bayer = buyers.getOrPut(name) { TreeMap() }
 
-        bayer[item.second] = bayer.getOrDefault(item.second, 0L) + item.third
+        bayer[item] = bayer.getOrDefault(item, 0L) + count
     }
 
     val list = mutableListOf<String>()
 
     // Формирование ответа
-    for (item in buyers.toSortedMap()) {    // O(M * logM + M * K * logK)
-        list.add("${item.key}:")
+    for ((name, items) in buyers) {
+        list.add("$name:")
 
-        for (i in item.value.toSortedMap()) {
-            list.add("${i.key} ${i.value}")
+        for ((item, count) in items) {
+            list.add("$item $count")
         }
     }
 
