@@ -6,13 +6,15 @@ import java.util.TreeMap
 
 
 /*
-Не решено - превышен лимит 1 сек
+Время = 0.99s
+Память = 58.72Mb
  */
 fun main() {
-    // В контесте неверный ответ из-за переполения, поэтому Long
+
+    // Автоматическая сортировка при добавлении
     val buyers = TreeMap<String, TreeMap<String, Long>>()
 
-    // В контесте только "\n"
+    // Быстрое чтение в буфер
     val text = BufferedReader(FileReader("input.txt"))
 
     text.useLines { lines ->
@@ -20,9 +22,10 @@ fun main() {
         lines.forEach { line ->
             if (line.isNotBlank()) {
 
-                val (name, item, count) = line.split(" ")
+                val (name, item, count) = line.split(' ')
 
                 val bayer = buyers.getOrPut(name) { TreeMap() }
+                // В контесте неверный ответ из-за переполения, поэтому Long
                 bayer[item] = bayer.getOrDefault(item, 0L) + count.toLong()
             }
         }
