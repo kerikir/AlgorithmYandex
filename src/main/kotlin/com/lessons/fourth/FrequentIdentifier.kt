@@ -4,8 +4,9 @@ import java.io.File
 import java.util.LinkedHashMap
 
 
+
 fun main() {
-    val text = File("input.txt").readText().trim().split(Regex("\r\n"))
+    val text = File("input.txt").readText().trim().split("\r\n")
 
     val (n, c, d) = text[0].split(' ')
 
@@ -79,10 +80,6 @@ fun determinateMostFrequentIdentifier(
             }
             if (identification.all { it.isDigit() }) {
                 // Идентификатор состоит только из цифр
-                continue
-            }
-            if (identification.all { it == '_' }) {
-                // Идентификатор состоит только из символов подчеркивания
                 continue
             }
 
