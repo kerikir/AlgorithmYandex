@@ -48,9 +48,14 @@ fun determinateMostFrequentIdentifier(
 
     // Получение всех идентификаторов и ключевых слов в программе
     val words = program.joinToString("\n")
-        .replace(Regex("[^A-Za-z0-9]"), " ")
+        .replace(Regex("[^A-Za-z0-9_]"), " ")
         .split(Regex("\\s+"))
         .filter { it.isNotBlank() }
+
+    // Проверка на пустую программу
+    if (words.isEmpty()) {
+        return ""
+    }
 
     val identifications = LinkedHashMap<String, Int>()
 
