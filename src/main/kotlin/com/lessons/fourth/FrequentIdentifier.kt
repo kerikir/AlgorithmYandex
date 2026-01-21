@@ -5,6 +5,10 @@ import java.util.LinkedHashMap
 
 
 
+/*
+Время = 290ms
+Память = 20.59Mb
+ */
 fun main() {
     val text = File("input.txt").readText().trim().split("\r\n")
 
