@@ -74,6 +74,15 @@ fun determinateMostFrequentIdentifier(
 
             // Идентификатор не подходит
             if (identification.first().isDigit() && !identifierWithDigit) {
+                // Первая цифра в идентификаторе и так запрещено в языке
+                continue
+            }
+            if (identification.all { it.isDigit() }) {
+                // Идентификатор состоит только из цифр
+                continue
+            }
+            if (identification.all { it == '_' }) {
+                // Идентификатор состоит только из символов подчеркивания
                 continue
             }
 
@@ -81,6 +90,10 @@ fun determinateMostFrequentIdentifier(
             val count = identifications.getOrDefault(identification, 0)
             identifications[identification] = count + 1
         }
+    }
+
+    if (identifications.isEmpty()) {
+        return ""
     }
 
     // Максимальная частота повторения идентификатора
