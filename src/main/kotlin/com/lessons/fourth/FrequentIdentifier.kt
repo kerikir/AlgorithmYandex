@@ -10,9 +10,9 @@ fun main() {
     val (n, c, d) = text[0].split(' ')
 
     // Чувствителен ли язык к регстру
-    val caseSensitivity = if (c == "yes") true else false
+    val caseSensitivity = c == "yes"
     // Может ли идентификатор начинаться с цифры
-    val identifierWithDigit = if (d == "yes") true else false
+    val identifierWithDigit = d == "yes"
     // Количество ключевых слов
     val numberOfKeywords = n.toInt()
 
@@ -99,5 +99,5 @@ fun determinateMostFrequentIdentifier(
     // Максимальная частота повторения идентификатора
     val maxFrequency = identifications.maxOf { it.value }
 
-    return identifications.entries.firstOrNull { it.value == maxFrequency }!!.key
+    return identifications.entries.first { it.value == maxFrequency }.key
 }
