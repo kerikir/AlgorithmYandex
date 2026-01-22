@@ -25,6 +25,14 @@ fun determinateTracksLiftingHeights(coords: List<Pair<Int, Int>>, tracks: List<P
 
     val result = mutableListOf<String>()
 
+    val sumHeights = initializeStraightSumLiftingHeights(coords)
+    val sumHeightsReverse = initializeReverseSumLiftingHeights(coords)
+
+    // Расчет суммарной высоты подъемов каждого пути
+    for (i in tracks) {
+
+    }
+
     return result.joinToString("\n")
 }
 
@@ -48,6 +56,32 @@ fun initializeStraightSumLiftingHeights(coords: List<Pair<Int, Int>>) : IntArray
         } else {
             // Спуск
             sumHeights[i] = sumHeights[i - 1]
+        }
+    }
+
+    return sumHeights
+}
+
+
+
+/**
+ * Инициализация префикс-суммы для высоты подъема при обратном ходе
+ */
+fun initializeReverseSumLiftingHeights(coords: List<Pair<Int, Int>>) : IntArray {
+
+    val sumHeights = IntArray(coords.size)
+
+    // Определение высот подъема
+    sumHeights[sumHeights.lastIndex] = 0
+    for (i in (sumHeights.lastIndex - 1) downTo 0) {
+
+        if (coords[i].second > coords[i + 1].second) {
+            // Подъем
+            sumHeights[i] = sumHeights[i + 1] + (coords[i].second - coords[i + 1].second)
+
+        } else {
+            // Спуск
+            sumHeights[i] = sumHeights[i + 1]
         }
     }
 
