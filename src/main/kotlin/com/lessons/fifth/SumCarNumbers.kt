@@ -2,6 +2,12 @@ package com.lessons.fifth
 
 
 
+/*
+Время = 444ms
+Память = 28.35Mb
+
+Сложность = O(2 * N) = O(N)
+ */
 fun main() {
 
     val (n, k) = readLine()!!.trim().split(' ').map { it.toInt() }
@@ -23,11 +29,11 @@ fun determinateNumberOfSetCars(carNumbers: List<Int>, value: Int) : Int {
     var sum = 0
 
     // Подсчет наборов машин с нужными номерами
-    while ((left < carNumbers.size) && (right < carNumbers.size)) {
+    while ((left < carNumbers.size) && (right < carNumbers.size)) {  // O(N)
 
         sum += carNumbers[right]
 
-        while (sum > value && left <= right) {
+        while (sum > value && left <= right) {       // O(N)
             // Перебор суммы номеров
             sum -= carNumbers[left]
             left++
