@@ -29,3 +29,27 @@ fun determinateTracksLiftingHeights(coords: List<Pair<Int, Int>>, tracks: List<P
 }
 
 
+
+/**
+ * Инициализация префикс-суммы для высоты подъема при прямом ходе
+ */
+fun initializeStraightSumLiftingHeights(coords: List<Pair<Int, Int>>) : IntArray {
+
+    val sumHeights = IntArray(coords.size)
+
+    // Определение высот подъема
+    sumHeights[0] = 0
+    for (i in 1..sumHeights.lastIndex) {
+
+        if (coords[i].second > coords[i - 1].second) {
+            // Подъем
+            sumHeights[i] = sumHeights[i - 1] + (coords[i].second - coords[i - 1].second)
+
+        } else {
+            // Спуск
+            sumHeights[i] = sumHeights[i - 1]
+        }
+    }
+
+    return sumHeights
+}
