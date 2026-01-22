@@ -15,8 +15,11 @@ fun main() {
     val tracks = mutableListOf<Pair<Int, Int>>()
     repeat(m) {
         val (s, f) = readLine()!!.trim().split(' ').map { it.toInt() }
-        coords.add(s to f)
+        tracks.add(s to f)
     }
+
+    val result = determinateTracksLiftingHeights(coords, tracks)
+    println(result)
 }
 
 
