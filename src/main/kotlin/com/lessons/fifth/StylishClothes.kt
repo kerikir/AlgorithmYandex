@@ -44,8 +44,15 @@ fun determinateColorsOfTShirtAndPants(colorsTShirt: List<Int>, colorsPants: List
 
                 secondPointer++
 
-            } else {
+            }
+
+            if (colorsTShirt[firstPointer] < colorsPants[secondPointer]) {
+                // К текущей майке не подобрать штанов лучше
                 break
+
+            } else {
+                // Подбираем штаны к майке получше
+                secondPointer++
             }
         }
     }
