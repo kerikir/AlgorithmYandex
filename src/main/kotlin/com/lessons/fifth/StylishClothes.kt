@@ -41,12 +41,9 @@ fun determinateColorsOfTShirtAndPants(colorsTShirt: List<Int>, colorsPants: List
                 minColorDifference = currentColorDifference
                 colorTShirt = colorsTShirt[firstPointer]
                 colorPants = colorsPants[secondPointer]
-
-                secondPointer++
-
             }
 
-            if (colorsTShirt[firstPointer] < colorsPants[secondPointer]) {
+            if (colorsTShirt[firstPointer] <= colorsPants[secondPointer]) {
                 // К текущей майке не подобрать штанов лучше
                 break
 
