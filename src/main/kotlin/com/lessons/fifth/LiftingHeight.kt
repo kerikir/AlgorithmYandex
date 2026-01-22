@@ -30,7 +30,8 @@ fun determinateTracksLiftingHeights(coords: List<Pair<Int, Int>>, tracks: List<P
 
     // Расчет суммарной высоты подъемов каждого пути
     for (i in tracks) {
-
+        val sumHeightsTrack = calculateSumLiftingHeights(i.first, i.second, sumHeights, sumHeightsReverse)
+        result.add(sumHeightsTrack.toString())
     }
 
     return result.joinToString("\n")
@@ -86,4 +87,26 @@ fun initializeReverseSumLiftingHeights(coords: List<Pair<Int, Int>>) : IntArray 
     }
 
     return sumHeights
+}
+
+
+
+/**
+ * Расчет суммарной высоты подъемов на данной трассе
+ */
+fun calculateSumLiftingHeights(start: Int, finish: Int, sumHeights: IntArray, sumHeightsReverse: IntArray) : Int {
+
+    var sum = 0
+
+    if (start < finish) {
+        sum = sumHeights[finish - 1] - sumHeights[start - 1]
+
+    } else if (start == finish) {
+        sum = 0
+
+    } else {
+        sum = sumHeightsReverse[finish - 1] - sumHeightsReverse[start - 1]
+    }
+
+    return sum
 }
