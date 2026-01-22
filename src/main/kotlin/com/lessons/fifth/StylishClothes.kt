@@ -20,7 +20,7 @@ fun main() {
 fun determinateColorsOfTShirtAndPants(colorsTShirt: List<Int>, colorsPants: List<Int>) : Pair<Int, Int> {
 
     // Второй указатель на цвет штанов
-    var secondPointer = 1
+    var secondPointer = 0
 
     // Минимальная разница в цвете элементов одежды
     var minColorDifference = abs(colorsTShirt[0] - colorsPants[0])
@@ -43,7 +43,7 @@ fun determinateColorsOfTShirtAndPants(colorsTShirt: List<Int>, colorsPants: List
                 colorPants = colorsPants[secondPointer]
             }
 
-            if (colorsTShirt[firstPointer] <= colorsPants[secondPointer]) {
+            if (colorsTShirt[firstPointer] < colorsPants[secondPointer]) {
                 // К текущей майке не подобрать штанов лучше
                 break
 
