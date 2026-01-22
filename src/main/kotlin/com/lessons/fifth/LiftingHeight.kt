@@ -2,10 +2,17 @@ package com.lessons.fifth
 
 
 
+/*
+Время = 0.66s
+Память = 43.97Mb
+
+Сложность = O(2 * N + M) = O(N + M)
+ */
 fun main() {
 
     val n = readLine()!!.trim().toInt()
     val coords = mutableListOf<Pair<Int, Int>>()
+    // O(N)
     repeat(n) {
         val (x, y) = readLine()!!.trim().split(' ').map { it.toInt() }
         coords.add(x to y)
@@ -13,6 +20,7 @@ fun main() {
 
     val m = readLine()!!.trim().toInt()
     val tracks = mutableListOf<Pair<Int, Int>>()
+    // O(M)
     repeat(m) {
         val (s, f) = readLine()!!.trim().split(' ').map { it.toInt() }
         tracks.add(s to f)
@@ -31,6 +39,7 @@ fun determinateTracksLiftingHeights(coords: List<Pair<Int, Int>>, tracks: List<P
     val sumHeights = initializeStraightSumLiftingHeights(coords)
     val sumHeightsReverse = initializeReverseSumLiftingHeights(coords)
 
+    // O(M)
     // Расчет суммарной высоты подъемов каждого пути
     for (i in tracks) {
         val sumHeightsTrack = calculateSumLiftingHeights(i.first, i.second, sumHeights, sumHeightsReverse)
@@ -51,7 +60,7 @@ fun initializeStraightSumLiftingHeights(coords: List<Pair<Int, Int>>) : IntArray
 
     // Определение высот подъема
     sumHeights[0] = 0
-    for (i in 1..sumHeights.lastIndex) {
+    for (i in 1..sumHeights.lastIndex) {    // O(N)
 
         if (coords[i].second > coords[i - 1].second) {
             // Подъем
@@ -77,7 +86,7 @@ fun initializeReverseSumLiftingHeights(coords: List<Pair<Int, Int>>) : IntArray 
 
     // Определение высот подъема
     sumHeights[sumHeights.lastIndex] = 0
-    for (i in (sumHeights.lastIndex - 1) downTo 0) {
+    for (i in (sumHeights.lastIndex - 1) downTo 0) {    // O(N)
 
         if (coords[i].second > coords[i + 1].second) {
             // Подъем
