@@ -20,11 +20,17 @@ fun determinateNumberOfSetCars(carNumbers: List<Int>, value: Int) : Int {
     var left = 0
     var right = 0
 
-    var sum = 0
+    var sum = carNumbers[0]
 
     // Подсчет наборов машин с нужными номерами
     while ((left < carNumbers.size) && (right < carNumbers.size)) {
 
+        // Проверка соответствие суммы номеров
+        if (sum == value) {
+            counter++
+        }
+
+        // Двигаем указатели
         if (sum < value) {
             // Сумма номеров недостаточна
             sum += carNumbers[right]
@@ -34,11 +40,10 @@ fun determinateNumberOfSetCars(carNumbers: List<Int>, value: Int) : Int {
             // Перебор суммы номеров
             sum -= carNumbers[left]
             left++
-        }
 
-        // Проверка соответствие суммы номеров
-        if (sum == value) {
-            counter++
+            if (left > right) {
+                right = left
+            }
         }
     }
 
