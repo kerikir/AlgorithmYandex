@@ -47,7 +47,13 @@ fun calculateCostConditioners(
 
         } else {
             // Не хватает мощности кондиционера для данного класса
-            conditionerPointer++
+            while (sortedClasses[classPointer] > sortedConditioners[conditionerPointer].first) {
+
+                // Сдвиг указателя на кондиционер
+                conditionerPointer++
+            }
+
+            sumCost += sortedConditioners[conditionerPointer].second
         }
     }
 
