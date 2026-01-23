@@ -15,7 +15,7 @@ fun main() {
 
 fun determinateNumberOfOptionForNonIntersection(
     distanceBetweenMonuments: List<Int>, visibilityDistance: Int
-) : Int {
+) : Long {
 
     // Заполнения префикс суммы для расстояний от первого памятника
     val distanceFromStart = IntArray(distanceBetweenMonuments.size)
@@ -23,7 +23,8 @@ fun determinateNumberOfOptionForNonIntersection(
         distanceFromStart[i] = distanceBetweenMonuments[i] - distanceBetweenMonuments[0]
     }
 
-    var counter = 0
+    // Расстояние видимости может быть нулевым и произойдет переполнение (каждый памятник подходит)
+    var counter = 0L
 
     var right = 0
 
