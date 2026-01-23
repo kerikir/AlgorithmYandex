@@ -47,6 +47,39 @@ fun determinateMinLengthSegment(treesVariety: List<Int>, numberOfVarieties: Int)
         return start to finish
     }
 
+    var minLengthSegment = treesVariety.size
+    var currentLengthSegment = treesVariety.size
 
-    return -1 to -1
+    var left = 0
+    var right = numberOfVarieties - 1
+
+    // Перебор отрезков
+    while (right < treesVariety.size && left < treesVariety.size) {
+
+        val currentVariety = treesVariety[right] - 1
+
+        // Нет сорта на отрезке
+        if (varietiesNumberOfOccurrences[currentVariety] == 0) {
+            counterVarieties++
+        }
+
+        varietiesNumberOfOccurrences[currentVariety]++
+
+        // Все сорта есть на отрезке
+        if (counterVarieties == numberOfVarieties) {
+
+            currentLengthSegment = right - left
+
+            // Наименьший по длине отрезок со всеми сортами
+            if (currentLengthSegment < minLengthSegment) {
+                minLengthSegment = currentLengthSegment
+                start = left + 1
+                finish = right + 1
+            }
+        }
+
+        right++
+    }
+
+    return start to finish
 }
