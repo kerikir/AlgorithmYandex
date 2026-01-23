@@ -2,6 +2,12 @@ package com.lessons.fifth
 
 
 
+/*
+Время = 0.674s
+Память = 56.91Mb
+
+Сложность = O(N)
+ */
 fun main() {
 
     val (n, r) = readLine()!!.trim().split(' ').map { it.toInt() }
