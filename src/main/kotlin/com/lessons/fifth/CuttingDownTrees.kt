@@ -51,7 +51,7 @@ fun determinateMinLengthSegment(treesVariety: List<Int>, numberOfVarieties: Int)
     var currentLengthSegment = treesVariety.size
 
     var left = 0
-    var right = numberOfVarieties - 1
+    var right = numberOfVarieties
 
     // Перебор отрезков
     while (right < treesVariety.size && left < treesVariety.size) {
