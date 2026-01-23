@@ -1,6 +1,11 @@
 package com.lessons.fifth
 
 
+
+/*
+Время =
+Память =
+ */
 fun main() {
 
     val (n, k) = readLine()!!.trim().split(' ').map { it.toInt() }
@@ -11,10 +16,11 @@ fun main() {
 }
 
 
+
 fun determinateMinLengthSegment(treesVariety: List<Int>, numberOfVarieties: Int) : Pair<Int, Int> {
 
     // Массив флагов вхождения в диапазон
-    val flagsVarieties = BooleanArray(numberOfVarieties)
+    val varietiesNumberOfOccurrences = IntArray(numberOfVarieties)
 
     // Количество сортов на отрезке
     var counterVarieties = 0
@@ -25,11 +31,11 @@ fun determinateMinLengthSegment(treesVariety: List<Int>, numberOfVarieties: Int)
         val currentVariety = treesVariety[i] - 1
 
         // Нет сорта на отрезке
-        if (!flagsVarieties[currentVariety]) {
-
-            flagsVarieties[currentVariety] = true
+        if (varietiesNumberOfOccurrences[currentVariety] == 0) {
             counterVarieties++
         }
+
+        varietiesNumberOfOccurrences[currentVariety]++
     }
 
     var start = 1
