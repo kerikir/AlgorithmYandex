@@ -5,6 +5,8 @@ package com.lessons.fifth
 /*
 Время = 0.598s
 Память = 41.85Mb
+
+Сложность = O(N + N) = O(N)
  */
 fun main() {
 
@@ -79,8 +81,6 @@ fun determinateMinLengthSegment(treesVariety: List<Int>, numberOfVarieties: Int)
 
             // Пытаемся укоротить отрезок с левой стороны
             while (counterVarieties == numberOfVarieties) {
-
-                // TODO проверка на выход за предел left и что left > right
 
                 val leftVariety = treesVariety[left] - 1
                 left++
