@@ -14,7 +14,7 @@ fun main() {
 fun determinateMinLengthSegment(treesVariety: List<Int>, numberOfVarieties: Int) : Pair<Int, Int> {
 
     // Массив флагов вхождения в диапазон
-    val flagsVarieties = BooleanArray(treesVariety.size)
+    val flagsVarieties = BooleanArray(numberOfVarieties)
 
     // Количество сортов на отрезке
     var counterVarieties = 0
@@ -32,8 +32,15 @@ fun determinateMinLengthSegment(treesVariety: List<Int>, numberOfVarieties: Int)
         }
     }
 
-    var start = 0
-    var finish = treesVariety.lastIndex
+    var start = 1
+    var finish = numberOfVarieties
 
-    return start to finish
+    // На первом минимальном отрезке все сорта деревьев
+    if (counterVarieties == numberOfVarieties) {
+
+        return start to finish
+    }
+
+
+    return -1 to -1
 }
