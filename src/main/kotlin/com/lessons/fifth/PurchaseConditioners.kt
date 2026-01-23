@@ -34,7 +34,22 @@ fun calculateCostConditioners(
     // Сортировка кондиционеров по стоимости
     val sortedConditioners = infoAboutConditioners.sortedBy { it.second }
 
+    var conditionerPointer = 0
     var sumCost = 0
+
+    // Сдвиг указателя на класс
+    for (classPointer in sortedClasses.indices) {
+
+        if (sortedClasses[classPointer] <= sortedConditioners[conditionerPointer].first) {
+            // Кондиционер подходит для данного класса
+            sumCost += sortedConditioners[conditionerPointer].second
+            continue
+
+        } else {
+            // Не хватает мощности кондиционера для данного класса
+            conditionerPointer++
+        }
+    }
 
     return sumCost
 }
