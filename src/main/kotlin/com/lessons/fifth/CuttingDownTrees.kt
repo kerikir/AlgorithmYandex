@@ -3,8 +3,8 @@ package com.lessons.fifth
 
 
 /*
-Время =
-Память =
+Время = 0.598s
+Память = 41.85Mb
  */
 fun main() {
 
