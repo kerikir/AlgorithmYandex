@@ -3,8 +3,10 @@ package com.lessons.fifth
 
 
 /*
-Время =
-Память =
+Время = 0.785s
+Память = 44.48Mb
+
+Сложность = O(N * logN + M * logM)
  */
 fun main() {
 
