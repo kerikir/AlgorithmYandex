@@ -32,7 +32,20 @@ fun determinateNumberOfOptionForNonIntersection(
 
         // Сдвиг правого указателя
         while (right < distanceFromStart.size) {
-            
+
+            val distance = distanceFromStart[right] - distanceFromStart[left]
+
+            // Расстояние достаточное
+            if (distance > visibilityDistance) {
+
+                // Оставшиеся дальше тоже подходят для левого памятника
+                counter += distanceFromStart.size - right
+                break
+
+            } else {
+                // Расстояния недостаточно
+                right++
+            }
         }
     }
 
