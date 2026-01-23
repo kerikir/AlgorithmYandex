@@ -76,6 +76,33 @@ fun determinateMinLengthSegment(treesVariety: List<Int>, numberOfVarieties: Int)
                 start = left + 1
                 finish = right + 1
             }
+
+            // Пытаемся укоротить отрезок с левой стороны
+            while (counterVarieties == numberOfVarieties) {
+
+                // TODO проверка на выход за предел left и что left > right
+
+                val leftVariety = treesVariety[left] - 1
+                left++
+
+                varietiesNumberOfOccurrences[leftVariety]--
+
+                if (varietiesNumberOfOccurrences[leftVariety] == 0) {
+                    // Необходимый сорт пропал
+                    counterVarieties--
+
+                } else {
+                    // Отрезок успешно укоротился
+                    currentLengthSegment = right - left
+
+                    // Наименьший по длине отрезок со всеми сортами
+                    if (currentLengthSegment < minLengthSegment) {
+                        minLengthSegment = currentLengthSegment
+                        start = left + 1
+                        finish = right + 1
+                    }
+                }
+            }
         }
 
         right++
