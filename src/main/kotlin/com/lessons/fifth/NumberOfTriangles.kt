@@ -1,16 +1,18 @@
 package com.lessons.fifth
 
 
+
 /*
 Время = 1.72s
 Память = 38.19Mb
 
-Сложность = O(N^2 * logN)
+Сложность = O(N + N * (N + N * logN + N)) = O(N^2 * logN)
  */
 fun main() {
 
     val n = readLine()!!.toInt()
 
+    // O(N)
     val coords = Array(n) {
         val (x, y) = readLine()!!.split(' ').map { it.toInt() }
         x to y
@@ -27,14 +29,15 @@ fun determinateNumberOfIsoscelesTriangles(coords: Array<Pair<Int, Int>>) : Int {
     var counter = 0
 
     // Перебор всех точек как начала координат
-    for (i in coords.indices) {
+    for (i in coords.indices) {         // O(N)
 
         val distanceToPoints = mutableListOf<Long>()
         val verticesOfTriangle = mutableSetOf<Pair<Int, Int>>()
 
         // Расчет расстояния до каждой точки
-        for (j in coords.indices) {
+        for (j in coords.indices) {         // O(N)
 
+            // O(1)
             if (i != j) {
                 val dx = coords[j].first - coords[i].first
                 val dy = coords[j].second - coords[i].second
@@ -53,11 +56,11 @@ fun determinateNumberOfIsoscelesTriangles(coords: Array<Pair<Int, Int>>) : Int {
         }
 
         // Сортируем вершины по расстоянию от начала координат
-        distanceToPoints.sort()
+        distanceToPoints.sort()         // O(N * logN)
 
         var right = 0
         // Двигаем левый указатель
-        for (left in distanceToPoints.indices) {
+        for (left in distanceToPoints.indices) {    // O(N)
 
             // Двигаем правый указатель
             while (
