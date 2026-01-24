@@ -29,6 +29,7 @@ fun determinateNumberOfIsoscelesTriangles(coords: List<Pair<Int, Int>>) : Int {
     for (i in coords.indices) {
 
         val distanceToPoints = mutableListOf<Int>()
+        val verticesOfTriangle = mutableSetOf<Pair<Int, Int>>()
 
         // Расчет расстояния до каждой точки
         for (j in coords.indices) {
@@ -39,6 +40,13 @@ fun determinateNumberOfIsoscelesTriangles(coords: List<Pair<Int, Int>>) : Int {
 
                 val distance = dx * dx + dy * dy
                 distanceToPoints.add(distance)
+
+                // Проверка точек лежащих на одной прямой
+                if (coords[j] in verticesOfTriangle) {
+                    counter--
+                }
+                val mirroredPoint = Pair(-coords[j].first, -coords[j].second)
+                verticesOfTriangle.add(mirroredPoint)
             }
         }
 
