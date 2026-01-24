@@ -43,11 +43,11 @@ fun determinateNumberOfIsoscelesTriangles(coords: List<Pair<Int, Int>>) : Int {
                 distanceToPoints.add(distance)
 
                 // Проверка точек лежащих на одной прямой
-                if (coords[j] in verticesOfTriangle) {
+                val point = Pair(dx, dy)
+                if (point in verticesOfTriangle) {
                     counter--
                 }
-                val mirroredPoint = Pair(-coords[j].first, -coords[j].second)
-                verticesOfTriangle.add(mirroredPoint)
+                verticesOfTriangle.add(-dx to -dy)
             }
         }
 
@@ -66,9 +66,6 @@ fun determinateNumberOfIsoscelesTriangles(coords: List<Pair<Int, Int>>) : Int {
             // Количество равнобедренных треугольников с текущей стороной
             counter += right - left - 1
         }
-
-
-
     }
 
     return counter
