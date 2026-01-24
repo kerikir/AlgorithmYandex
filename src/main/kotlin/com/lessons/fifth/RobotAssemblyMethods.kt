@@ -17,12 +17,12 @@ fun main() {
 
 
 
-fun definitionRobotAssemblyMethods(operations: String, memory: Int) : Int {
+fun definitionRobotAssemblyMethods(operations: String, memory: Int) : Long {
 
     var currentLength = 0
-    var numberOfWays = 0
+    var numberOfWays = 0L
 
-    // Пробег окном
+    // Пробег окном - двигаем указатель
     for (i in memory..operations.lastIndex) {
 
         if (operations[i] == operations[i - memory]) {
