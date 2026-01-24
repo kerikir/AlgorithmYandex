@@ -38,6 +38,7 @@ fun determinateNumberOfIsoscelesTriangles(coords: List<Pair<Int, Int>>) : Int {
                 val dx = coords[j].first - coords[i].first
                 val dy = coords[j].second - coords[i].second
 
+                // Определяем квадрат длины
                 val distance = dx * dx + dy * dy
                 distanceToPoints.add(distance)
 
@@ -49,6 +50,23 @@ fun determinateNumberOfIsoscelesTriangles(coords: List<Pair<Int, Int>>) : Int {
                 verticesOfTriangle.add(mirroredPoint)
             }
         }
+
+        // Сортируем вершины по расстоянию от начала координат
+        val sortedDistanceToPoints = distanceToPoints.sorted()
+
+        var right = 0
+        // Двигаем левый указатель
+        for (left in sortedDistanceToPoints.indices) {
+
+            // Двигаем правый указатель
+            while ((right < distanceToPoints.size) && (distanceToPoints[left] == distanceToPoints[right])) {
+                right++
+            }
+
+            // Количество равнобедренных треугольников с текущей стороной
+            counter += right - left - 1
+        }
+
 
 
     }
