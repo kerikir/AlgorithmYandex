@@ -25,27 +25,29 @@ fun determinateNumberOfIsoscelesTriangles(coords: Array<Pair<Int, Int>>) : Int {
     var counter = 0
 
     // Перебор всех точек как начала координат
-    for (i in 0..coords.lastIndex) {
+    for (i in coords.indices) {
 
-        val distanceToPoints = mutableListOf<Int>()
-        val verticesOfTriangle = HashSet<Pair<Int, Int>>(coords.size)
+        val distanceToPoints = mutableListOf<Long>()
+        val verticesOfTriangle = mutableSetOf<Pair<Int, Int>>()
 
         // Расчет расстояния до каждой точки
         for (j in coords.indices) {
 
-            val dx = coords[j].first - coords[i].first
-            val dy = coords[j].second - coords[i].second
+            if (i != j) {
+                val dx = coords[j].first - coords[i].first
+                val dy = coords[j].second - coords[i].second
 
-            // Определяем квадрат длины
-            val distance = dx * dx + dy * dy
-            distanceToPoints.add(distance)
+                // Определяем квадрат длины
+                val distance = dx * dx.toLong() + dy * dy.toLong()
+                distanceToPoints.add(distance)
 
-            // Проверка точек лежащих на одной прямой
-            val point = Pair(dx, dy)
-            if (point in verticesOfTriangle) {
-                counter--
+                // Проверка точек лежащих на одной прямой
+                val point = Pair(dx, dy)
+                if (point in verticesOfTriangle) {
+                    counter--
+                }
+                verticesOfTriangle.add(-dx to -dy)
             }
-            verticesOfTriangle.add(-dx to -dy)
         }
 
         // Сортируем вершины по расстоянию от начала координат
