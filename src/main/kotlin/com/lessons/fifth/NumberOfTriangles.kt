@@ -9,10 +9,9 @@ fun main() {
 
     val n = readLine()!!.toInt()
 
-    val coords = ArrayList<Pair<Int, Int>>(n)
-    for (i in 0 until n) {
+    val coords = Array(n) {
         val (x, y) = readLine()!!.split(' ').map { it.toInt() }
-        coords.add(x to y)
+        x to y
     }
 
     val result = determinateNumberOfIsoscelesTriangles(coords)
@@ -21,14 +20,14 @@ fun main() {
 
 
 
-fun determinateNumberOfIsoscelesTriangles(coords: List<Pair<Int, Int>>) : Int {
+fun determinateNumberOfIsoscelesTriangles(coords: Array<Pair<Int, Int>>) : Int {
 
     var counter = 0
 
     // Перебор всех точек как начала координат
     for (i in 0..coords.lastIndex) {
 
-        val distanceToPoints = ArrayList<Int>(coords.size)
+        val distanceToPoints = mutableListOf<Int>()
         val verticesOfTriangle = HashSet<Pair<Int, Int>>(coords.size)
 
         // Расчет расстояния до каждой точки
@@ -50,16 +49,16 @@ fun determinateNumberOfIsoscelesTriangles(coords: List<Pair<Int, Int>>) : Int {
         }
 
         // Сортируем вершины по расстоянию от начала координат
-        val sortedDistanceToPoints = distanceToPoints.sorted()
+        distanceToPoints.sort()
 
         var right = 0
         // Двигаем левый указатель
-        for (left in 0..sortedDistanceToPoints.lastIndex) {
+        for (left in distanceToPoints.indices) {
 
             // Двигаем правый указатель
             while (
-                (right < sortedDistanceToPoints.size) &&
-                (sortedDistanceToPoints[left] == sortedDistanceToPoints[right])
+                (right < distanceToPoints.size) &&
+                (distanceToPoints[left] == distanceToPoints[right])
             ) {
                 right++
             }
