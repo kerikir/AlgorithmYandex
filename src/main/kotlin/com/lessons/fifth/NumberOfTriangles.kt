@@ -7,11 +7,11 @@ package com.lessons.fifth
  */
 fun main() {
 
-    val n = readLine()!!.trim().toInt()
+    val n = readLine()!!.toInt()
 
     val coords = ArrayList<Pair<Int, Int>>(n)
-    repeat(n) {
-        val (x, y) = readLine()!!.trim().split(' ').map { it.toInt() }
+    for (i in 0 until n) {
+        val (x, y) = readLine()!!.split(' ').map { it.toInt() }
         coords.add(x to y)
     }
 
@@ -26,10 +26,10 @@ fun determinateNumberOfIsoscelesTriangles(coords: List<Pair<Int, Int>>) : Int {
     var counter = 0
 
     // Перебор всех точек как начала координат
-    for (i in coords.indices) {
+    for (i in 0..coords.lastIndex) {
 
-        val distanceToPoints = ArrayList<Int>(coords.size - 1)
-        val verticesOfTriangle = HashSet<Pair<Int, Int>>(coords.size - 1)
+        val distanceToPoints = ArrayList<Int>(coords.size)
+        val verticesOfTriangle = HashSet<Pair<Int, Int>>(coords.size)
 
         // Расчет расстояния до каждой точки
         for (j in coords.indices) {
@@ -54,7 +54,7 @@ fun determinateNumberOfIsoscelesTriangles(coords: List<Pair<Int, Int>>) : Int {
 
         var right = 0
         // Двигаем левый указатель
-        for (left in sortedDistanceToPoints.indices) {
+        for (left in 0..sortedDistanceToPoints.lastIndex) {
 
             // Двигаем правый указатель
             while (
@@ -65,7 +65,7 @@ fun determinateNumberOfIsoscelesTriangles(coords: List<Pair<Int, Int>>) : Int {
             }
 
             // Количество равнобедренных треугольников с текущей стороной
-            counter += right - left - 1
+            counter += (right - left - 1)
         }
     }
 
