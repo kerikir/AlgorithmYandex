@@ -3,8 +3,8 @@ package com.lessons.fifth
 
 
 /*
-Время =
-Память =
+Время = 271ms
+Память = 18.05Mb
  */
 fun main() {
 
@@ -19,8 +19,9 @@ fun main() {
 
 fun definitionRobotAssemblyMethods(operations: String, memory: Int) : Long {
 
-    var currentLength = 0
     var numberOfWays = 0L
+    // Совпадения подряд
+    var currentLength = 0
 
     // Пробег окном - двигаем указатель
     for (i in memory..operations.lastIndex) {
