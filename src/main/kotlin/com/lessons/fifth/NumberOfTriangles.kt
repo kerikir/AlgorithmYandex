@@ -1,7 +1,6 @@
 package com.lessons.fifth
 
 
-
 /*
 Время =
 Память =
@@ -16,15 +15,35 @@ fun main() {
         coords.add(x to y)
     }
 
-    val result = determinateNumberOfTriangles(coords)
+    val result = determinateNumberOfIsoscelesTriangles(coords)
     println(result)
 }
 
 
 
-fun determinateNumberOfTriangles(coords: List<Pair<Int, Int>>) : Int {
+fun determinateNumberOfIsoscelesTriangles(coords: List<Pair<Int, Int>>) : Int {
 
     var counter = 0
+
+    // Перебор всех точек как начала координат
+    for (i in coords.indices) {
+
+        val distanceToPoints = mutableListOf<Int>()
+
+        // Расчет расстояния до каждой точки
+        for (j in coords.indices) {
+
+            if (i != j) {
+                val dx = coords[j].first - coords[i].first
+                val dy = coords[j].second - coords[i].second
+
+                val distance = dx * dx + dy * dy
+                distanceToPoints.add(distance)
+            }
+        }
+
+
+    }
 
     return counter
 }
