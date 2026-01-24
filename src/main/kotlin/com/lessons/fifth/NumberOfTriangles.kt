@@ -59,7 +59,10 @@ fun determinateNumberOfIsoscelesTriangles(coords: List<Pair<Int, Int>>) : Int {
         for (left in sortedDistanceToPoints.indices) {
 
             // Двигаем правый указатель
-            while ((right < distanceToPoints.size) && (distanceToPoints[left] == distanceToPoints[right])) {
+            while (
+                (right < sortedDistanceToPoints.size) &&
+                (sortedDistanceToPoints[left] == sortedDistanceToPoints[right])
+            ) {
                 right++
             }
 
