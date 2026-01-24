@@ -5,6 +5,8 @@ package com.lessons.fifth
 /*
 Время = 271ms
 Память = 18.05Mb
+
+Сложность = O(N)
  */
 fun main() {
 
