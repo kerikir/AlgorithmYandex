@@ -37,6 +37,22 @@ fun determinateVariationsOfGameScore(cards: List<Int>, maxDiff: Int) : Long {
     var dublicated = 0
 
     var right = 0
+    // Двигаем левый указатель - уникальная карточка счета
+    for (left in scoreCards.indices) {
+
+        // Двигаем правый указатель - допустимая карточка для разницы в счете
+        while (
+            (right < scoreCards.size) &&
+            (scoreCards[right] <= (scoreCards[left] * maxDiff))
+        ) {
+            // Считаем количество дубликатов каждой подходящей карточки
+            if (numberOfCards[scoreCards[right]]!! >= 2) {
+                dublicated++
+            }
+
+            right++
+        }
+    }
 
     return counter
 }
