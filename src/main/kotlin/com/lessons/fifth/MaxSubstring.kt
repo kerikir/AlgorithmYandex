@@ -21,6 +21,10 @@ fun determinateMaxSubstring(string: String, maxRepeat: Int) : Pair<Int, Int> {
 
     val repeatChar = mutableMapOf<Char, Int>()
 
+    var maxLengthSubstring = 0
+    var startIndexMaxLength = 0
+    var currentLengthSubstring = 0
+
     var right = 0
     // Двигаем левый указатель - начало подстроки
     for (left in string.indices) {
@@ -34,6 +38,14 @@ fun determinateMaxSubstring(string: String, maxRepeat: Int) : Pair<Int, Int> {
                 // Подстрока продолжается
                 repeatChar[string[right]] = count + 1
 
+                currentLengthSubstring++
+
+                if (currentLengthSubstring > maxLengthSubstring) {
+                    // Нашли наибольшую подстроку
+                    maxLengthSubstring = currentLengthSubstring
+                    startIndexMaxLength = left
+                }
+
             } else {
                 // Новый символ не подходит для подстроки
                 break
@@ -41,7 +53,10 @@ fun determinateMaxSubstring(string: String, maxRepeat: Int) : Pair<Int, Int> {
 
             right++
         }
+
+        // Символ ушел из подстроки
+        repeatChar[string[left]] = repeatChar.getOrDefault(string[left], 1) - 1
     }
 
-    return 1 to 1
+    return maxLengthSubstring to startIndexMaxLength
 }
