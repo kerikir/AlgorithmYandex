@@ -52,6 +52,25 @@ fun determinateVariationsOfGameScore(cards: List<Int>, maxDiff: Int) : Long {
 
             right++
         }
+
+        // Ведущая карточка повторяется один раз с разными карточками
+        counter += (right - left - 1) * (right - left - 2)
+
+        // Ведущая карточка повторяется два раза с разными карточками
+        if (numberOfCards[scoreCards[left]]!! >= 2) {
+
+            counter += (right - left - 1) * 3
+            dublicated--
+        }
+
+        // Ведущая карточка повторяется один раз с дубликатоми каждой карточки
+        counter += 3 * dublicated
+
+        // Ведущая карточка повторяется три раза
+        if (numberOfCards[scoreCards[left]]!! >= 3) {
+
+            counter++
+        }
     }
 
     return counter
