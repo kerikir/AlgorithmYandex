@@ -3,8 +3,10 @@ package com.lessons.fifth
 
 
 /*
-Время =
-Память =
+Время = 0.913s
+Память = 40.46Mb
+
+Сложность = O(N + M * logM)
  */
 fun main() {
 
@@ -25,20 +27,20 @@ fun determinateVariationsOfGameScore(cards: List<Int>, maxDiff: Int) : Long {
     val numberOfCards = mutableMapOf<Int, Int>()
 
     // Определение количества каждой карточки
-    for (card in cards) {
+    for (card in cards) {           // O(N)
 
         val count = numberOfCards.getOrDefault(card, 0)
         numberOfCards[card] = count + 1
     }
 
     // Все уникальные значения счета
-    val scoreCards = numberOfCards.keys.sorted()
+    val scoreCards = numberOfCards.keys.sorted()  // O(M * logM)
 
     var dublicated = 0
 
     var right = 0
     // Двигаем левый указатель - уникальная карточка счета
-    for (left in scoreCards.indices) {
+    for (left in scoreCards.indices) {          // O(M)
 
         // Двигаем правый указатель - допустимая карточка для разницы в счете
         while (
