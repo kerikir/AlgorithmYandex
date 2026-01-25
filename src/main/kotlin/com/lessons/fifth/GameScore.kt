@@ -31,5 +31,12 @@ fun determinateVariationsOfGameScore(cards: List<Int>, maxDiff: Int) : Long {
         numberOfCards[card] = count + 1
     }
 
+    // Все уникальные значения счета
+    val scoreCards = numberOfCards.keys.sorted()
+
+    var dublicated = 0
+
+    var right = 0
+
     return counter
 }
