@@ -22,6 +22,13 @@ fun searchNumbersInArray(arrayN: IntArray, arrayK: IntArray) : String {
 
     val resultList = mutableListOf<String>()
 
+    // Проверка каждого числа на наличие в массиве
+    for (number in arrayK) {
+
+        val result = binarySearchNumber(arrayN, number)
+        resultList.add(result)
+    }
+
     return resultList.joinToString("\n")
 }
 
@@ -35,7 +42,7 @@ fun binarySearchNumber(arrayN: IntArray, number: Int) : String {
     // Поиск первого элемента массива >= числу
     while (rightBorder != leftBorder) {
 
-        val middle = (rightBorder - leftBorder) / 2
+        val middle = (rightBorder + leftBorder) / 2
 
         if (arrayN[middle] > number) {
             // Дальше все числа не подходят
