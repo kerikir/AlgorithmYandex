@@ -57,3 +57,31 @@ fun binarySearchLargerNumber(array: IntArray, number: Int) : Int {
 
     return array[leftBorder]
 }
+
+
+
+/**
+ * Правый бинарный поиск.
+ * Поиск наибольшего числа из меньше либо равных `number`.
+ */
+fun binarySearchSmallerNumber(array: IntArray, number: Int) : Int {
+
+    var leftBorder = 0
+    var rightBorder = array.lastIndex
+
+    while (leftBorder < rightBorder) {
+
+        val middle = (rightBorder + leftBorder + 1) / 2
+
+        if (array[middle] <= number) {
+
+            leftBorder = middle
+
+        } else {
+
+            rightBorder = middle - 1
+        }
+    }
+
+    return array[leftBorder]
+}
