@@ -5,8 +5,10 @@ import kotlin.math.min
 
 
 /*
-Время =
-Память =
+Время = 172ms
+Память = 14.70Mb
+
+Сложность = O(logM)
  */
 fun main() {
 
@@ -20,6 +22,7 @@ fun main() {
 
 fun determinateMinBoardSize(numberOfDiplomas: Int, diplomaHeight: Int, diplomaWidth: Int) : Long {
 
+    // O(logM)
     val size = binarySearchBoardSize( numberOfDiplomas, diplomaHeight, diplomaWidth)
 
     return size
@@ -35,6 +38,7 @@ fun binarySearchBoardSize(numberOfDiplomas: Int, diplomaHeight: Int, diplomaWidt
 : Long {
 
     var leftBorder = 1L
+    // Дипломы в один ряд (по высоте или ширине)
     var rightBorder = numberOfDiplomas * min(diplomaHeight, diplomaWidth).toLong()
 
     // Поиск минимальных размеров доски для всех дипломов
