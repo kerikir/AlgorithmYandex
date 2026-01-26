@@ -46,8 +46,9 @@ fun binarySearchBoardSize(sizesOfBoard: IntArray, numberOfDiplomas: Int, diploma
 
         val middle = (rightBorder + leftBorder) / 2
 
-        if (true) {
+        val isCorrect = checkCorrectSizeBoard(middle, numberOfDiplomas, diplomaHeight, diplomaWidth)
 
+        if (isCorrect) {
             rightBorder = middle
         } else {
             leftBorder = middle + 1
@@ -55,4 +56,15 @@ fun binarySearchBoardSize(sizesOfBoard: IntArray, numberOfDiplomas: Int, diploma
     }
 
     return sizesOfBoard[leftBorder]
+}
+
+
+
+fun checkCorrectSizeBoard(size: Int, numberOfDiplomas: Int, diplomaHeight: Int, diplomaWidth: Int)
+: Boolean {
+
+    // Проверка можно ли поместить все дипломы на доску
+    val isCorrect = (size / diplomaHeight) * (size / diplomaWidth) >= numberOfDiplomas
+
+    return isCorrect
 }
