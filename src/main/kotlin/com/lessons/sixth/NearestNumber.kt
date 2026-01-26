@@ -4,8 +4,8 @@ import kotlin.math.abs
 
 
 /*
-Время =
-Память =
+Время = 0.953s
+Память = 43.61Mb
  */
 fun main() {
 
