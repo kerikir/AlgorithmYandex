@@ -1,5 +1,7 @@
 package com.lessons.sixth
 
+import kotlin.math.abs
+
 
 /*
 Время =
@@ -25,6 +27,16 @@ fun determinateNearestNumber(array: IntArray, listNumbers: List<Int>) : String {
     // Пробег по всем числам
     for (number in listNumbers) {
 
+        val a = binarySearchSmallerNumber(array, number)
+        val b = binarySearchLargerNumber(array, number)
+
+        // Сравнение близости к числу
+        if (abs(a - number) >= abs(b - number)) {
+            resultList.add(a.toString())
+
+        } else {
+            resultList.add(b.toString())
+        }
     }
 
     return resultList.joinToString("\n")
@@ -41,6 +53,7 @@ fun binarySearchLargerNumber(array: IntArray, number: Int) : Int {
     var leftBorder = 0
     var rightBorder = array.lastIndex
 
+    // Поиск первого элемента массива >= числу
     while (leftBorder < rightBorder) {
 
         val middle = (rightBorder + leftBorder) / 2
@@ -69,6 +82,7 @@ fun binarySearchSmallerNumber(array: IntArray, number: Int) : Int {
     var leftBorder = 0
     var rightBorder = array.lastIndex
 
+    // Поиск последнего элемента массива <= числу
     while (leftBorder < rightBorder) {
 
         val middle = (rightBorder + leftBorder + 1) / 2
