@@ -2,8 +2,8 @@ package com.lessons.sixth
 
 
 /*
-Время =
-Память =
+Время = 0.811s
+Память = 35.89Mb
  */
 fun main() {
 
