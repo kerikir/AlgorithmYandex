@@ -11,7 +11,11 @@ fun main() {
 
     val arrayN = readLine()!!.trim().split(' ').map { it.toInt() }.toIntArray()
     val arrayK = readLine()!!.trim().split(' ').map { it.toInt() }.toIntArray()
+
+    val result = searchNumbersInArray(arrayN, arrayK)
+    println(result)
 }
+
 
 
 fun searchNumbersInArray(arrayN: IntArray, arrayK: IntArray) : String {
@@ -19,4 +23,29 @@ fun searchNumbersInArray(arrayN: IntArray, arrayK: IntArray) : String {
     val resultList = mutableListOf<String>()
 
     return resultList.joinToString("\n")
+}
+
+
+
+fun binarySearchNumber(arrayN: IntArray, number: Int) : String {
+
+    var leftBorder = 0
+    var rightBorder = arrayN.lastIndex
+
+    // Поиск первого элемента массива >= числу
+    while (rightBorder != leftBorder) {
+
+        val middle = (rightBorder - leftBorder) / 2
+
+        if (arrayN[middle] > number) {
+            // Дальше все числа не подходят
+            rightBorder = middle
+
+        } else {
+            // Все числа левее меньше нужного
+            leftBorder = middle
+        }
+    }
+
+    return if (arrayN[leftBorder] == number) "YES" else "NO"
 }
