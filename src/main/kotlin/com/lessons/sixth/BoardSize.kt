@@ -18,7 +18,7 @@ fun main() {
 
 
 
-fun determinateMinBoardSize(numberOfDiplomas: Int, diplomaHeight: Int, diplomaWidth: Int) : Int {
+fun determinateMinBoardSize(numberOfDiplomas: Int, diplomaHeight: Int, diplomaWidth: Int) : Long {
 
     val size = binarySearchBoardSize( numberOfDiplomas, diplomaHeight, diplomaWidth)
 
@@ -32,10 +32,10 @@ fun determinateMinBoardSize(numberOfDiplomas: Int, diplomaHeight: Int, diplomaWi
  * Поиск наименьшего размера каждой стороны доски.
  */
 fun binarySearchBoardSize(numberOfDiplomas: Int, diplomaHeight: Int, diplomaWidth: Int)
-: Int {
+: Long {
 
-    var leftBorder = 1
-    var rightBorder = numberOfDiplomas * min(diplomaHeight, diplomaWidth)
+    var leftBorder = 1L
+    var rightBorder = numberOfDiplomas * min(diplomaHeight, diplomaWidth).toLong()
 
     // Поиск минимальных размеров доски для всех дипломов
     while (leftBorder < rightBorder) {
@@ -56,7 +56,7 @@ fun binarySearchBoardSize(numberOfDiplomas: Int, diplomaHeight: Int, diplomaWidt
 
 
 
-fun checkCorrectSizeBoard(size: Int, numberOfDiplomas: Int, diplomaHeight: Int, diplomaWidth: Int)
+fun checkCorrectSizeBoard(size: Long, numberOfDiplomas: Int, diplomaHeight: Int, diplomaWidth: Int)
 : Boolean {
 
     // Проверка можно ли поместить все дипломы на доску
