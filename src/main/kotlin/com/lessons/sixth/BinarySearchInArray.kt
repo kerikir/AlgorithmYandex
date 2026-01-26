@@ -1,9 +1,12 @@
 package com.lessons.sixth
 
 
+
 /*
 Время = 0.811s
 Память = 35.89Mb
+
+Сложность = O(K * logN)
  */
 fun main() {
 
@@ -23,7 +26,7 @@ fun searchNumbersInArray(arrayN: IntArray, arrayK: IntArray) : String {
     val resultList = mutableListOf<String>()
 
     // Проверка каждого числа на наличие в массиве
-    for (number in arrayK) {
+    for (number in arrayK) {                            // O(K)
 
         val result = binarySearchNumber(arrayN, number)
         resultList.add(result)
@@ -34,17 +37,21 @@ fun searchNumbersInArray(arrayN: IntArray, arrayK: IntArray) : String {
 
 
 
+/**
+ * Левый бинарный поиск.
+ * Первый элемент больше либо равный числу.
+ */
 fun binarySearchNumber(arrayN: IntArray, number: Int) : String {
 
     var leftBorder = 0
     var rightBorder = arrayN.lastIndex
 
     // Поиск первого элемента массива >= числу
-    while (leftBorder < rightBorder) {
+    while (leftBorder < rightBorder) {                   // O(logN)
 
-        val middle = (rightBorder + leftBorder) / 2
+        val middle = (rightBorder + leftBorder) / 2      // O(1)
 
-        if (arrayN[middle] >= number) {
+        if (arrayN[middle] >= number) {                  // O(1)
             // Дальше все числа не подходят
             rightBorder = middle
 
@@ -54,5 +61,5 @@ fun binarySearchNumber(arrayN: IntArray, number: Int) : String {
         }
     }
 
-    return if (arrayN[leftBorder] == number) "YES" else "NO"
+    return if (arrayN[leftBorder] == number) "YES" else "NO"    // O(1)
 }
