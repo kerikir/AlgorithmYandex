@@ -16,5 +16,17 @@ fun determinateMinBoardSize(numberOfDiplomas: Int, diplomaHeight: Int, diplomaWi
 
     var maxBoardSize = numberOfDiplomas * min(diplomaHeight, diplomaWidth)
 
+    val sizesOfBoard = IntArray(maxBoardSize) { it + 1 }
+
+    for (size in sizesOfBoard) {
+
+        val isCorrect = true
+
+        if (isCorrect) {
+
+            return size
+        }
+    }
+
     return maxBoardSize
 }
