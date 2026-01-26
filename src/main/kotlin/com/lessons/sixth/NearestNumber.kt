@@ -31,7 +31,7 @@ fun determinateNearestNumber(array: IntArray, listNumbers: List<Int>) : String {
         val b = binarySearchLargerNumber(array, number)
 
         // Сравнение близости к числу
-        if (abs(a - number) >= abs(b - number)) {
+        if (abs(a - number) <= abs(b - number)) {
             resultList.add(a.toString())
 
         } else {
