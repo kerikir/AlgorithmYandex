@@ -40,17 +40,17 @@ fun binarySearchNumber(arrayN: IntArray, number: Int) : String {
     var rightBorder = arrayN.lastIndex
 
     // Поиск первого элемента массива >= числу
-    while (rightBorder != leftBorder) {
+    while (leftBorder < rightBorder) {
 
         val middle = (rightBorder + leftBorder) / 2
 
-        if (arrayN[middle] > number) {
+        if (arrayN[middle] >= number) {
             // Дальше все числа не подходят
             rightBorder = middle
 
         } else {
             // Все числа левее меньше нужного
-            leftBorder = middle
+            leftBorder = middle + 1
         }
     }
 
