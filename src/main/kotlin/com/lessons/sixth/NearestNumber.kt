@@ -6,11 +6,14 @@ import kotlin.math.abs
 /*
 Время = 0.953s
 Память = 43.61Mb
+
+Сложность = O(K * logN)
  */
 fun main() {
 
     val (n, k) = readLine()!!.trim().split(' ').map { it.toInt() }
 
+    // O(N + K)
     val arrayN = readLine()!!.trim().split(' ').map { it.toInt() }.toIntArray()
     val listK = readLine()!!.trim().split(' ').map { it.toInt() }
 
@@ -25,8 +28,9 @@ fun determinateNearestNumber(array: IntArray, listNumbers: List<Int>) : String {
     val resultList = mutableListOf<String>()
 
     // Пробег по всем числам
-    for (number in listNumbers) {
+    for (number in listNumbers) {     // O(K)
 
+        // O(2 * logN)
         val a = binarySearchSmallerNumber(array, number)
         val b = binarySearchLargerNumber(array, number)
 
@@ -39,6 +43,7 @@ fun determinateNearestNumber(array: IntArray, listNumbers: List<Int>) : String {
         }
     }
 
+    // O(K)
     return resultList.joinToString("\n")
 }
 
