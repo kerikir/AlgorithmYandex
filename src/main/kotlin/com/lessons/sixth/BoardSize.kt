@@ -20,11 +20,7 @@ fun main() {
 
 fun determinateMinBoardSize(numberOfDiplomas: Int, diplomaHeight: Int, diplomaWidth: Int) : Int {
 
-    var maxBoardSize = numberOfDiplomas * min(diplomaHeight, diplomaWidth)
-
-    val sizesOfBoard = IntArray(maxBoardSize) { it + 1 }
-
-    val size = binarySearchBoardSize(sizesOfBoard, numberOfDiplomas, diplomaHeight, diplomaWidth)
+    val size = binarySearchBoardSize( numberOfDiplomas, diplomaHeight, diplomaWidth)
 
     return size
 }
@@ -35,18 +31,18 @@ fun determinateMinBoardSize(numberOfDiplomas: Int, diplomaHeight: Int, diplomaWi
  * Левый бинарный поиск.
  * Поиск наименьшего размера каждой стороны доски.
  */
-fun binarySearchBoardSize(sizesOfBoard: IntArray, numberOfDiplomas: Int, diplomaHeight: Int, diplomaWidth: Int)
+fun binarySearchBoardSize(numberOfDiplomas: Int, diplomaHeight: Int, diplomaWidth: Int)
 : Int {
 
-    var leftBorder = 0
-    var rightBorder = sizesOfBoard.lastIndex
+    var leftBorder = 1
+    var rightBorder = numberOfDiplomas * min(diplomaHeight, diplomaWidth)
 
     // Поиск минимальных размеров доски для всех дипломов
     while (leftBorder < rightBorder) {
 
         val middle = (rightBorder + leftBorder) / 2
 
-        val isCorrect = checkCorrectSizeBoard(sizesOfBoard[middle], numberOfDiplomas, diplomaHeight, diplomaWidth)
+        val isCorrect = checkCorrectSizeBoard(middle, numberOfDiplomas, diplomaHeight, diplomaWidth)
 
         if (isCorrect) {
             rightBorder = middle
@@ -55,7 +51,7 @@ fun binarySearchBoardSize(sizesOfBoard: IntArray, numberOfDiplomas: Int, diploma
         }
     }
 
-    return sizesOfBoard[leftBorder]
+    return leftBorder
 }
 
 
