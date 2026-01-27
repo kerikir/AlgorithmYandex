@@ -29,7 +29,7 @@ fun determinateCopyTimeOnPrinters(numberOfCopies: Int, copyTimeOnFirstPrinter: I
 
     var leftBorder = 1
     // Максимальное время копии - все копии на одном принтере
-    var rightBorder = numberOfCopies * min(copyTimeOnFirstPrinter, copyTimeOnSecondPrinter)
+    var rightBorder = numberOfCopies * copyTimeOnFirstPrinter
 
 
     // Поиск наименьшего времени для копий всех экземпляров
@@ -37,10 +37,12 @@ fun determinateCopyTimeOnPrinters(numberOfCopies: Int, copyTimeOnFirstPrinter: I
 
         val middle = (rightBorder + leftBorder) / 2
 
-        val isCorrect = checkCorrectCopyTimeOnPrinters(middle, numberOfCopies,
-            copyTimeOnFirstPrinter, copyTimeOnSecondPrinter)
 
-        if (isCorrect) {
+        if (checkCorrectCopyTimeOnPrinters(
+                middle, numberOfCopies, copyTimeOnFirstPrinter,
+                copyTimeOnSecondPrinter
+            )
+        ) {
             rightBorder = middle
 
         } else {
@@ -67,9 +69,7 @@ fun checkCorrectCopyTimeOnPrinters(
     val remainTime = copyTime - firstCopyTime
 
     // Копирование экземпляров на двух принтерах в оставшееся время
-    var counterCopies = 1
-    counterCopies += remainTime / copyTimeOnFirstPrinter
-    counterCopies += remainTime / copyTimeOnSecondPrinter
+    var counterCopies = 1L + (remainTime / copyTimeOnFirstPrinter) + (remainTime / copyTimeOnSecondPrinter)
 
     return counterCopies >= numberOfCopies
 }
