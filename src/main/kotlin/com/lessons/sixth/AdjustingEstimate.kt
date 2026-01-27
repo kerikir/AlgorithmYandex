@@ -1,5 +1,6 @@
 package com.lessons.sixth
 
+import kotlin.math.round
 
 
 /*
@@ -8,7 +9,12 @@ package com.lessons.sixth
  */
 fun main() {
 
-    val (a, b, c) = readLine()!!.trim().split(' ').map { it.toLong() }
+    val a = readLine()!!.trim().toLong()
+    val b = readLine()!!.trim().toLong()
+    val c = readLine()!!.trim().toLong()
+
+    val result = determinateNumberOfFives(a, b, c)
+    println(result)
 }
 
 
@@ -27,7 +33,7 @@ fun determinateNumberOfFives(numberOfTwos: Long, numberOfTriples: Long, numberOf
 
         val middle = (rightBorder + leftBorder) / 2
 
-        val isCorrect = true
+        val isCorrect = checkCorrectNumberOfFives(middle, numberOfTwos, numberOfTriples, numberOfFours)
 
         if (isCorrect) {
             rightBorder = middle
@@ -38,4 +44,23 @@ fun determinateNumberOfFives(numberOfTwos: Long, numberOfTriples: Long, numberOf
     }
 
     return leftBorder
+}
+
+
+
+fun checkCorrectNumberOfFives(
+    numberOfFives: Long, numberOfTwos: Long, numberOfTriples: Long, numberOfFours: Long
+) : Boolean {
+
+    // Общее число оценок
+    val numberOfRatings = numberOfTwos + numberOfTriples + numberOfFours + numberOfFives
+    // Сумма всех оценок
+    val sumOfRatings = 2 * numberOfTwos + 3 * numberOfTriples + 4 * numberOfFours + 5 * numberOfFives
+
+    // Средний балл
+    val averageScore = sumOfRatings / numberOfRatings.toDouble()
+    // Итоговая оценка
+    val finalAssessment = round(averageScore).toLong()
+
+    return finalAssessment >= 4L
 }
