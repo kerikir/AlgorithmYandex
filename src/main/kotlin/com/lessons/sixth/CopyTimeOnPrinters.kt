@@ -7,6 +7,8 @@ import kotlin.math.min
 /*
 Время = 173ms
 Память = 14.70Mb
+
+Сложность = O(logN)
  */
 fun main() {
 
@@ -29,12 +31,13 @@ fun determinateCopyTimeOnPrinters(
 
     var leftBorder = 1L
     // Максимальное время копии - все копии на одном принтере
-    var rightBorder = numberOfCopies * copyTimeOnFirstPrinter
+    var rightBorder = numberOfCopies * min(copyTimeOnFirstPrinter, copyTimeOnSecondPrinter)
 
 
     // Поиск наименьшего времени для копий всех экземпляров
     while (leftBorder < rightBorder) {
 
+        // Могло уйти в переполнение (2 числа близки к 2 * 10^9)  и уйти в временной лимит
         val middle = (rightBorder + leftBorder) / 2
 
         val isCorrect = checkCorrectCopyTimeOnPrinters(middle, numberOfCopies,
