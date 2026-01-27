@@ -4,8 +4,10 @@ import kotlin.math.min
 
 
 /*
-Время =
-Память =
+Время = 173ms
+Память = 14.70Mb
+
+Сложность = O(logM)
  */
 fun main() {
 
