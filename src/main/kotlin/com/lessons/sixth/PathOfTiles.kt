@@ -47,12 +47,12 @@ fun determinateWidthPathOfTiles(n: Long, m: Long, numberOfTiles: Long) : Long {
 fun checkCorrectWidthPathOfTiles(width: Long, n: Long, m: Long, numberOfTiles: Long) : Boolean {
 
     var counter = 1L
-    var numberOfTilesSaved = 1L
+    var numberOfTilesSaved = 0L
 
     // Расчет сэкономленых плит
     while (counter < width) {
 
-        numberOfTilesSaved += counter
+        numberOfTilesSaved += counter * 8L
         counter++
     }
 
