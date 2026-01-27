@@ -3,8 +3,10 @@ package com.lessons.sixth
 
 
 /*
-Время =
-Память =
+Время = 289ms
+Память = 18.70Mb
+
+Сложность = O(N * logM) = O(N)
  */
 fun main() {
 
@@ -24,9 +26,12 @@ fun main() {
 
 fun determinateSegmentLength(lengthOfWires: List<Long>, numberOfWires: Int) : Long {
 
+    // Из-за правого бинарного поиска никогда не поделит на 0
     var leftBorder = 0L
-    var rightBorder = Math.pow(10.0, 11.0).toLong()
+    // Максимальная длина отрезка - максимальная длина самого длинного провода
+    var rightBorder = Math.pow(10.0, 7.0).toLong()
 
+    // O(logM)
     while (leftBorder < rightBorder) {
 
         val middle = (rightBorder + leftBorder + 1L) / 2
@@ -51,7 +56,7 @@ fun checkCorrectSegmentLength(segmentLength: Long, lengthOfWires: List<Long>, nu
     var counterWires = 0L
 
     // Подсчет числа отрезков соответствующего размера из каждого провода
-    for (wires in lengthOfWires) {
+    for (wires in lengthOfWires) {          // O(N)
 
         counterWires += wires / segmentLength
     }
