@@ -1,5 +1,6 @@
 package com.lessons.sixth
 
+import java.io.File
 import kotlin.math.min
 
 
@@ -10,10 +11,11 @@ import kotlin.math.min
  */
 fun main() {
 
-    val (n, x, y) = readLine()!!.trim().split(' ').map { it.toInt() }
+    val file = File("input.txt").readText().trim()
+    val (n, x, y) = file.split(" ").map { it.toInt() }
 
     val result = determinateCopyTimeOnPrinters(n, x, y)
-    println(result)
+    File("output.txt").writeText(result.toString())
 }
 
 
@@ -69,10 +71,5 @@ fun checkCorrectCopyTimeOnPrinters(
     counterCopies += remainTime / copyTimeOnFirstPrinter
     counterCopies += remainTime / copyTimeOnSecondPrinter
 
-    if (counterCopies >= numberOfCopies) {
-        return true
-
-    } else {
-        return false
-    }
+    return counterCopies >= numberOfCopies
 }
