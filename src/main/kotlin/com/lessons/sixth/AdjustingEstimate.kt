@@ -3,8 +3,10 @@ package com.lessons.sixth
 
 
 /*
-Время =
-Память =
+Время = 163ms
+Память = 13.66Mb
+
+Сложность = O(log(A+B))
  */
 fun main() {
 
