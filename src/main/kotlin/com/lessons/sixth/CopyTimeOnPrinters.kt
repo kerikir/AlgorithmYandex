@@ -47,3 +47,31 @@ fun determinateCopyTimeOnPrinters(numberOfCopies: Int, copyTimeOnFirstPrinter: I
 
     return leftBorder
 }
+
+
+
+fun checkCorrectCopyTimeOnPrinters(
+    copyTime: Int, numberOfCopies: Int, copyTimeOnFirstPrinter: Int, copyTimeOnSecondPrinter: Int
+) : Boolean {
+
+    // Необходимое время для старта второго принтера
+    val firstCopyTime = min(copyTimeOnFirstPrinter, copyTimeOnSecondPrinter)
+
+    // Времени не хватило даже на 1 копию
+    if (firstCopyTime > copyTime)
+        return false
+
+    val remainTime = copyTime - firstCopyTime
+
+    // Копирование экземпляров на двух принтерах в оставшееся время
+    var counterCopies = 1
+    counterCopies += remainTime / copyTimeOnFirstPrinter
+    counterCopies += remainTime / copyTimeOnSecondPrinter
+
+    if (counterCopies >= numberOfCopies) {
+        return true
+
+    } else {
+        return false
+    }
+}
