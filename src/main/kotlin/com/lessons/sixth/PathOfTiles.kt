@@ -7,6 +7,7 @@ import kotlin.math.min
 /*
 Время = 166ms
 Память = 13.74Mb
+Вывод = 100
 
 Сложность = O(logN)
  */
