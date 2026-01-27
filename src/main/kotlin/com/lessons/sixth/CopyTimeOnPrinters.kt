@@ -1,21 +1,20 @@
 package com.lessons.sixth
 
-import java.io.File
 import kotlin.math.min
 
 
 
 /*
-Время =
-Память =
+Время = 173ms
+Память = 14.70Mb
  */
 fun main() {
 
-    val file = File("input.txt").readText().trim()
-    val (n, x, y) = file.split(" ").map { it.toInt() }
+    // Был TL, но решилось переходом с Int на Long (переполнение - WA)
+    val (n, x, y) = readLine()!!.trim().split(" ").map { it.toLong() }
 
     val result = determinateCopyTimeOnPrinters(n, x, y)
-    File("output.txt").writeText(result.toString())
+    println(result)
 }
 
 
@@ -24,10 +23,11 @@ fun main() {
  * Левый бинарный поиск.
  * Поиск наименьшего времени для печати `numberOfCopies` копий.
  */
-fun determinateCopyTimeOnPrinters(numberOfCopies: Int, copyTimeOnFirstPrinter: Int, copyTimeOnSecondPrinter: Int)
-: Int {
+fun determinateCopyTimeOnPrinters(
+    numberOfCopies: Long, copyTimeOnFirstPrinter: Long, copyTimeOnSecondPrinter: Long
+) : Long {
 
-    var leftBorder = 1
+    var leftBorder = 1L
     // Максимальное время копии - все копии на одном принтере
     var rightBorder = numberOfCopies * copyTimeOnFirstPrinter
 
@@ -37,12 +37,10 @@ fun determinateCopyTimeOnPrinters(numberOfCopies: Int, copyTimeOnFirstPrinter: I
 
         val middle = (rightBorder + leftBorder) / 2
 
+        val isCorrect = checkCorrectCopyTimeOnPrinters(middle, numberOfCopies,
+            copyTimeOnFirstPrinter, copyTimeOnSecondPrinter)
 
-        if (checkCorrectCopyTimeOnPrinters(
-                middle, numberOfCopies, copyTimeOnFirstPrinter,
-                copyTimeOnSecondPrinter
-            )
-        ) {
+        if (isCorrect) {
             rightBorder = middle
 
         } else {
@@ -56,7 +54,7 @@ fun determinateCopyTimeOnPrinters(numberOfCopies: Int, copyTimeOnFirstPrinter: I
 
 
 fun checkCorrectCopyTimeOnPrinters(
-    copyTime: Int, numberOfCopies: Int, copyTimeOnFirstPrinter: Int, copyTimeOnSecondPrinter: Int
+    copyTime: Long, numberOfCopies: Long, copyTimeOnFirstPrinter: Long, copyTimeOnSecondPrinter: Long
 ) : Boolean {
 
     // Необходимое время для старта второго принтера
