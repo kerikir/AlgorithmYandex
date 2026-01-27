@@ -63,9 +63,14 @@ fun checkCorrectSizeBuildingProtection(
     // Количество модулей по ширине и высоте на поле
     val numberOfModulesByWidth = fieldWidth / sizeModuleByWidth
     val numberOfModulesByHeight = fieldHeight / sizeModuleByHeight
+    val numberOfRotatedModulesByWidth = fieldWidth / sizeModuleByHeight
+    val numberOfRotatedModulesByHeight = fieldHeight / sizeModuleByWidth
 
     // Можно ли разместить все модули с текущей защитой
-    if ((numberOfModulesByHeight * numberOfModulesByWidth) >= numberOfModules) {
+    if (
+        ((numberOfModulesByHeight * numberOfModulesByWidth) >= numberOfModules) ||
+        ((numberOfRotatedModulesByHeight * numberOfRotatedModulesByWidth) >= numberOfModules)
+    ) {
 
         isCorrect = true
     }
