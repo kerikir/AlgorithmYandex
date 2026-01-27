@@ -3,9 +3,12 @@ package com.lessons.sixth
 import kotlin.math.min
 
 
+
 /*
-Время =
-Память =
+Время = 166ms
+Память = 13.74Mb
+
+Сложность = O(logN)
  */
 fun main() {
 
@@ -25,11 +28,12 @@ fun determinateWidthPathOfTiles(n: Long, m: Long, numberOfTiles: Long) : Long {
     // Максимальная ширина дорожки - отсутствие клумбы по центру
     var rightBorder = min(n, m) / 2L
 
+    // O(log(min(N, M)))
     while (leftBorder < rightBorder) {
 
         val middle = (rightBorder + leftBorder + 1L) / 2L
 
-        val isCorrect = checkCorrectWidthPathOfTiles(middle, n, m, numberOfTiles)
+        val isCorrect = checkCorrectWidthPathOfTiles(middle, n, m, numberOfTiles)   // O(1)
 
         if (isCorrect) {
             leftBorder = middle
