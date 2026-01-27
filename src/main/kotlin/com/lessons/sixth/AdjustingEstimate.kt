@@ -1,6 +1,5 @@
 package com.lessons.sixth
 
-import kotlin.math.round
 
 
 /*
@@ -52,15 +51,7 @@ fun checkCorrectNumberOfFives(
     numberOfFives: Long, numberOfTwos: Long, numberOfTriples: Long, numberOfFours: Long
 ) : Boolean {
 
-    // Общее число оценок
-    val numberOfRatings = numberOfTwos + numberOfTriples + numberOfFours + numberOfFives
-    // Сумма всех оценок
-    val sumOfRatings = 2 * numberOfTwos + 3 * numberOfTriples + 4 * numberOfFours + 5 * numberOfFives
-
-    // Средний балл
-    val averageScore = sumOfRatings / numberOfRatings.toDouble()
-    // Итоговая оценка
-    val finalAssessment = round(averageScore).toLong()
-
-    return finalAssessment >= 4L
+    // Избавлено от использования вещественных чисел
+    val isCorrect = (3L * numberOfFives) >= (3L * numberOfTwos + numberOfTriples - numberOfFours)
+    return isCorrect
 }
