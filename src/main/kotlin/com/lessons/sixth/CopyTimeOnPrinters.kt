@@ -35,7 +35,8 @@ fun determinateCopyTimeOnPrinters(numberOfCopies: Int, copyTimeOnFirstPrinter: I
 
         val middle = (rightBorder + leftBorder) / 2
 
-        val isCorrect = true
+        val isCorrect = checkCorrectCopyTimeOnPrinters(middle, numberOfCopies,
+            copyTimeOnFirstPrinter, copyTimeOnSecondPrinter)
 
         if (isCorrect) {
             rightBorder = middle
