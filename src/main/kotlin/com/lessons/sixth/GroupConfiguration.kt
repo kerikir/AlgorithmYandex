@@ -57,5 +57,28 @@ fun checkCorrectHeightDifferenceInBrigade(
     heightDifference: Int, growthSchoolchildren: IntArray, numberOfBrigade: Int, numberOfPeopleInBrigade: Int
 ) : Boolean {
 
-    return true
+    var index = 0
+    var numberOfBrigades = 0
+
+    // Проверяем подходит ли бригада с минимальным ростом i школьника в группе
+    while (index < (growthSchoolchildren.size - numberOfPeopleInBrigade)) {
+
+        // Определяем разницу в росте в текущей бригаде
+        val currentHeightDifference = growthSchoolchildren[index + numberOfPeopleInBrigade - 1] -
+                growthSchoolchildren[index]
+
+        // Проверка подходит ли разница по требываемому удобству
+        if (currentHeightDifference <= heightDifference) {
+
+            numberOfBrigades++
+            // Проверка следующей бригады
+            index += numberOfPeopleInBrigade
+
+        } else {
+            // Проверка следующего школьника
+            index++
+        }
+    }
+
+    return numberOfBrigades >= numberOfBrigade
 }
