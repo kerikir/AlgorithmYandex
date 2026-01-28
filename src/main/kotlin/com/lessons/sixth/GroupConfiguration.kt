@@ -3,8 +3,10 @@ package com.lessons.sixth
 
 
 /*
-Время =
-Память =
+Время = 479ms
+Память = 31.12Mb
+
+Сложность = O(N * logM + N * logN) = O(N * logN)
  */
 fun main() {
 
@@ -27,12 +29,13 @@ fun determinateMaxHeightDifferenceInBrigade(
 ) : Int {
 
     // Сортировка учеников по росту
-    growthSchoolchildren.sort()
+    growthSchoolchildren.sort()     // O(N * logN)
 
     var leftBorder = 0
     // Максимальная разница в росте - разница между самым высоким учеником и самым низким
     var rightBorder = growthSchoolchildren[growthSchoolchildren.lastIndex] - growthSchoolchildren[0]
 
+    // O(logM)
     while (leftBorder < rightBorder) {
 
         val middle = (rightBorder + leftBorder) / 2
@@ -61,7 +64,7 @@ fun checkCorrectHeightDifferenceInBrigade(
     var numberOfBrigades = 0
 
     // Проверяем подходит ли бригада с минимальным ростом i школьника в группе
-    while (index < (growthSchoolchildren.size - numberOfPeopleInBrigade)) {
+    while (index <= (growthSchoolchildren.size - numberOfPeopleInBrigade)) {    // O(N)
 
         // Определяем разницу в росте в текущей бригаде
         val currentHeightDifference = growthSchoolchildren[index + numberOfPeopleInBrigade - 1] -
