@@ -49,3 +49,26 @@ fun determinateLeftMedianOfSequences(sequenceFirst: IntArray, sequenceSecond: In
 
     return leftBorder
 }
+
+
+
+fun determinateNumberOfLessNumbers(value: Int, sequence: IntArray) : Int {
+
+    var leftBorder = 0
+    var rightBorder = sequence.lastIndex
+
+    // Определение наибольшего индеса элемента, который меньше значения
+    while (leftBorder < rightBorder) {
+
+        val middle = (rightBorder + leftBorder + 1) / 2
+
+        if (sequence[middle] < value) {
+            leftBorder = middle
+
+        } else {
+            rightBorder = middle - 1
+        }
+    }
+
+    return leftBorder + 1
+}
