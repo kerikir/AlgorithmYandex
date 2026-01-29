@@ -6,8 +6,10 @@ import kotlin.math.min
 
 
 /*
-Время =
-Память =
+Время = 491ms
+Память = 28.02Mb
+
+Сложность = O(N^2 * logK * logL)
  */
 fun main() {
 
@@ -20,7 +22,7 @@ fun main() {
     }
 
     // Перебор всех пар последовательностей
-    for (i in 0 until sequences.lastIndex) {
+    for (i in 0 until sequences.lastIndex) {    // (N^2)
         for (j in (i + 1)..sequences.lastIndex) {
             println(determinateLeftMedianOfSequences(sequences[i], sequences[j], l))
         }
@@ -35,10 +37,12 @@ fun determinateLeftMedianOfSequences(sequenceFirst: IntArray, sequenceSecond: In
     var leftBorder = min(sequenceFirst[0], sequenceSecond[0])
     var rightBorder = max(sequenceFirst[sequenceFirst.lastIndex], sequenceSecond[sequenceSecond.lastIndex])
 
+    // O(logK)
     while (leftBorder < rightBorder) {
 
         val middle = (leftBorder + rightBorder) / 2
 
+        // O(4*logL)
         val numberOfLessNumbers = determinateNumberOfLessNumbers(middle, sequenceFirst) +
                 determinateNumberOfLessNumbers(middle, sequenceSecond)
         val numberOfHigherNumbers = determinateNumberOfHigherNumbers(middle, sequenceFirst) +
