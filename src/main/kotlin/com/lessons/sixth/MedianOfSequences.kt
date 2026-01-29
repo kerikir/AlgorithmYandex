@@ -39,10 +39,18 @@ fun determinateLeftMedianOfSequences(sequenceFirst: IntArray, sequenceSecond: In
 
         val middle = (leftBorder + rightBorder) / 2
 
-        if (true) {
-            rightBorder = middle
+        val numberOfLessNumbers = determinateNumberOfLessNumbers(middle, sequenceFirst) +
+                determinateNumberOfLessNumbers(middle, sequenceSecond)
+        val numberOfHigherNumbers = determinateNumberOfHigherNumbers(middle, sequenceFirst) +
+                determinateNumberOfHigherNumbers(middle, sequenceSecond)
 
-        } else {
+        if ((numberOfLessNumbers <= median - 1) && (numberOfHigherNumbers <= median)) {
+            return middle
+        }
+        else if (numberOfLessNumbers >= median) {
+            rightBorder = middle - 1
+
+        } else if (numberOfHigherNumbers >= middle + 1) {
             leftBorder = middle + 1
         }
     }
