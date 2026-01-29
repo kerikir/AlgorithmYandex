@@ -76,7 +76,11 @@ fun determinateNumberOfLessNumbers(value: Int, sequence: IntArray) : Int {
         }
     }
 
-    return leftBorder
+    return if ((leftBorder == sequence.lastIndex) && (sequence[leftBorder] < value)) {
+        leftBorder + 1
+    } else {
+        leftBorder
+    }
 }
 
 
