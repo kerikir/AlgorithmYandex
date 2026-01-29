@@ -57,7 +57,7 @@ fun determinateNumberOfLessNumbers(value: Int, sequence: IntArray) : Int {
     var leftBorder = 0
     var rightBorder = sequence.lastIndex
 
-    // Определение наибольшего индеса элемента, который меньше значения
+    // Определение наибольшего индеса из элементов, которые меньше значения
     while (leftBorder < rightBorder) {
 
         val middle = (rightBorder + leftBorder + 1) / 2
@@ -71,4 +71,27 @@ fun determinateNumberOfLessNumbers(value: Int, sequence: IntArray) : Int {
     }
 
     return leftBorder + 1
+}
+
+
+
+fun determinateNumberOfHigherNumbers(value: Int, sequence: IntArray) : Int {
+
+    var leftBorder = 0
+    var rightBorder = sequence.lastIndex
+
+    // Определение наименьшего индеса из элементов, которые больше значения
+    while (leftBorder < rightBorder) {
+
+        val middle = (rightBorder + leftBorder) / 2
+
+        if (sequence[middle] > value) {
+            rightBorder = middle
+
+        } else {
+            leftBorder = middle + 1
+        }
+    }
+
+    return sequence.size - leftBorder
 }
