@@ -20,7 +20,7 @@ fun main() {
     }
 
     // Перебор всех пар последовательностей
-    for (i in 0 until sequences.lastIndex - 1) {
+    for (i in 0 until sequences.lastIndex) {
         for (j in (i + 1)..sequences.lastIndex) {
             println(determinateLeftMedianOfSequences(sequences[i], sequences[j], l))
         }
@@ -46,11 +46,9 @@ fun determinateLeftMedianOfSequences(sequenceFirst: IntArray, sequenceSecond: In
 
         if ((numberOfLessNumbers <= median - 1) && (numberOfHigherNumbers <= median)) {
             return middle
-        }
-        else if (numberOfLessNumbers >= median) {
+        } else if (numberOfLessNumbers >= median) {
             rightBorder = middle - 1
-
-        } else if (numberOfHigherNumbers >= middle + 1) {
+        } else if (numberOfHigherNumbers >= median + 1) {
             leftBorder = middle + 1
         }
     }
