@@ -49,10 +49,13 @@ fun determinateLeftMedianOfSequences(sequenceFirst: IntArray, sequenceSecond: In
                 determinateNumberOfHigherNumbers(middle, sequenceSecond)
 
         if ((numberOfLessNumbers <= median - 1) && (numberOfHigherNumbers <= median)) {
+            // Определили медиану
             return middle
         } else if (numberOfLessNumbers >= median) {
+            // Правее медианы
             rightBorder = middle - 1
         } else if (numberOfHigherNumbers >= median + 1) {
+            // Левее медианы
             leftBorder = middle + 1
         }
     }
@@ -62,6 +65,10 @@ fun determinateLeftMedianOfSequences(sequenceFirst: IntArray, sequenceSecond: In
 
 
 
+/**
+ * Левый бинарный поиск.
+ * Определение количества элементов в последовательности, которые меньше числа.
+ */
 fun determinateNumberOfLessNumbers(value: Int, sequence: IntArray) : Int {
 
     var leftBorder = 0
@@ -72,6 +79,7 @@ fun determinateNumberOfLessNumbers(value: Int, sequence: IntArray) : Int {
 
         val middle = (rightBorder + leftBorder) / 2
 
+        // Обратный поиск
         if (sequence[middle] >= value) {
             rightBorder = middle
 
@@ -80,6 +88,7 @@ fun determinateNumberOfLessNumbers(value: Int, sequence: IntArray) : Int {
         }
     }
 
+    // Проверка краевого условия
     return if ((leftBorder == sequence.lastIndex) && (sequence[leftBorder] < value)) {
         leftBorder + 1
     } else {
@@ -89,6 +98,10 @@ fun determinateNumberOfLessNumbers(value: Int, sequence: IntArray) : Int {
 
 
 
+/**
+ * Левый бинарный поиск.
+ * Определение количества элементов в последовательности, которые больше числа.
+ */
 fun determinateNumberOfHigherNumbers(value: Int, sequence: IntArray) : Int {
 
     var leftBorder = 0
@@ -99,6 +112,7 @@ fun determinateNumberOfHigherNumbers(value: Int, sequence: IntArray) : Int {
 
         val middle = (rightBorder + leftBorder + 1) / 2
 
+        // Обратный поиск
         if (sequence[middle] <= value) {
             leftBorder = middle
 
@@ -107,7 +121,7 @@ fun determinateNumberOfHigherNumbers(value: Int, sequence: IntArray) : Int {
         }
     }
 
-
+    // Проверка краевого условия
     return if ((leftBorder == 0) && (sequence[leftBorder] > value)) {
         sequence.size
     } else {
