@@ -86,18 +86,18 @@ fun determinateNumberOfHigherNumbers(value: Int, sequence: IntArray) : Int {
     var leftBorder = 0
     var rightBorder = sequence.lastIndex
 
-    // Определение наименьшего индеса из элементов, которые больше значения
+    // Определение наибольшего индеса из элементов, которые меньше либо равны значения
     while (leftBorder < rightBorder) {
 
-        val middle = (rightBorder + leftBorder) / 2
+        val middle = (rightBorder + leftBorder + 1) / 2
 
-        if (sequence[middle] > value) {
-            rightBorder = middle
+        if (sequence[middle] <= value) {
+            leftBorder = middle
 
         } else {
-            leftBorder = middle + 1
+            rightBorder = middle - 1
         }
     }
 
-    return sequence.size - leftBorder
+    return sequence.size - leftBorder - 1
 }
