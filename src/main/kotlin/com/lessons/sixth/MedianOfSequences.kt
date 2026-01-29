@@ -103,5 +103,10 @@ fun determinateNumberOfHigherNumbers(value: Int, sequence: IntArray) : Int {
         }
     }
 
-    return sequence.size - leftBorder - 1
+
+    return if ((leftBorder == sequence.lastIndex) && (sequence[leftBorder] > value)) {
+        sequence.lastIndex - leftBorder + 1
+    } else {
+        sequence.lastIndex - leftBorder + 1
+    }
 }
