@@ -65,8 +65,8 @@ fun calculateLeftMedianOfSequences(sequenceFirst: IntArray, sequenceSecond: IntA
 
         val middle = (leftBorder + rightBorder) / 2
 
-        val numberOfLessNumbers = NumberOfLessNumbers(middle, sequenceFirst) +
-                NumberOfLessNumbers(middle, sequenceSecond)
+        val numberOfLessNumbers = determinateNumberOfNumbersLess(sequenceFirst, middle) +
+                determinateNumberOfNumbersLess(sequenceSecond, middle)
         val numberOfHigherNumbers = NumberOfHigherNumbers(middle, sequenceFirst) +
                 NumberOfHigherNumbers(middle, sequenceSecond)
 
@@ -87,6 +87,9 @@ fun calculateLeftMedianOfSequences(sequenceFirst: IntArray, sequenceSecond: IntA
 
 
 
+/**
+ * Левый бинарный поиск с передаваемым условием `checkCondition`
+ */
 fun leftBinarySearch(sequence: IntArray, value: Int, checkCondition: (Int, Int) -> Boolean): Int {
 
     var leftBorder = 0
@@ -103,23 +106,19 @@ fun leftBinarySearch(sequence: IntArray, value: Int, checkCondition: (Int, Int) 
             leftBorder = middle + 1
         }
     }
+
+    return leftBorder
 }
 
 
 
 /**
- * Левый бинарный поиск.
  * Определение количества элементов в последовательности, которые меньше числа.
  */
-fun NumberOfLessNumbers(value: Int, sequence: IntArray) : Int {
+fun determinateNumberOfNumbersLess(sequence: IntArray, value: Int) : Int {
 
-
-
-    // Проверка краевого условия
-    return if ((leftBorder == sequence.lastIndex) && (sequence[leftBorder] < value)) {
-        leftBorder + 1
-    } else {
-        leftBorder
+    val index = leftBinarySearch(sequence, value) { item, value ->
+        true
     }
 }
 
