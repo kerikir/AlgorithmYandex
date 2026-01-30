@@ -6,16 +6,17 @@ import kotlin.math.min
 
 
 /*
-Время =
-Память =
+Время = 1.559s
+Память = 149.01Mb
 
-Сложность =
+Сложность = O(N * L + N^2 * logK * logL)
  */
 fun main() {
 
     val (n, l) = readLine()!!.trim().split(' ').map { it.toInt() }
 
     val sequences = mutableListOf<LongArray>()
+    // O(N * L)
     repeat(n) {
         // В контесте лишние пробелы
         val (x1, d1, a, c, m) = readLine()!!.trim().split(Regex("\\s+")).map { it.toLong() }
@@ -24,7 +25,7 @@ fun main() {
     }
 
     // Перебор всех пар последовательностей
-    for (i in 0 until sequences.lastIndex) {
+    for (i in 0 until sequences.lastIndex) {    // O(N^2)
         for (j in (i + 1)..sequences.lastIndex) {
             println(calculateLeftMedianOfSequences(sequences[i], sequences[j]))
         }
@@ -61,10 +62,12 @@ fun calculateLeftMedianOfSequences(sequenceFirst: LongArray, sequenceSecond: Lon
     var leftBorder = min(sequenceFirst[0], sequenceSecond[0])
     var rightBorder = max(sequenceFirst[sequenceFirst.lastIndex], sequenceSecond[sequenceSecond.lastIndex])
 
+    // O(logK)
     while (leftBorder < rightBorder) {
 
         val middle = (leftBorder + rightBorder) / 2L
 
+        // O(logL)
         val numberOfLessNumbers = determinateNumberOfNumbersLess(sequenceFirst, middle) +
                 determinateNumberOfNumbersLess(sequenceSecond, middle)
         val numberOfHigherNumbers = determinateNumberOfNumbersMore(sequenceFirst, middle) +
