@@ -67,16 +67,16 @@ fun calculateLeftMedianOfSequences(sequenceFirst: IntArray, sequenceSecond: IntA
 
         val numberOfLessNumbers = determinateNumberOfNumbersLess(sequenceFirst, middle) +
                 determinateNumberOfNumbersLess(sequenceSecond, middle)
-        val numberOfHigherNumbers = NumberOfHigherNumbers(middle, sequenceFirst) +
-                NumberOfHigherNumbers(middle, sequenceSecond)
+        val numberOfHigherNumbers = determinateNumberOfNumbersMore(sequenceFirst, middle) +
+                determinateNumberOfNumbersMore(sequenceSecond, middle)
 
-        if ((numberOfLessNumbers <= median - 1) && (numberOfHigherNumbers <= median)) {
+        if ((numberOfLessNumbers <= sequenceFirst.size - 1) && (numberOfHigherNumbers <= sequenceFirst.size)) {
             // Определили медиану
             return middle
-        } else if (numberOfLessNumbers >= median) {
+        } else if (numberOfLessNumbers >= sequenceFirst.size) {
             // Правее медианы
             rightBorder = middle - 1
-        } else if (numberOfHigherNumbers >= median + 1) {
+        } else if (numberOfHigherNumbers >= sequenceFirst.size + 1) {
             // Левее медианы
             leftBorder = middle + 1
         }
@@ -113,7 +113,7 @@ fun leftBinarySearch(sequence: IntArray, value: Int, checkCondition: (Int, Int) 
 
 
 /**
- * Определение количества элементов в последовательности, которые меньше числа.
+ * Определение количества элементов в последовательности, которые меньше медианы.
  */
 fun determinateNumberOfNumbersLess(sequence: IntArray, value: Int) : Int {
 
@@ -135,32 +135,21 @@ fun determinateNumberOfNumbersLess(sequence: IntArray, value: Int) : Int {
 
 
 /**
- * Левый бинарный поиск.
- * Определение количества элементов в последовательности, которые больше числа.
+ * Определение количества элементов в последовательности, которые больше медианы.
  */
-fun NumberOfHigherNumbers(value: Int, sequence: IntArray) : Int {
+fun determinateNumberOfNumbersMore(sequence: IntArray, value: Int) : Int {
 
-    var leftBorder = 0
-    var rightBorder = sequence.lastIndex
-
-    // Определение наибольшего индеса из элементов, которые меньше либо равны значения
-    while (leftBorder < rightBorder) {
-
-        val middle = (rightBorder + leftBorder + 1) / 2
-
-        // Обратный поиск
-        if (sequence[middle] <= value) {
-            leftBorder = middle
-
-        } else {
-            rightBorder = middle - 1
-        }
+    // Определение индекса первого элемента, значение которого больше предпологаемой медиане
+    val index = leftBinarySearch(sequence, value) { item, value ->
+        item > value
     }
 
-    // Проверка краевого условия
-    return if ((leftBorder == 0) && (sequence[leftBorder] > value)) {
-        sequence.size
+    if ((index == sequence.lastIndex) && (sequence[index] <= value)) {
+        // Все элементы последовательности меньше предпологаемой медианы
+        return 0
+
     } else {
-        sequence.lastIndex - leftBorder
+        // Корректное определение количества элементов
+        return sequence.lastIndex - index
     }
 }
