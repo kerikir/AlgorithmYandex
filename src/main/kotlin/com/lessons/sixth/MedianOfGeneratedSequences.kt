@@ -23,9 +23,9 @@ fun main() {
     }
 
     // Перебор всех пар последовательностей
-    for (i in 0 until sequences.lastIndex) {    // (N^2)
+    for (i in 0 until sequences.lastIndex) {
         for (j in (i + 1)..sequences.lastIndex) {
-            println(LeftMedianOfSequences(sequences[i], sequences[j], l))
+            println(calculateLeftMedianOfSequences(sequences[i], sequences[j]))
         }
     }
 }
@@ -54,18 +54,17 @@ fun generateSequence(x1: Int, d1: Int, a: Int, c: Int, m: Int, l: Int) : IntArra
 
 
 
-fun LeftMedianOfSequences(sequenceFirst: IntArray, sequenceSecond: IntArray, median: Int) : Int {
+fun calculateLeftMedianOfSequences(sequenceFirst: IntArray, sequenceSecond: IntArray) : Int {
 
     // Определение границ значения медианы
     var leftBorder = min(sequenceFirst[0], sequenceSecond[0])
     var rightBorder = max(sequenceFirst[sequenceFirst.lastIndex], sequenceSecond[sequenceSecond.lastIndex])
 
-    // O(logK)
+
     while (leftBorder < rightBorder) {
 
         val middle = (leftBorder + rightBorder) / 2
 
-        // O(4*logL)
         val numberOfLessNumbers = NumberOfLessNumbers(middle, sequenceFirst) +
                 NumberOfLessNumbers(middle, sequenceSecond)
         val numberOfHigherNumbers = NumberOfHigherNumbers(middle, sequenceFirst) +
@@ -88,28 +87,33 @@ fun LeftMedianOfSequences(sequenceFirst: IntArray, sequenceSecond: IntArray, med
 
 
 
-/**
- * Левый бинарный поиск.
- * Определение количества элементов в последовательности, которые меньше числа.
- */
-fun NumberOfLessNumbers(value: Int, sequence: IntArray) : Int {
+fun leftBinarySearch(sequence: IntArray, value: Int, checkCondition: (Int, Int) -> Boolean): Int {
 
     var leftBorder = 0
     var rightBorder = sequence.lastIndex
 
-    // Определение наименьший индес из элементов, которые больше либо равны значению
     while (leftBorder < rightBorder) {
 
         val middle = (rightBorder + leftBorder) / 2
 
-        // Обратный поиск
-        if (sequence[middle] >= value) {
+        if (checkCondition(sequence[middle], value)) {
             rightBorder = middle
 
         } else {
             leftBorder = middle + 1
         }
     }
+}
+
+
+
+/**
+ * Левый бинарный поиск.
+ * Определение количества элементов в последовательности, которые меньше числа.
+ */
+fun NumberOfLessNumbers(value: Int, sequence: IntArray) : Int {
+
+
 
     // Проверка краевого условия
     return if ((leftBorder == sequence.lastIndex) && (sequence[leftBorder] < value)) {
