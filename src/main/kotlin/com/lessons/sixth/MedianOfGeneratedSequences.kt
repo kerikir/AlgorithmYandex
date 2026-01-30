@@ -60,7 +60,6 @@ fun calculateLeftMedianOfSequences(sequenceFirst: IntArray, sequenceSecond: IntA
     var leftBorder = min(sequenceFirst[0], sequenceSecond[0])
     var rightBorder = max(sequenceFirst[sequenceFirst.lastIndex], sequenceSecond[sequenceSecond.lastIndex])
 
-
     while (leftBorder < rightBorder) {
 
         val middle = (leftBorder + rightBorder) / 2
@@ -128,7 +127,7 @@ fun determinateNumberOfNumbersLess(sequence: IntArray, value: Int) : Int {
 
     } else {
         // Корректное определение количества элементов
-        return index + 1
+        return index
     }
 }
 
@@ -150,6 +149,6 @@ fun determinateNumberOfNumbersMore(sequence: IntArray, value: Int) : Int {
 
     } else {
         // Корректное определение количества элементов
-        return sequence.lastIndex - index
+        return sequence.size - index
     }
 }
