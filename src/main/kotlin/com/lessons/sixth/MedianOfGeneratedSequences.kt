@@ -117,8 +117,18 @@ fun leftBinarySearch(sequence: IntArray, value: Int, checkCondition: (Int, Int) 
  */
 fun determinateNumberOfNumbersLess(sequence: IntArray, value: Int) : Int {
 
+    // Определение индекса первого элемента, значение которого больше либо равно предпологаемой медиане
     val index = leftBinarySearch(sequence, value) { item, value ->
-        true
+        item >= value
+    }
+
+    if ((index == sequence.lastIndex) && (sequence[index] < value)) {
+        // Все элементы последовательности меньше предпологаемой медианы
+        return sequence.size
+
+    } else {
+        // Корректное определение количества элементов
+        return index + 1
     }
 }
 
