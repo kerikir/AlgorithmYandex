@@ -17,7 +17,8 @@ fun main() {
 
     val sequences = mutableListOf<LongArray>()
     repeat(n) {
-        val (x1, d1, a, c, m) = readLine()!!.trim().split(' ').map { it.toLong() }
+        // В контесте лишние пробелы
+        val (x1, d1, a, c, m) = readLine()!!.trim().split(Regex("\\s+")).map { it.toLong() }
         val sequence = generateSequence(x1, d1, a, c, m, l)
         sequences.add(sequence)
     }
