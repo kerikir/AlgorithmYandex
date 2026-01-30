@@ -72,12 +72,14 @@ fun calculateLeftMedianOfSequences(sequenceFirst: LongArray, sequenceSecond: Lon
         if ((numberOfLessNumbers < sequenceFirst.size) && (numberOfHigherNumbers <= sequenceFirst.size)) {
             // Определили медиану
             return middle
-        } else if (numberOfLessNumbers > sequenceFirst.size - 1) {
-            // Правее медианы
-            rightBorder = middle - 1
-        } else if (numberOfHigherNumbers > sequenceSecond.size) {
+        }
+        if (numberOfHigherNumbers > sequenceSecond.size) {
             // Левее медианы
             leftBorder = middle + 1
+        }
+        if (numberOfLessNumbers > sequenceFirst.size - 1) {
+            // Правее медианы
+            rightBorder = middle - 1
         }
     }
 
