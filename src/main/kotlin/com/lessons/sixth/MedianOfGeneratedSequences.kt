@@ -69,13 +69,13 @@ fun calculateLeftMedianOfSequences(sequenceFirst: IntArray, sequenceSecond: IntA
         val numberOfHigherNumbers = determinateNumberOfNumbersMore(sequenceFirst, middle) +
                 determinateNumberOfNumbersMore(sequenceSecond, middle)
 
-        if ((numberOfLessNumbers <= sequenceFirst.size - 1) && (numberOfHigherNumbers <= sequenceFirst.size)) {
+        if ((numberOfLessNumbers < sequenceFirst.size) && (numberOfHigherNumbers <= sequenceFirst.size)) {
             // Определили медиану
             return middle
-        } else if (numberOfLessNumbers >= sequenceFirst.size) {
+        } else if (numberOfLessNumbers > sequenceFirst.size - 1) {
             // Правее медианы
             rightBorder = middle - 1
-        } else if (numberOfHigherNumbers >= sequenceFirst.size + 1) {
+        } else if (numberOfHigherNumbers > sequenceSecond.size) {
             // Левее медианы
             leftBorder = middle + 1
         }
