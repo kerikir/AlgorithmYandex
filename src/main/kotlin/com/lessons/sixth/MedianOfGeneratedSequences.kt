@@ -15,9 +15,9 @@ fun main() {
 
     val (n, l) = readLine()!!.trim().split(' ').map { it.toInt() }
 
-    val sequences = mutableListOf<IntArray>()
+    val sequences = mutableListOf<LongArray>()
     repeat(n) {
-        val (x1, d1, a, c, m) = readLine()!!.trim().split(' ').map { it.toInt() }
+        val (x1, d1, a, c, m) = readLine()!!.trim().split(' ').map { it.toLong() }
         val sequence = generateSequence(x1, d1, a, c, m, l)
         sequences.add(sequence)
     }
@@ -35,11 +35,11 @@ fun main() {
 /**
  * Генерация последовательности для устранения медленного чтения данных из консоли
  */
-fun generateSequence(x1: Int, d1: Int, a: Int, c: Int, m: Int, l: Int) : IntArray {
+fun generateSequence(x1: Long, d1: Long, a: Long, c: Long, m: Long, l: Int) : LongArray {
 
     // Инициализация последовательности начальными данными
-    val x = IntArray(l)
-    val d = IntArray(l)
+    val x = LongArray(l)
+    val d = LongArray(l)
     x[0] = x1
     d[0] = d1
 
@@ -54,7 +54,7 @@ fun generateSequence(x1: Int, d1: Int, a: Int, c: Int, m: Int, l: Int) : IntArra
 
 
 
-fun calculateLeftMedianOfSequences(sequenceFirst: IntArray, sequenceSecond: IntArray) : Int {
+fun calculateLeftMedianOfSequences(sequenceFirst: LongArray, sequenceSecond: LongArray) : Long {
 
     // Определение границ значения медианы
     var leftBorder = min(sequenceFirst[0], sequenceSecond[0])
@@ -62,7 +62,7 @@ fun calculateLeftMedianOfSequences(sequenceFirst: IntArray, sequenceSecond: IntA
 
     while (leftBorder < rightBorder) {
 
-        val middle = (leftBorder + rightBorder) / 2
+        val middle = (leftBorder + rightBorder) / 2L
 
         val numberOfLessNumbers = determinateNumberOfNumbersLess(sequenceFirst, middle) +
                 determinateNumberOfNumbersLess(sequenceSecond, middle)
@@ -89,7 +89,7 @@ fun calculateLeftMedianOfSequences(sequenceFirst: IntArray, sequenceSecond: IntA
 /**
  * Левый бинарный поиск с передаваемым условием `checkCondition`
  */
-fun leftBinarySearch(sequence: IntArray, value: Int, checkCondition: (Int, Int) -> Boolean): Int {
+fun leftBinarySearch(sequence: LongArray, value: Long, checkCondition: (Long, Long) -> Boolean): Int {
 
     var leftBorder = 0
     var rightBorder = sequence.lastIndex
@@ -114,7 +114,7 @@ fun leftBinarySearch(sequence: IntArray, value: Int, checkCondition: (Int, Int) 
 /**
  * Определение количества элементов в последовательности, которые меньше медианы.
  */
-fun determinateNumberOfNumbersLess(sequence: IntArray, value: Int) : Int {
+fun determinateNumberOfNumbersLess(sequence: LongArray, value: Long) : Int {
 
     // Определение индекса первого элемента, значение которого больше либо равно предпологаемой медиане
     val index = leftBinarySearch(sequence, value) { item, value ->
@@ -136,7 +136,7 @@ fun determinateNumberOfNumbersLess(sequence: IntArray, value: Int) : Int {
 /**
  * Определение количества элементов в последовательности, которые больше медианы.
  */
-fun determinateNumberOfNumbersMore(sequence: IntArray, value: Int) : Int {
+fun determinateNumberOfNumbersMore(sequence: LongArray, value: Long) : Int {
 
     // Определение индекса первого элемента, значение которого больше предпологаемой медиане
     val index = leftBinarySearch(sequence, value) { item, value ->
