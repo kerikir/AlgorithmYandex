@@ -23,5 +23,21 @@ fun main() {
 
 
     val result = IntArray(m)
+    var startIndex = 0
+    for (i in pointsSorted.indices) {
+        var index = startIndex
+        var counter = 0
+
+        while (pointsSorted[i] >= segmentsSorted[index].first) {
+            if (pointsSorted[i] >= segmentsSorted[index].first && pointsSorted[i] <= segmentsSorted[index].second) {
+                if (counter == 0) startIndex = index
+                counter++
+            }
+
+            index++
+        }
+
+        result[i] = counter
+    }
     println(result.joinToString(" "))
 }
