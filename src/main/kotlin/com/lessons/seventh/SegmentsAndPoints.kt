@@ -1,5 +1,8 @@
 package com.lessons.seventh
 
+import kotlin.math.max
+import kotlin.math.min
+
 
 /*
 Не решено - превышен лимит времени
@@ -7,36 +10,43 @@ package com.lessons.seventh
 Память = O(M)
 */
 fun main() {
-    val (n, m) = readLine()!!.trim().split(" ").map { it.toInt() }
-    val segments = mutableListOf<Pair<Int, Int>>()
-    for (i in 1..n) {
-        val (a, b) = readLine()!!.trim().split(" ").map { it.toInt() }
-        segments.add(a to b)
+    val (n, m) = readLine()!!.trim().split(Regex("\\s+")).map { it.toInt() }
+    val segments = ArrayList<Pair<Int, Int>>(n)
+    for (i in 0..n - 1) {
+        val (a, b) = readLine()!!.trim().split(Regex("\\s+")).map { it.toInt() }
+        segments.add(min(a, b) to max(a, b))
     }
-    val points = readLine()!!.trim().split(" ").map { it.toInt() }
+    val points = readLine()!!.trim().split(Regex("\\s+")).map { it.toInt() }
 
-    val result = determinateNumberOfPointsOnSegments(points, segments)
-    println(result)
-}
+    val segmentsSorted = segments.sortedWith(
+        compareBy<Pair<Int, Int>> { it.first }
+            .thenBy { it.second }
+    )
+    val pointsSorted = points.sorted()
 
 
-fun determinateNumberOfPointsOnSegments(points: List<Int>, segments: List<Pair<Int, Int>>) : String {
+    val result = mutableMapOf<Int, Int>()
+    var startIndex = 0
+    for (i in pointsSorted.indices) {
+        var index = startIndex
+        var counter = 0
 
-    val amountSegmentsList = mutableListOf<Int>()
-
-    var amountSegments = 0
-
-    for (point in points) {
-        amountSegments = 0
-
-        for (segment in segments) {
-            if (point >= segment.first && point <= segment.second) {
-                amountSegments++
+        while (index < n && pointsSorted[i] >= segmentsSorted[index].first) {
+            if (pointsSorted[i] >= segmentsSorted[index].first && pointsSorted[i] <= segmentsSorted[index].second) {
+                if (counter == 0) startIndex = index
+                counter++
             }
+
+            index++
         }
 
-        amountSegmentsList.add(amountSegments)
+        result[pointsSorted[i]] = counter
     }
 
-    return amountSegmentsList.joinToString(" ")
+    val sb = StringBuilder()
+    points.forEachIndexed { index, item ->
+        if (index > 0) sb.append(' ')
+        sb.append(result[item])
+    }
+    println(sb.toString())
 }
