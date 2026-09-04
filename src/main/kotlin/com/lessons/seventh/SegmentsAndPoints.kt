@@ -7,13 +7,13 @@ package com.lessons.seventh
 Память = O(M)
 */
 fun main() {
-    val (n, m) = readln().trim().split(Regex("\\s+")).map { it.toInt() }
+    val (n, m) = readLine()!!.trim().split(Regex("\\s+")).map { it.toInt() }
     val segments = ArrayList<Pair<Int, Int>>(n)
-    for (i in 0..<n) {
-        val (a, b) = readln().trim().split(Regex("\\s+")).map { it.toInt() }
+    for (i in 0..n - 1) {
+        val (a, b) = readLine()!!.trim().split(Regex("\\s+")).map { it.toInt() }
         segments.add(a to b)
     }
-    val points = readln().trim().split(Regex("\\s+")).map { it.toInt() }
+    val points = readLine()!!.trim().split(Regex("\\s+")).map { it.toInt() }
 
     val segmentsSorted = segments.sortedWith(
         compareBy<Pair<Int, Int>> { it.first }
