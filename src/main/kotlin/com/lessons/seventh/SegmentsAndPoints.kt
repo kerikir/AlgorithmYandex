@@ -1,5 +1,8 @@
 package com.lessons.seventh
 
+import kotlin.math.max
+import kotlin.math.min
+
 
 /*
 Не решено - превышен лимит времени
@@ -11,7 +14,7 @@ fun main() {
     val segments = ArrayList<Pair<Int, Int>>(n)
     for (i in 0..n - 1) {
         val (a, b) = readLine()!!.trim().split(Regex("\\s+")).map { it.toInt() }
-        segments.add(a to b)
+        segments.add(min(a, b) to max(a, b))
     }
     val points = readLine()!!.trim().split(Regex("\\s+")).map { it.toInt() }
 
@@ -22,13 +25,13 @@ fun main() {
     val pointsSorted = points.sorted()
 
 
-    val result = IntArray(m)
+    val result = mutableMapOf<Int, Int>()
     var startIndex = 0
     for (i in pointsSorted.indices) {
         var index = startIndex
         var counter = 0
 
-        while (pointsSorted[i] >= segmentsSorted[index].first) {
+        while (index < n && pointsSorted[i] >= segmentsSorted[index].first) {
             if (pointsSorted[i] >= segmentsSorted[index].first && pointsSorted[i] <= segmentsSorted[index].second) {
                 if (counter == 0) startIndex = index
                 counter++
@@ -37,7 +40,7 @@ fun main() {
             index++
         }
 
-        result[i] = counter
+        result[pointsSorted[i]] = counter
     }
     println(result.joinToString(" "))
 }
