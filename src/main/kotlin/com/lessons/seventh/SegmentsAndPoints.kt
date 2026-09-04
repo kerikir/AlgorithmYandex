@@ -42,5 +42,11 @@ fun main() {
 
         result[pointsSorted[i]] = counter
     }
-    println(result.joinToString(" "))
+
+    val sb = StringBuilder()
+    points.forEachIndexed { index, item ->
+        if (index > 0) sb.append(' ')
+        sb.append(result[item])
+    }
+    println(sb.toString())
 }
