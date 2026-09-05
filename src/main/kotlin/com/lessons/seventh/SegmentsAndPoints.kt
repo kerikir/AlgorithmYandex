@@ -5,10 +5,11 @@ import kotlin.math.min
 
 
 /*
-Не решено - превышен лимит времени
-Сложность = O(N*M) = O(N^2)
-Память = O(M)
-*/
+Время = 1.862s
+Память = 64.57Mb
+
+Сложность = O((N + M) * log(N + M))
+ */
 fun main() {
     val (n, m) = readLine()!!.trim().split(Regex("\\s+")).map { it.toInt() }
     val segments = ArrayList<Pair<Int, Int>>(n)
