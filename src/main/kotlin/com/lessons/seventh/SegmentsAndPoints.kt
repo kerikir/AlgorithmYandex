@@ -18,30 +18,22 @@ fun main() {
     }
     val points = readLine()!!.trim().split(Regex("\\s+")).map { it.toInt() }
 
-    val segmentsSorted = segments.sortedWith(
-        compareBy<Pair<Int, Int>> { it.first }
+    val events = ArrayList<Pair<Int, Event>>(2 * n + m)
+    segments.forEach { pair ->
+        events.add(pair.first to Event.START)
+        events.add(pair.second to Event.END)
+    }
+    points.forEach { x ->
+        events.add(x to Event.POINT)
+    }
+
+    val eventsSorted = events.sortedWith(
+        compareBy<Pair<Int, Event>> { it.first }
             .thenBy { it.second }
     )
-    val pointsSorted = points.sorted()
-
 
     val result = mutableMapOf<Int, Int>()
-    var startIndex = 0
-    for (i in pointsSorted.indices) {
-        var index = startIndex
-        var counter = 0
-
-        while (index < n && pointsSorted[i] >= segmentsSorted[index].first) {
-            if (pointsSorted[i] >= segmentsSorted[index].first && pointsSorted[i] <= segmentsSorted[index].second) {
-                if (counter == 0) startIndex = index
-                counter++
-            }
-
-            index++
-        }
-
-        result[pointsSorted[i]] = counter
-    }
+    
 
     val sb = StringBuilder()
     points.forEachIndexed { index, item ->
@@ -49,4 +41,9 @@ fun main() {
         sb.append(result[item])
     }
     println(sb.toString())
+}
+
+
+enum class Event {
+    START, POINT, END
 }
