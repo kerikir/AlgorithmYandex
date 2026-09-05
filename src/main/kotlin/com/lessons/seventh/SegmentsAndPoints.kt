@@ -32,8 +32,21 @@ fun main() {
             .thenBy { it.second }
     )
 
+    var counterSegments = 0
     val result = mutableMapOf<Int, Int>()
-    
+    eventsSorted.forEach { event ->
+        when (event.second) {
+            Event.START -> {
+                counterSegments++
+            }
+            Event.POINT -> {
+                result[event.first] = counterSegments
+            }
+            Event.END -> {
+                counterSegments--
+            }
+        }
+    }
 
     val sb = StringBuilder()
     points.forEachIndexed { index, item ->
