@@ -1,5 +1,11 @@
 package com.lessons.seventh
 
+/*
+Время = 389ms
+Память = 24.17Mb
+
+Сложность = O(N*logN)
+ */
 fun main() {
     val (n, d) = readLine()!!.trim().split(Regex("\\s+")).map { it.toInt() }
     val coords = readLine()!!.trim().split(Regex("\\s+")).map { it.toInt() }
